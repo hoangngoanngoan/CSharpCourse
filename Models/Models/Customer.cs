@@ -13,10 +13,7 @@ namespace Models
         public DateTime CreatTime { get; set; } // Ngày tạo tài khoản
         public string Email { get; set; }
 
-        public Customer()
-        {
-
-        }
+        public Customer() { }
 
         public Customer(string personId, string fullName,
             DateTime birthDate, string address, string phoneNumber,

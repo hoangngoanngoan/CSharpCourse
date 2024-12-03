@@ -11,7 +11,7 @@ namespace Controller
     {
         public bool IsMatchEmailValid(string email)
         {
-            var pattern = @"^[a-z0-9_]+[a-z0-9_-]*@[a-z0-9].[a-z]{2,5}$";
+            var pattern = @"^[a-z0-9_]+[a-z0-9_-]*@[a-z0-9]+.[a-z]{2,5}$";
             var regex = new Regex(pattern);
             return regex.IsMatch(email);
         }

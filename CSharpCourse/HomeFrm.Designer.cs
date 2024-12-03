@@ -28,8 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -37,12 +41,20 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnSearchItem = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.numericItemTo = new System.Windows.Forms.NumericUpDown();
@@ -58,19 +70,12 @@
             this.radioSortItemByPriceDSC = new System.Windows.Forms.RadioButton();
             this.radioSortItemByPriceASC = new System.Windows.Forms.RadioButton();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btnReloadItem = new System.Windows.Forms.Button();
+            this.btnAddItem = new System.Windows.Forms.Button();
             this.tblItem = new System.Windows.Forms.DataGridView();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tblItemEdit = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.tblItemRemove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.btnSearchCustomer = new System.Windows.Forms.Button();
             this.txtSearchCustomer = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -82,22 +87,30 @@
             this.radioButton14 = new System.Windows.Forms.RadioButton();
             this.radioButton15 = new System.Windows.Forms.RadioButton();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.btnReloadCustomer = new System.Windows.Forms.Button();
+            this.btnAddCustomer = new System.Windows.Forms.Button();
             this.tblCustomer = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.btnSearchDiscount = new System.Windows.Forms.Button();
             this.txtSearchDiscount = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.comboSearchDiscount = new System.Windows.Forms.ComboBox();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.btnReloadDiscount = new System.Windows.Forms.Button();
+            this.btnAddDiscount = new System.Windows.Forms.Button();
             this.tblDiscount = new System.Windows.Forms.DataGridView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSearchBill = new System.Windows.Forms.Button();
             this.txtSearchBill = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.comboSearchBill = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnReloadBill = new System.Windows.Forms.Button();
+            this.btnAddBill = new System.Windows.Forms.Button();
             this.tblBill = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -111,9 +124,20 @@
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnSearchStat = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comboSearchStat = new System.Windows.Forms.ComboBox();
             this.tblStat = new System.Windows.Forms.DataGridView();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tblItemEdit = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.tblItemRemove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -125,19 +149,6 @@
             this.Column27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tblCellCustomerEdit = new System.Windows.Forms.DataGridViewButtonColumn();
             this.tblCellCustomerRemove = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.btnSearchItem = new System.Windows.Forms.Button();
-            this.btnReloadItem = new System.Windows.Forms.Button();
-            this.btnAddItem = new System.Windows.Forms.Button();
-            this.btnSearchCustomer = new System.Windows.Forms.Button();
-            this.btnReloadCustomer = new System.Windows.Forms.Button();
-            this.btnAddCustomer = new System.Windows.Forms.Button();
-            this.btnSearchDiscount = new System.Windows.Forms.Button();
-            this.btnReloadDiscount = new System.Windows.Forms.Button();
-            this.btnAddDiscount = new System.Windows.Forms.Button();
-            this.btnSearchBill = new System.Windows.Forms.Button();
-            this.btnReloadBill = new System.Windows.Forms.Button();
-            this.btnAddBill = new System.Windows.Forms.Button();
-            this.btnSearchStat = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -184,10 +195,10 @@
             this.tabPage1.Controls.Add(this.groupBox5);
             this.tabPage1.Controls.Add(this.groupBox6);
             this.tabPage1.Controls.Add(this.tblItem);
-            this.tabPage1.Location = new System.Drawing.Point(4, 32);
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1174, 651);
+            this.tabPage1.Size = new System.Drawing.Size(1174, 654);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "QL Mặt Hàng";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -206,17 +217,29 @@
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Right;
             this.groupBox4.Location = new System.Drawing.Point(834, 434);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(337, 214);
+            this.groupBox4.Size = new System.Drawing.Size(337, 217);
             this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Tìm kiếm";
+            // 
+            // btnSearchItem
+            // 
+            this.btnSearchItem.Image = global::CSharpCourse.Properties.Resources.search;
+            this.btnSearchItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSearchItem.Location = new System.Drawing.Point(115, 160);
+            this.btnSearchItem.Name = "btnSearchItem";
+            this.btnSearchItem.Size = new System.Drawing.Size(151, 40);
+            this.btnSearchItem.TabIndex = 8;
+            this.btnSearchItem.Text = "Tìm kiếm";
+            this.btnSearchItem.UseVisualStyleBackColor = true;
+            this.btnSearchItem.Click += new System.EventHandler(this.BtnSearchItemClick);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(195, 117);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(44, 20);
+            this.label5.Size = new System.Drawing.Size(38, 17);
             this.label5.TabIndex = 7;
             this.label5.Text = "Đến:";
             // 
@@ -225,7 +248,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(65, 117);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(33, 20);
+            this.label6.Size = new System.Drawing.Size(29, 17);
             this.label6.TabIndex = 6;
             this.label6.Text = "Từ:";
             // 
@@ -238,7 +261,7 @@
             0,
             0});
             this.numericItemTo.Name = "numericItemTo";
-            this.numericItemTo.Size = new System.Drawing.Size(64, 27);
+            this.numericItemTo.Size = new System.Drawing.Size(64, 23);
             this.numericItemTo.TabIndex = 5;
             // 
             // numericItemFrom
@@ -250,14 +273,14 @@
             0,
             0});
             this.numericItemFrom.Name = "numericItemFrom";
-            this.numericItemFrom.Size = new System.Drawing.Size(64, 27);
+            this.numericItemFrom.Size = new System.Drawing.Size(64, 23);
             this.numericItemFrom.TabIndex = 4;
             // 
             // txtSearchItem
             // 
             this.txtSearchItem.Location = new System.Drawing.Point(115, 73);
             this.txtSearchItem.Name = "txtSearchItem";
-            this.txtSearchItem.Size = new System.Drawing.Size(194, 27);
+            this.txtSearchItem.Size = new System.Drawing.Size(194, 23);
             this.txtSearchItem.TabIndex = 3;
             // 
             // label7
@@ -265,7 +288,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(29, 76);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(80, 20);
+            this.label7.Size = new System.Drawing.Size(69, 17);
             this.label7.TabIndex = 2;
             this.label7.Text = "Nội dung:";
             // 
@@ -274,7 +297,7 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(29, 42);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(73, 20);
+            this.label8.Size = new System.Drawing.Size(62, 17);
             this.label8.TabIndex = 1;
             this.label8.Text = "Tiêu chí:";
             // 
@@ -289,7 +312,7 @@
             "Theo số lượng khoảng a-b."});
             this.comboSearchItem.Location = new System.Drawing.Point(115, 39);
             this.comboSearchItem.Name = "comboSearchItem";
-            this.comboSearchItem.Size = new System.Drawing.Size(194, 28);
+            this.comboSearchItem.Size = new System.Drawing.Size(194, 25);
             this.comboSearchItem.TabIndex = 0;
             this.comboSearchItem.SelectedIndexChanged += new System.EventHandler(this.ComboBoxSearchItemSelectedIndexChanged);
             // 
@@ -303,7 +326,7 @@
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox5.Location = new System.Drawing.Point(375, 434);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(796, 214);
+            this.groupBox5.Size = new System.Drawing.Size(796, 217);
             this.groupBox5.TabIndex = 6;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Sắp xếp";
@@ -313,7 +336,7 @@
             this.radioSortItemByDate.AutoSize = true;
             this.radioSortItemByDate.Location = new System.Drawing.Point(237, 95);
             this.radioSortItemByDate.Name = "radioSortItemByDate";
-            this.radioSortItemByDate.Size = new System.Drawing.Size(205, 24);
+            this.radioSortItemByDate.Size = new System.Drawing.Size(176, 21);
             this.radioSortItemByDate.TabIndex = 4;
             this.radioSortItemByDate.TabStop = true;
             this.radioSortItemByDate.Text = "Ngày sản xuất tăng dần";
@@ -325,7 +348,7 @@
             this.radioSortItemByQuantity.AutoSize = true;
             this.radioSortItemByQuantity.Location = new System.Drawing.Point(237, 48);
             this.radioSortItemByQuantity.Name = "radioSortItemByQuantity";
-            this.radioSortItemByQuantity.Size = new System.Drawing.Size(168, 24);
+            this.radioSortItemByQuantity.Size = new System.Drawing.Size(144, 21);
             this.radioSortItemByQuantity.TabIndex = 3;
             this.radioSortItemByQuantity.TabStop = true;
             this.radioSortItemByQuantity.Text = "Số lượng giảm dần";
@@ -337,7 +360,7 @@
             this.radioSortItemByName.AutoSize = true;
             this.radioSortItemByName.Location = new System.Drawing.Point(25, 142);
             this.radioSortItemByName.Name = "radioSortItemByName";
-            this.radioSortItemByName.Size = new System.Drawing.Size(171, 24);
+            this.radioSortItemByName.Size = new System.Drawing.Size(146, 21);
             this.radioSortItemByName.TabIndex = 2;
             this.radioSortItemByName.TabStop = true;
             this.radioSortItemByName.Text = "Tên mặt hàng a - z";
@@ -349,7 +372,7 @@
             this.radioSortItemByPriceDSC.AutoSize = true;
             this.radioSortItemByPriceDSC.Location = new System.Drawing.Point(25, 95);
             this.radioSortItemByPriceDSC.Name = "radioSortItemByPriceDSC";
-            this.radioSortItemByPriceDSC.Size = new System.Drawing.Size(197, 24);
+            this.radioSortItemByPriceDSC.Size = new System.Drawing.Size(167, 21);
             this.radioSortItemByPriceDSC.TabIndex = 1;
             this.radioSortItemByPriceDSC.TabStop = true;
             this.radioSortItemByPriceDSC.Text = "Gía niêm yết giảm dần";
@@ -361,7 +384,7 @@
             this.radioSortItemByPriceASC.AutoSize = true;
             this.radioSortItemByPriceASC.Location = new System.Drawing.Point(25, 48);
             this.radioSortItemByPriceASC.Name = "radioSortItemByPriceASC";
-            this.radioSortItemByPriceASC.Size = new System.Drawing.Size(193, 24);
+            this.radioSortItemByPriceASC.Size = new System.Drawing.Size(165, 21);
             this.radioSortItemByPriceASC.TabIndex = 0;
             this.radioSortItemByPriceASC.TabStop = true;
             this.radioSortItemByPriceASC.Text = "Gía niêm yết tăng dần";
@@ -375,16 +398,48 @@
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox6.Location = new System.Drawing.Point(3, 434);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(372, 214);
+            this.groupBox6.Size = new System.Drawing.Size(372, 217);
             this.groupBox6.TabIndex = 5;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Hành động";
+            // 
+            // btnReloadItem
+            // 
+            this.btnReloadItem.Image = global::CSharpCourse.Properties.Resources.reload;
+            this.btnReloadItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReloadItem.Location = new System.Drawing.Point(201, 78);
+            this.btnReloadItem.Name = "btnReloadItem";
+            this.btnReloadItem.Size = new System.Drawing.Size(151, 50);
+            this.btnReloadItem.TabIndex = 1;
+            this.btnReloadItem.Text = "Làm mới";
+            this.btnReloadItem.UseVisualStyleBackColor = true;
+            this.btnReloadItem.Click += new System.EventHandler(this.btnReloadItem_Click);
+            // 
+            // btnAddItem
+            // 
+            this.btnAddItem.Image = global::CSharpCourse.Properties.Resources.plus;
+            this.btnAddItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAddItem.Location = new System.Drawing.Point(20, 78);
+            this.btnAddItem.Name = "btnAddItem";
+            this.btnAddItem.Size = new System.Drawing.Size(151, 49);
+            this.btnAddItem.TabIndex = 0;
+            this.btnAddItem.Text = "Thêm mới";
+            this.btnAddItem.UseVisualStyleBackColor = true;
+            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
             // 
             // tblItem
             // 
             this.tblItem.AllowUserToAddRows = false;
             this.tblItem.AllowUserToDeleteRows = false;
             this.tblItem.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tblItem.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.tblItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tblItem.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column11,
@@ -400,109 +455,19 @@
             this.tblItem.Dock = System.Windows.Forms.DockStyle.Top;
             this.tblItem.Location = new System.Drawing.Point(3, 3);
             this.tblItem.Name = "tblItem";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tblItem.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tblItem.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.tblItem.RowHeadersWidth = 51;
             this.tblItem.RowTemplate.Height = 24;
             this.tblItem.Size = new System.Drawing.Size(1168, 431);
             this.tblItem.TabIndex = 4;
             this.tblItem.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tblItemCellCick);
-            // 
-            // Column11
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column11.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Column11.HeaderText = "Mã MH";
-            this.Column11.MinimumWidth = 6;
-            this.Column11.Name = "Column11";
-            this.Column11.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column12
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column12.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Column12.HeaderText = "Tên MH";
-            this.Column12.MinimumWidth = 6;
-            this.Column12.Name = "Column12";
-            this.Column12.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column13
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column13.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Column13.HeaderText = "Loại MH";
-            this.Column13.MinimumWidth = 6;
-            this.Column13.Name = "Column13";
-            this.Column13.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column14
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column14.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Column14.HeaderText = "Số Lượng";
-            this.Column14.MinimumWidth = 6;
-            this.Column14.Name = "Column14";
-            this.Column14.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column15
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column15.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Column15.HeaderText = "Hãng SX";
-            this.Column15.MinimumWidth = 6;
-            this.Column15.Name = "Column15";
-            this.Column15.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column16
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column16.DefaultCellStyle = dataGridViewCellStyle6;
-            this.Column16.HeaderText = "Ngày SX";
-            this.Column16.MinimumWidth = 6;
-            this.Column16.Name = "Column16";
-            this.Column16.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column17
-            // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column17.DefaultCellStyle = dataGridViewCellStyle7;
-            this.Column17.HeaderText = "Gía Bán";
-            this.Column17.MinimumWidth = 6;
-            this.Column17.Name = "Column17";
-            this.Column17.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column18
-            // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column18.DefaultCellStyle = dataGridViewCellStyle8;
-            this.Column18.HeaderText = "Khuyến Mãi";
-            this.Column18.MinimumWidth = 6;
-            this.Column18.Name = "Column18";
-            this.Column18.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // tblItemEdit
-            // 
-            this.tblItemEdit.HeaderText = "Sửa";
-            this.tblItemEdit.MinimumWidth = 6;
-            this.tblItemEdit.Name = "tblItemEdit";
-            this.tblItemEdit.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tblItemEdit.Text = "Sửa";
-            this.tblItemEdit.UseColumnTextForButtonValue = true;
-            // 
-            // tblItemRemove
-            // 
-            this.tblItemRemove.HeaderText = "Xóa";
-            this.tblItemRemove.MinimumWidth = 6;
-            this.tblItemRemove.Name = "tblItemRemove";
-            this.tblItemRemove.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tblItemRemove.Text = "Xóa";
-            this.tblItemRemove.UseColumnTextForButtonValue = true;
             // 
             // tabPage2
             // 
@@ -510,10 +475,10 @@
             this.tabPage2.Controls.Add(this.groupBox8);
             this.tabPage2.Controls.Add(this.groupBox9);
             this.tabPage2.Controls.Add(this.tblCustomer);
-            this.tabPage2.Location = new System.Drawing.Point(4, 32);
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1174, 651);
+            this.tabPage2.Size = new System.Drawing.Size(1174, 654);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "QL Khách Hàng";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -528,16 +493,27 @@
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Right;
             this.groupBox7.Location = new System.Drawing.Point(864, 434);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(307, 214);
+            this.groupBox7.Size = new System.Drawing.Size(307, 217);
             this.groupBox7.TabIndex = 7;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Tìm kiếm";
+            // 
+            // btnSearchCustomer
+            // 
+            this.btnSearchCustomer.Image = global::CSharpCourse.Properties.Resources.search;
+            this.btnSearchCustomer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSearchCustomer.Location = new System.Drawing.Point(102, 142);
+            this.btnSearchCustomer.Name = "btnSearchCustomer";
+            this.btnSearchCustomer.Size = new System.Drawing.Size(151, 40);
+            this.btnSearchCustomer.TabIndex = 8;
+            this.btnSearchCustomer.Text = "Tìm kiếm";
+            this.btnSearchCustomer.UseVisualStyleBackColor = true;
             // 
             // txtSearchCustomer
             // 
             this.txtSearchCustomer.Location = new System.Drawing.Point(102, 93);
             this.txtSearchCustomer.Name = "txtSearchCustomer";
-            this.txtSearchCustomer.Size = new System.Drawing.Size(194, 27);
+            this.txtSearchCustomer.Size = new System.Drawing.Size(194, 23);
             this.txtSearchCustomer.TabIndex = 3;
             // 
             // label11
@@ -545,7 +521,7 @@
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(16, 96);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(80, 20);
+            this.label11.Size = new System.Drawing.Size(69, 17);
             this.label11.TabIndex = 2;
             this.label11.Text = "Nội dung:";
             // 
@@ -554,7 +530,7 @@
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(16, 62);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(73, 20);
+            this.label12.Size = new System.Drawing.Size(62, 17);
             this.label12.TabIndex = 1;
             this.label12.Text = "Tiêu chí:";
             // 
@@ -569,7 +545,7 @@
             "Số điện thoại."});
             this.comboSearchCustomer.Location = new System.Drawing.Point(102, 59);
             this.comboSearchCustomer.Name = "comboSearchCustomer";
-            this.comboSearchCustomer.Size = new System.Drawing.Size(194, 28);
+            this.comboSearchCustomer.Size = new System.Drawing.Size(194, 25);
             this.comboSearchCustomer.TabIndex = 0;
             // 
             // groupBox8
@@ -582,7 +558,7 @@
             this.groupBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox8.Location = new System.Drawing.Point(375, 434);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(796, 214);
+            this.groupBox8.Size = new System.Drawing.Size(796, 217);
             this.groupBox8.TabIndex = 6;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Sắp xếp";
@@ -592,7 +568,7 @@
             this.radioButton11.AutoSize = true;
             this.radioButton11.Location = new System.Drawing.Point(242, 95);
             this.radioButton11.Name = "radioButton11";
-            this.radioButton11.Size = new System.Drawing.Size(241, 24);
+            this.radioButton11.Size = new System.Drawing.Size(207, 21);
             this.radioButton11.TabIndex = 4;
             this.radioButton11.TabStop = true;
             this.radioButton11.Text = "Ngày tạo tài khoản giảm dần";
@@ -603,7 +579,7 @@
             this.radioButton12.AutoSize = true;
             this.radioButton12.Location = new System.Drawing.Point(243, 48);
             this.radioButton12.Name = "radioButton12";
-            this.radioButton12.Size = new System.Drawing.Size(200, 24);
+            this.radioButton12.Size = new System.Drawing.Size(168, 21);
             this.radioButton12.TabIndex = 3;
             this.radioButton12.TabStop = true;
             this.radioButton12.Text = "Điểm tích lũy giảm dần";
@@ -614,7 +590,7 @@
             this.radioButton13.AutoSize = true;
             this.radioButton13.Location = new System.Drawing.Point(25, 142);
             this.radioButton13.Name = "radioButton13";
-            this.radioButton13.Size = new System.Drawing.Size(173, 24);
+            this.radioButton13.Size = new System.Drawing.Size(149, 21);
             this.radioButton13.TabIndex = 2;
             this.radioButton13.TabStop = true;
             this.radioButton13.Text = "Ngày sinh tăng dần";
@@ -625,7 +601,7 @@
             this.radioButton14.AutoSize = true;
             this.radioButton14.Location = new System.Drawing.Point(25, 95);
             this.radioButton14.Name = "radioButton14";
-            this.radioButton14.Size = new System.Drawing.Size(217, 24);
+            this.radioButton14.Size = new System.Drawing.Size(189, 21);
             this.radioButton14.TabIndex = 1;
             this.radioButton14.TabStop = true;
             this.radioButton14.Text = "Tên khách hàng tăng dần";
@@ -636,7 +612,7 @@
             this.radioButton15.AutoSize = true;
             this.radioButton15.Location = new System.Drawing.Point(25, 48);
             this.radioButton15.Name = "radioButton15";
-            this.radioButton15.Size = new System.Drawing.Size(212, 24);
+            this.radioButton15.Size = new System.Drawing.Size(183, 21);
             this.radioButton15.TabIndex = 0;
             this.radioButton15.TabStop = true;
             this.radioButton15.Text = "Mã khách hàng tăng dần";
@@ -649,16 +625,47 @@
             this.groupBox9.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox9.Location = new System.Drawing.Point(3, 434);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(372, 214);
+            this.groupBox9.Size = new System.Drawing.Size(372, 217);
             this.groupBox9.TabIndex = 5;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Hành động";
+            // 
+            // btnReloadCustomer
+            // 
+            this.btnReloadCustomer.Image = global::CSharpCourse.Properties.Resources.reload;
+            this.btnReloadCustomer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReloadCustomer.Location = new System.Drawing.Point(201, 78);
+            this.btnReloadCustomer.Name = "btnReloadCustomer";
+            this.btnReloadCustomer.Size = new System.Drawing.Size(151, 50);
+            this.btnReloadCustomer.TabIndex = 1;
+            this.btnReloadCustomer.Text = "Làm mới";
+            this.btnReloadCustomer.UseVisualStyleBackColor = true;
+            // 
+            // btnAddCustomer
+            // 
+            this.btnAddCustomer.Image = global::CSharpCourse.Properties.Resources.plus;
+            this.btnAddCustomer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAddCustomer.Location = new System.Drawing.Point(20, 78);
+            this.btnAddCustomer.Name = "btnAddCustomer";
+            this.btnAddCustomer.Size = new System.Drawing.Size(151, 49);
+            this.btnAddCustomer.TabIndex = 0;
+            this.btnAddCustomer.Text = "Thêm mới";
+            this.btnAddCustomer.UseVisualStyleBackColor = true;
+            this.btnAddCustomer.Click += new System.EventHandler(this.BtnAddNewCustomerClick);
             // 
             // tblCustomer
             // 
             this.tblCustomer.AllowUserToAddRows = false;
             this.tblCustomer.AllowUserToDeleteRows = false;
             this.tblCustomer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tblCustomer.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.tblCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tblCustomer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column19,
@@ -675,14 +682,14 @@
             this.tblCustomer.Dock = System.Windows.Forms.DockStyle.Top;
             this.tblCustomer.Location = new System.Drawing.Point(3, 3);
             this.tblCustomer.Name = "tblCustomer";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tblCustomer.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tblCustomer.RowHeadersDefaultCellStyle = dataGridViewCellStyle21;
             this.tblCustomer.RowHeadersWidth = 51;
             this.tblCustomer.RowTemplate.Height = 24;
             this.tblCustomer.Size = new System.Drawing.Size(1168, 431);
@@ -694,10 +701,10 @@
             this.tabPage3.Controls.Add(this.groupBox10);
             this.tabPage3.Controls.Add(this.groupBox12);
             this.tabPage3.Controls.Add(this.tblDiscount);
-            this.tabPage3.Location = new System.Drawing.Point(4, 32);
+            this.tabPage3.Location = new System.Drawing.Point(4, 29);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1174, 651);
+            this.tabPage3.Size = new System.Drawing.Size(1174, 654);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "QL Khuyến Mãi";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -716,11 +723,22 @@
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Tìm kiếm";
             // 
+            // btnSearchDiscount
+            // 
+            this.btnSearchDiscount.Image = global::CSharpCourse.Properties.Resources.search;
+            this.btnSearchDiscount.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSearchDiscount.Location = new System.Drawing.Point(217, 142);
+            this.btnSearchDiscount.Name = "btnSearchDiscount";
+            this.btnSearchDiscount.Size = new System.Drawing.Size(151, 40);
+            this.btnSearchDiscount.TabIndex = 8;
+            this.btnSearchDiscount.Text = "Tìm kiếm";
+            this.btnSearchDiscount.UseVisualStyleBackColor = true;
+            // 
             // txtSearchDiscount
             // 
             this.txtSearchDiscount.Location = new System.Drawing.Point(192, 93);
             this.txtSearchDiscount.Name = "txtSearchDiscount";
-            this.txtSearchDiscount.Size = new System.Drawing.Size(286, 27);
+            this.txtSearchDiscount.Size = new System.Drawing.Size(286, 23);
             this.txtSearchDiscount.TabIndex = 3;
             // 
             // label9
@@ -728,7 +746,7 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(93, 96);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(80, 20);
+            this.label9.Size = new System.Drawing.Size(69, 17);
             this.label9.TabIndex = 2;
             this.label9.Text = "Nội dung:";
             // 
@@ -737,7 +755,7 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(93, 62);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(73, 20);
+            this.label10.Size = new System.Drawing.Size(62, 17);
             this.label10.TabIndex = 1;
             this.label10.Text = "Tiêu chí:";
             // 
@@ -752,7 +770,7 @@
             "Số điện thoại."});
             this.comboSearchDiscount.Location = new System.Drawing.Point(192, 59);
             this.comboSearchDiscount.Name = "comboSearchDiscount";
-            this.comboSearchDiscount.Size = new System.Drawing.Size(286, 28);
+            this.comboSearchDiscount.Size = new System.Drawing.Size(286, 25);
             this.comboSearchDiscount.TabIndex = 0;
             // 
             // groupBox12
@@ -765,6 +783,28 @@
             this.groupBox12.TabIndex = 9;
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Hành động";
+            // 
+            // btnReloadDiscount
+            // 
+            this.btnReloadDiscount.Image = global::CSharpCourse.Properties.Resources.reload;
+            this.btnReloadDiscount.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReloadDiscount.Location = new System.Drawing.Point(307, 82);
+            this.btnReloadDiscount.Name = "btnReloadDiscount";
+            this.btnReloadDiscount.Size = new System.Drawing.Size(171, 50);
+            this.btnReloadDiscount.TabIndex = 1;
+            this.btnReloadDiscount.Text = "Làm mới";
+            this.btnReloadDiscount.UseVisualStyleBackColor = true;
+            // 
+            // btnAddDiscount
+            // 
+            this.btnAddDiscount.Image = global::CSharpCourse.Properties.Resources.plus;
+            this.btnAddDiscount.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAddDiscount.Location = new System.Drawing.Point(89, 82);
+            this.btnAddDiscount.Name = "btnAddDiscount";
+            this.btnAddDiscount.Size = new System.Drawing.Size(171, 49);
+            this.btnAddDiscount.TabIndex = 0;
+            this.btnAddDiscount.Text = "Thêm mới";
+            this.btnAddDiscount.UseVisualStyleBackColor = true;
             // 
             // tblDiscount
             // 
@@ -781,10 +821,10 @@
             this.tabPage4.Controls.Add(this.groupBox1);
             this.tabPage4.Controls.Add(this.groupBox2);
             this.tabPage4.Controls.Add(this.tblBill);
-            this.tabPage4.Location = new System.Drawing.Point(4, 32);
+            this.tabPage4.Location = new System.Drawing.Point(4, 29);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1174, 651);
+            this.tabPage4.Size = new System.Drawing.Size(1174, 654);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "QL Hóa Đơn";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -803,11 +843,22 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tìm kiếm";
             // 
+            // btnSearchBill
+            // 
+            this.btnSearchBill.Image = global::CSharpCourse.Properties.Resources.search;
+            this.btnSearchBill.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSearchBill.Location = new System.Drawing.Point(217, 142);
+            this.btnSearchBill.Name = "btnSearchBill";
+            this.btnSearchBill.Size = new System.Drawing.Size(151, 40);
+            this.btnSearchBill.TabIndex = 8;
+            this.btnSearchBill.Text = "Tìm kiếm";
+            this.btnSearchBill.UseVisualStyleBackColor = true;
+            // 
             // txtSearchBill
             // 
             this.txtSearchBill.Location = new System.Drawing.Point(192, 93);
             this.txtSearchBill.Name = "txtSearchBill";
-            this.txtSearchBill.Size = new System.Drawing.Size(286, 27);
+            this.txtSearchBill.Size = new System.Drawing.Size(286, 23);
             this.txtSearchBill.TabIndex = 3;
             // 
             // label2
@@ -815,7 +866,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(93, 96);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 20);
+            this.label2.Size = new System.Drawing.Size(69, 17);
             this.label2.TabIndex = 2;
             this.label2.Text = "Nội dung:";
             // 
@@ -824,7 +875,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(93, 62);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 20);
+            this.label3.Size = new System.Drawing.Size(62, 17);
             this.label3.TabIndex = 1;
             this.label3.Text = "Tiêu chí:";
             // 
@@ -839,7 +890,7 @@
             "Số điện thoại."});
             this.comboSearchBill.Location = new System.Drawing.Point(192, 59);
             this.comboSearchBill.Name = "comboSearchBill";
-            this.comboSearchBill.Size = new System.Drawing.Size(286, 28);
+            this.comboSearchBill.Size = new System.Drawing.Size(286, 25);
             this.comboSearchBill.TabIndex = 0;
             // 
             // groupBox2
@@ -853,19 +904,41 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Hành động";
             // 
+            // btnReloadBill
+            // 
+            this.btnReloadBill.Image = global::CSharpCourse.Properties.Resources.reload;
+            this.btnReloadBill.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReloadBill.Location = new System.Drawing.Point(307, 82);
+            this.btnReloadBill.Name = "btnReloadBill";
+            this.btnReloadBill.Size = new System.Drawing.Size(171, 50);
+            this.btnReloadBill.TabIndex = 1;
+            this.btnReloadBill.Text = "Làm mới";
+            this.btnReloadBill.UseVisualStyleBackColor = true;
+            // 
+            // btnAddBill
+            // 
+            this.btnAddBill.Image = global::CSharpCourse.Properties.Resources.plus;
+            this.btnAddBill.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAddBill.Location = new System.Drawing.Point(89, 82);
+            this.btnAddBill.Name = "btnAddBill";
+            this.btnAddBill.Size = new System.Drawing.Size(171, 49);
+            this.btnAddBill.TabIndex = 0;
+            this.btnAddBill.Text = "Thêm mới";
+            this.btnAddBill.UseVisualStyleBackColor = true;
+            // 
             // tblBill
             // 
             this.tblBill.AllowUserToAddRows = false;
             this.tblBill.AllowUserToDeleteRows = false;
             this.tblBill.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tblBill.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tblBill.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
             this.tblBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tblBill.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -880,14 +953,14 @@
             this.Column10});
             this.tblBill.Location = new System.Drawing.Point(3, 3);
             this.tblBill.Name = "tblBill";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tblBill.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tblBill.RowHeadersDefaultCellStyle = dataGridViewCellStyle23;
             this.tblBill.RowHeadersWidth = 51;
             this.tblBill.RowTemplate.Height = 24;
             this.tblBill.Size = new System.Drawing.Size(1168, 431);
@@ -967,10 +1040,10 @@
             // 
             this.tabPage5.Controls.Add(this.groupBox3);
             this.tabPage5.Controls.Add(this.tblStat);
-            this.tabPage5.Location = new System.Drawing.Point(4, 32);
+            this.tabPage5.Location = new System.Drawing.Point(4, 29);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1174, 651);
+            this.tabPage5.Size = new System.Drawing.Size(1174, 654);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Thống Kê";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -981,19 +1054,30 @@
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.comboSearchStat);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox3.Location = new System.Drawing.Point(3, 438);
+            this.groupBox3.Location = new System.Drawing.Point(3, 437);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(1168, 214);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Tìm kiếm";
             // 
+            // btnSearchStat
+            // 
+            this.btnSearchStat.Image = global::CSharpCourse.Properties.Resources.search;
+            this.btnSearchStat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSearchStat.Location = new System.Drawing.Point(509, 115);
+            this.btnSearchStat.Name = "btnSearchStat";
+            this.btnSearchStat.Size = new System.Drawing.Size(151, 40);
+            this.btnSearchStat.TabIndex = 8;
+            this.btnSearchStat.Text = "Tìm kiếm";
+            this.btnSearchStat.UseVisualStyleBackColor = true;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(399, 68);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 20);
+            this.label1.Size = new System.Drawing.Size(62, 17);
             this.label1.TabIndex = 1;
             this.label1.Text = "Tiêu chí:";
             // 
@@ -1008,7 +1092,7 @@
             "Theo số lượng khoảng a-b."});
             this.comboSearchStat.Location = new System.Drawing.Point(500, 65);
             this.comboSearchStat.Name = "comboSearchStat";
-            this.comboSearchStat.Size = new System.Drawing.Size(269, 28);
+            this.comboSearchStat.Size = new System.Drawing.Size(269, 25);
             this.comboSearchStat.TabIndex = 0;
             // 
             // tblStat
@@ -1022,8 +1106,100 @@
             this.tblStat.Size = new System.Drawing.Size(1168, 431);
             this.tblStat.TabIndex = 0;
             // 
+            // Column11
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column11.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Column11.HeaderText = "Mã MH";
+            this.Column11.MinimumWidth = 6;
+            this.Column11.Name = "Column11";
+            this.Column11.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column12
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column12.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Column12.HeaderText = "Tên MH";
+            this.Column12.MinimumWidth = 6;
+            this.Column12.Name = "Column12";
+            this.Column12.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column13
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column13.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Column13.HeaderText = "Loại MH";
+            this.Column13.MinimumWidth = 6;
+            this.Column13.Name = "Column13";
+            this.Column13.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column14
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column14.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Column14.HeaderText = "Số Lượng";
+            this.Column14.MinimumWidth = 6;
+            this.Column14.Name = "Column14";
+            this.Column14.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column15
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column15.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Column15.HeaderText = "Hãng SX";
+            this.Column15.MinimumWidth = 6;
+            this.Column15.Name = "Column15";
+            this.Column15.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column16
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column16.DefaultCellStyle = dataGridViewCellStyle7;
+            this.Column16.HeaderText = "Ngày SX";
+            this.Column16.MinimumWidth = 6;
+            this.Column16.Name = "Column16";
+            this.Column16.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column17
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column17.DefaultCellStyle = dataGridViewCellStyle8;
+            this.Column17.HeaderText = "Gía Bán";
+            this.Column17.MinimumWidth = 6;
+            this.Column17.Name = "Column17";
+            this.Column17.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column18
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column18.DefaultCellStyle = dataGridViewCellStyle9;
+            this.Column18.HeaderText = "Khuyến Mãi";
+            this.Column18.MinimumWidth = 6;
+            this.Column18.Name = "Column18";
+            this.Column18.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // tblItemEdit
+            // 
+            this.tblItemEdit.HeaderText = "Sửa";
+            this.tblItemEdit.MinimumWidth = 6;
+            this.tblItemEdit.Name = "tblItemEdit";
+            this.tblItemEdit.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tblItemEdit.Text = "Sửa";
+            this.tblItemEdit.UseColumnTextForButtonValue = true;
+            // 
+            // tblItemRemove
+            // 
+            this.tblItemRemove.HeaderText = "Xóa";
+            this.tblItemRemove.MinimumWidth = 6;
+            this.tblItemRemove.Name = "tblItemRemove";
+            this.tblItemRemove.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tblItemRemove.Text = "Xóa";
+            this.tblItemRemove.UseColumnTextForButtonValue = true;
+            // 
             // Column19
             // 
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column19.DefaultCellStyle = dataGridViewCellStyle12;
             this.Column19.HeaderText = "Mã KH";
             this.Column19.MinimumWidth = 6;
             this.Column19.Name = "Column19";
@@ -1031,6 +1207,8 @@
             // 
             // Column20
             // 
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column20.DefaultCellStyle = dataGridViewCellStyle13;
             this.Column20.HeaderText = "Họ và tên";
             this.Column20.MinimumWidth = 6;
             this.Column20.Name = "Column20";
@@ -1038,6 +1216,8 @@
             // 
             // Column21
             // 
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column21.DefaultCellStyle = dataGridViewCellStyle14;
             this.Column21.HeaderText = "Ngày sinh";
             this.Column21.MinimumWidth = 6;
             this.Column21.Name = "Column21";
@@ -1045,6 +1225,8 @@
             // 
             // Column22
             // 
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column22.DefaultCellStyle = dataGridViewCellStyle15;
             this.Column22.HeaderText = "Địa chỉ";
             this.Column22.MinimumWidth = 6;
             this.Column22.Name = "Column22";
@@ -1052,6 +1234,8 @@
             // 
             // Column23
             // 
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column23.DefaultCellStyle = dataGridViewCellStyle16;
             this.Column23.HeaderText = "Số ĐT";
             this.Column23.MinimumWidth = 6;
             this.Column23.Name = "Column23";
@@ -1059,6 +1243,8 @@
             // 
             // Column24
             // 
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column24.DefaultCellStyle = dataGridViewCellStyle17;
             this.Column24.HeaderText = "Email";
             this.Column24.MinimumWidth = 6;
             this.Column24.Name = "Column24";
@@ -1066,6 +1252,8 @@
             // 
             // Column25
             // 
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column25.DefaultCellStyle = dataGridViewCellStyle18;
             this.Column25.HeaderText = "Điểm TL";
             this.Column25.MinimumWidth = 6;
             this.Column25.Name = "Column25";
@@ -1073,6 +1261,8 @@
             // 
             // Column26
             // 
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column26.DefaultCellStyle = dataGridViewCellStyle19;
             this.Column26.HeaderText = "Loại KH";
             this.Column26.MinimumWidth = 6;
             this.Column26.Name = "Column26";
@@ -1080,6 +1270,8 @@
             // 
             // Column27
             // 
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column27.DefaultCellStyle = dataGridViewCellStyle20;
             this.Column27.HeaderText = "NTTK";
             this.Column27.MinimumWidth = 6;
             this.Column27.Name = "Column27";
@@ -1091,7 +1283,8 @@
             this.tblCellCustomerEdit.MinimumWidth = 6;
             this.tblCellCustomerEdit.Name = "tblCellCustomerEdit";
             this.tblCellCustomerEdit.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tblCellCustomerEdit.Text = "";
+            this.tblCellCustomerEdit.Text = "Sửa";
+            this.tblCellCustomerEdit.UseColumnTextForButtonValue = true;
             // 
             // tblCellCustomerRemove
             // 
@@ -1099,158 +1292,12 @@
             this.tblCellCustomerRemove.MinimumWidth = 6;
             this.tblCellCustomerRemove.Name = "tblCellCustomerRemove";
             this.tblCellCustomerRemove.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tblCellCustomerRemove.Text = "";
-            // 
-            // btnSearchItem
-            // 
-            this.btnSearchItem.Image = global::CSharpCourse.Properties.Resources.search;
-            this.btnSearchItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSearchItem.Location = new System.Drawing.Point(115, 160);
-            this.btnSearchItem.Name = "btnSearchItem";
-            this.btnSearchItem.Size = new System.Drawing.Size(151, 40);
-            this.btnSearchItem.TabIndex = 8;
-            this.btnSearchItem.Text = "Tìm kiếm";
-            this.btnSearchItem.UseVisualStyleBackColor = true;
-            this.btnSearchItem.Click += new System.EventHandler(this.BtnSearchItemClick);
-            // 
-            // btnReloadItem
-            // 
-            this.btnReloadItem.Image = global::CSharpCourse.Properties.Resources.reload;
-            this.btnReloadItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReloadItem.Location = new System.Drawing.Point(201, 78);
-            this.btnReloadItem.Name = "btnReloadItem";
-            this.btnReloadItem.Size = new System.Drawing.Size(151, 50);
-            this.btnReloadItem.TabIndex = 1;
-            this.btnReloadItem.Text = "Làm mới";
-            this.btnReloadItem.UseVisualStyleBackColor = true;
-            this.btnReloadItem.Click += new System.EventHandler(this.btnReloadItem_Click);
-            // 
-            // btnAddItem
-            // 
-            this.btnAddItem.Image = global::CSharpCourse.Properties.Resources.plus;
-            this.btnAddItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddItem.Location = new System.Drawing.Point(20, 78);
-            this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(151, 49);
-            this.btnAddItem.TabIndex = 0;
-            this.btnAddItem.Text = "Thêm mới";
-            this.btnAddItem.UseVisualStyleBackColor = true;
-            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
-            // 
-            // btnSearchCustomer
-            // 
-            this.btnSearchCustomer.Image = global::CSharpCourse.Properties.Resources.search;
-            this.btnSearchCustomer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSearchCustomer.Location = new System.Drawing.Point(102, 142);
-            this.btnSearchCustomer.Name = "btnSearchCustomer";
-            this.btnSearchCustomer.Size = new System.Drawing.Size(151, 40);
-            this.btnSearchCustomer.TabIndex = 8;
-            this.btnSearchCustomer.Text = "Tìm kiếm";
-            this.btnSearchCustomer.UseVisualStyleBackColor = true;
-            // 
-            // btnReloadCustomer
-            // 
-            this.btnReloadCustomer.Image = global::CSharpCourse.Properties.Resources.reload;
-            this.btnReloadCustomer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReloadCustomer.Location = new System.Drawing.Point(201, 78);
-            this.btnReloadCustomer.Name = "btnReloadCustomer";
-            this.btnReloadCustomer.Size = new System.Drawing.Size(151, 50);
-            this.btnReloadCustomer.TabIndex = 1;
-            this.btnReloadCustomer.Text = "Làm mới";
-            this.btnReloadCustomer.UseVisualStyleBackColor = true;
-            // 
-            // btnAddCustomer
-            // 
-            this.btnAddCustomer.Image = global::CSharpCourse.Properties.Resources.plus;
-            this.btnAddCustomer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddCustomer.Location = new System.Drawing.Point(20, 78);
-            this.btnAddCustomer.Name = "btnAddCustomer";
-            this.btnAddCustomer.Size = new System.Drawing.Size(151, 49);
-            this.btnAddCustomer.TabIndex = 0;
-            this.btnAddCustomer.Text = "Thêm mới";
-            this.btnAddCustomer.UseVisualStyleBackColor = true;
-            this.btnAddCustomer.Click += new System.EventHandler(this.BtnAddNewCustomerClick);
-            // 
-            // btnSearchDiscount
-            // 
-            this.btnSearchDiscount.Image = global::CSharpCourse.Properties.Resources.search;
-            this.btnSearchDiscount.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSearchDiscount.Location = new System.Drawing.Point(217, 142);
-            this.btnSearchDiscount.Name = "btnSearchDiscount";
-            this.btnSearchDiscount.Size = new System.Drawing.Size(151, 40);
-            this.btnSearchDiscount.TabIndex = 8;
-            this.btnSearchDiscount.Text = "Tìm kiếm";
-            this.btnSearchDiscount.UseVisualStyleBackColor = true;
-            // 
-            // btnReloadDiscount
-            // 
-            this.btnReloadDiscount.Image = global::CSharpCourse.Properties.Resources.reload;
-            this.btnReloadDiscount.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReloadDiscount.Location = new System.Drawing.Point(307, 82);
-            this.btnReloadDiscount.Name = "btnReloadDiscount";
-            this.btnReloadDiscount.Size = new System.Drawing.Size(171, 50);
-            this.btnReloadDiscount.TabIndex = 1;
-            this.btnReloadDiscount.Text = "Làm mới";
-            this.btnReloadDiscount.UseVisualStyleBackColor = true;
-            // 
-            // btnAddDiscount
-            // 
-            this.btnAddDiscount.Image = global::CSharpCourse.Properties.Resources.plus;
-            this.btnAddDiscount.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddDiscount.Location = new System.Drawing.Point(89, 82);
-            this.btnAddDiscount.Name = "btnAddDiscount";
-            this.btnAddDiscount.Size = new System.Drawing.Size(171, 49);
-            this.btnAddDiscount.TabIndex = 0;
-            this.btnAddDiscount.Text = "Thêm mới";
-            this.btnAddDiscount.UseVisualStyleBackColor = true;
-            // 
-            // btnSearchBill
-            // 
-            this.btnSearchBill.Image = global::CSharpCourse.Properties.Resources.search;
-            this.btnSearchBill.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSearchBill.Location = new System.Drawing.Point(217, 142);
-            this.btnSearchBill.Name = "btnSearchBill";
-            this.btnSearchBill.Size = new System.Drawing.Size(151, 40);
-            this.btnSearchBill.TabIndex = 8;
-            this.btnSearchBill.Text = "Tìm kiếm";
-            this.btnSearchBill.UseVisualStyleBackColor = true;
-            // 
-            // btnReloadBill
-            // 
-            this.btnReloadBill.Image = global::CSharpCourse.Properties.Resources.reload;
-            this.btnReloadBill.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReloadBill.Location = new System.Drawing.Point(307, 82);
-            this.btnReloadBill.Name = "btnReloadBill";
-            this.btnReloadBill.Size = new System.Drawing.Size(171, 50);
-            this.btnReloadBill.TabIndex = 1;
-            this.btnReloadBill.Text = "Làm mới";
-            this.btnReloadBill.UseVisualStyleBackColor = true;
-            // 
-            // btnAddBill
-            // 
-            this.btnAddBill.Image = global::CSharpCourse.Properties.Resources.plus;
-            this.btnAddBill.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddBill.Location = new System.Drawing.Point(89, 82);
-            this.btnAddBill.Name = "btnAddBill";
-            this.btnAddBill.Size = new System.Drawing.Size(171, 49);
-            this.btnAddBill.TabIndex = 0;
-            this.btnAddBill.Text = "Thêm mới";
-            this.btnAddBill.UseVisualStyleBackColor = true;
-            // 
-            // btnSearchStat
-            // 
-            this.btnSearchStat.Image = global::CSharpCourse.Properties.Resources.search;
-            this.btnSearchStat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSearchStat.Location = new System.Drawing.Point(509, 115);
-            this.btnSearchStat.Name = "btnSearchStat";
-            this.btnSearchStat.Size = new System.Drawing.Size(151, 40);
-            this.btnSearchStat.TabIndex = 8;
-            this.btnSearchStat.Text = "Tìm kiếm";
-            this.btnSearchStat.UseVisualStyleBackColor = true;
+            this.tblCellCustomerRemove.Text = "Xóa";
+            this.tblCellCustomerRemove.UseColumnTextForButtonValue = true;
             // 
             // HomeFrm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1182, 703);
             this.Controls.Add(this.tabControl1);

@@ -26,8 +26,10 @@ namespace Controller
         public static List<Customer> CreateFakeCustomer()
         {
             List<Customer> items = new List<Customer>();
-            items.Add(new Customer("", "Lương Đình Hoàng", DateTime.Now, "248 Phương Sài tp.Nha Trang", "0705154714", "Vip", 10, DateTime.Now, "ldh2381995@gmail.com"));
-            items.Add(new Customer("", "Lương Đình Huy", DateTime.Now, "248 Phương Sài tp.Nha Trang", "0705154714", "Vip", 10, DateTime.Now, "ldh2381995@gmail.com"));
+            items.Add(new Customer("0123456789123", "Lương Đình Hoàng", DateTime.ParseExact("23/08/1995","dd/MM/yyyy", null), "248 Phương Sài tp.Nha Trang", "0705154714", "Mua lẻ", 10, DateTime.Now, "ldh2381995@gmail.com"));
+            items.Add(new Customer("0123456789124", "Lương Đình Huy", DateTime.ParseExact("17/03/1994","dd/MM/yyyy", null), "248 Phương Sài tp.Nha Trang", "0705154714", "Mua lẻ", 10, DateTime.Now, "ldh17071994@gmail.com"));
+            items.Add(new Customer("0123456789125", "Lương Điền Hồ Ngọc", DateTime.ParseExact("20/11/2006","dd/MM/yyyy", null), "248 Phương Sài tp.Nha Trang", "0705154714", "Mua lẻ", 10, DateTime.Now, "ldh17071994@gmail.com"));
+            items.Add(new Customer("0123456789126", "Lương Tiểu Diệp Nghĩa", DateTime.ParseExact("17/05/2010","dd/MM/yyyy", null), "248 Phương Sài tp.Nha Trang", "0705154714", "Mua lẻ", 10, DateTime.Now, "ldh17071994@gmail.com"));
             return items;
         }
     }

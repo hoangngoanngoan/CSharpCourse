@@ -18,7 +18,6 @@ namespace CSharpCourse
         private IViewController _controller;
         private Customer _oldCustomer = null;
         private Customer _newCustomer = null;
-        private bool _isUpdate = false;
         public AddEditCustomerFrm()
         {
             InitializeComponent();
@@ -31,11 +30,13 @@ namespace CSharpCourse
 
             if(customer != null)
             {
-                _isUpdate = true;
                 _oldCustomer = customer;
                 Text = "CẬP NHẬT THÔNG TIN NGƯỜI DÙNG";
                 btnAddCustomer.Text = "Cập nhật";
                 GetCustomerDataFromHomeFrm();
+            }else
+            {
+
             }
         }
 
@@ -83,13 +84,21 @@ namespace CSharpCourse
                 var email = txtEmail.Text;
                 var poin = (int)numericPoin.Value;
                 var customerType = comboCustomerType.Text;
-                var cus = new Customer(id, name, birthDate, address, phoneNumber, customerType, poin, DateTime.Now, email);
-                if (_isUpdate)
+                Customer newCustomer = new Customer(id, name, birthDate, address, 
+                    phoneNumber, customerType, poin, DateTime.Now, email);
+                if (btnAddCustomer.Text.CompareTo("Cập nhật") == 0)
                 {
-                    _controller.UpdateItem(_oldCustomer, cus);
-                }else
+                    var ans = MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if(ans == DialogResult.Yes)
+                    {
+                        _controller.UpdateItem(_oldCustomer, newCustomer);
+                        Dispose();
+                    }                    
+                }
+                else
                 {
-                    _controller.AddNewItem(cus);
+                    // MessageBox.Show("Kiểm tra lỗi", "Đang test thử", MessageBoxButtons.OK);
+                    _controller.AddNewItem(newCustomer);
                 }
             }
             catch (InvalidNameExceoption ex) { MessageBox.Show($"{ex.Message} {ex.InvalidName}", "Lỗi dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error); }

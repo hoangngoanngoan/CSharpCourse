@@ -17,15 +17,22 @@ namespace CSharpCourse
     }
     public partial class HomeFrm : Form, IViewController
     {
+
+        private ActionType _actionType;
+        private CommonController _commonController; // Dùng để gọi các phương thức Generic Thêm xoá sửa sắp xếp tìm kiếm
+
+        // Mặt hàng
+
         private List<Item> _items;                  // Dùng để lưu danh sách các mặt hàng có trong cửa hàng
         private List<Discount> _discount = null;    // Dùng để lưu các đối tượng mã khuyến mãi
-        private CommonController _commonController; // Dùng để gọi các phương thức Generic Thêm xoá sửa sắp xếp tìm kiếm
         private ItemController _itemController;     // Dùng nạp các comparer truyền vào phương thức _commonController.Sort<T>(<T>List list, Comparison<T> Comparer)
         private List<Item> _resultSearchItem;       // Dùng để lưu dách sách kết quả tìm kiếm tạm thời
-        private ActionType _actionType;
+        private List<Customer> _resultSearchCustomer; // Dùng để lưu danh sách kết quả tìm kiềm tạm thời
 
         // Khách hàng
+
         private List<Customer> _customers;
+
         public HomeFrm()
         {
             InitializeComponent();
@@ -39,6 +46,7 @@ namespace CSharpCourse
 
             // Khách hàng
             _customers = new List<Customer>();
+
             // Nạp dữ liệu 
             _customers = Utils.CreateFakeCustomer();
             _items = Utils.CreateFakeItem();
@@ -55,7 +63,7 @@ namespace CSharpCourse
                 {
                     customer.PersonId, customer.FullName.ToString(), customer.BirthDate.ToString("dd/MM/yyyy"),
                     customer.Address, customer.Email, customer.PhoneNumber, 
-                    customer.Poin, customer.CustomerType, customer.CreatTime.ToString("dd/MM/yyy")
+                    customer.Poin, customer.CustomerType, customer.CreatTime.ToString("dd/MM/yyy HH:mm:ss")
                 });
             }
         }
@@ -86,7 +94,9 @@ namespace CSharpCourse
             }
             else if(typeof(T) == typeof(Customer)) 
             {
-                // Hiển thị khách hàng lên bảng khách hàng
+                var newCustomer = item as Customer;
+                _commonController.AddNewItem(_customers, newCustomer);
+                ShowCustomers(_customers);
             }
         }
 
@@ -119,7 +129,13 @@ namespace CSharpCourse
                
             }else if (typeof(T) == typeof(Customer))
             {
-
+                if(_actionType == ActionType.NORMAL)
+                {
+                    var nCustomer = newItem as Customer;
+                    var oCustomer = oldItem as Customer;
+                    _commonController.UpdateItem(_customers, oCustomer, nCustomer);
+                    // LÀM TIẾP
+                }
             }
         }
 
@@ -331,20 +347,42 @@ namespace CSharpCourse
 
         private void TblCustomerCellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex != -1 && e.ColumnIndex == 9)
+            if (_actionType == ActionType.NORMAL)
             {
-                var frm = new AddEditCustomerFrm(this, _customers[e.RowIndex]);
-                frm.ShowDialog();
-            }else if (e.RowIndex != -1 && e.ColumnIndex == 10)
-            {
-                var ans = MessageBox.Show("Bạn có chắc chắn muốn xoá không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (ans == DialogResult.Yes) 
+                if (e.RowIndex != -1 && e.ColumnIndex == 9)
                 {
-                    _customers.RemoveAt(e.RowIndex);
-                    tblCustomer.Rows.RemoveAt(e.RowIndex);
+                    var frm = new AddEditCustomerFrm(this, _customers[e.RowIndex]);
+                    frm.ShowDialog();
                 }
-            
+                else if (e.RowIndex != -1 && e.ColumnIndex == 10)
+                {
+                    var ans = MessageBox.Show("Bạn có chắc chắn muốn xoá không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (ans == DialogResult.Yes)
+                    {
+                        _commonController.DeleteItem(_customers, _customers[e.RowIndex]);
+                        _customers.RemoveAt(e.RowIndex);
+                        tblCustomer.Rows.RemoveAt(e.RowIndex);
+                    }
+
+                }
+            }else
+            {
+                if(e.RowIndex != -1 && e.ColumnIndex == 9)
+                {
+                    var frm = new AddEditCustomerFrm(this, _resultSearchCustomer[e.RowIndex]);
+                    frm .ShowDialog();
+                }else if(e.RowIndex != -1 && e.ColumnIndex == 10)
+                {
+                    var ans = MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if(ans == DialogResult.Yes)
+                    {
+                        _commonController.DeleteItem(_customers, _resultSearchCustomer[e.RowIndex]);
+                        _commonController.DeleteItem(_resultSearchCustomer, _resultSearchCustomer[e.RowIndex]);
+                        tblCustomer.Rows.RemoveAt(e.RowIndex);
+                    }
+                }
             }
+            
         }
     }
 }
