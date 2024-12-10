@@ -87,6 +87,9 @@
     <EmbeddedResource Include="AddEditCustomerFrm.resx">
       <DependentUpon>AddEditCustomerFrm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddEditDiscountFrm.resx">
+      <DependentUpon>AddEditDiscountFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddEditItemFrm.resx">
       <DependentUpon>AddEditItemFrm.cs</DependentUpon>
     </EmbeddedResource>

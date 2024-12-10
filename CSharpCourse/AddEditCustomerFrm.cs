@@ -1,14 +1,6 @@
 ﻿using Controller;
 using Models;
 using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CSharpCourse
@@ -34,9 +26,6 @@ namespace CSharpCourse
                 Text = "CẬP NHẬT THÔNG TIN NGƯỜI DÙNG";
                 btnAddCustomer.Text = "Cập nhật";
                 GetCustomerDataFromHomeFrm();
-            }else
-            {
-
             }
         }
 
@@ -64,6 +53,7 @@ namespace CSharpCourse
             var _customerController = new CustomerController();
             try
             {
+                
                 if (!_customerController.IsMatchNameValid(txtFullName.Text))
                 {
                     throw new InvalidNameExceoption("Họ và tên không hợp lệ", txtFullName.Text);
@@ -84,27 +74,34 @@ namespace CSharpCourse
                 var email = txtEmail.Text;
                 var poin = (int)numericPoin.Value;
                 var customerType = comboCustomerType.Text;
-                Customer newCustomer = new Customer(id, name, birthDate, address, 
-                    phoneNumber, customerType, poin, DateTime.Now, email);
+                _newCustomer = new Customer(id, name, birthDate, address, phoneNumber, customerType, poin, DateTime.Now, email);
                 if (btnAddCustomer.Text.CompareTo("Cập nhật") == 0)
                 {
-                    var ans = MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if(ans == DialogResult.Yes)
+                    var ans = MessageBox.Show("Bạn có chắc chắn muốn cập nhật không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (ans == DialogResult.Yes)
                     {
-                        _controller.UpdateItem(_oldCustomer, newCustomer);
+                        _controller.UpdateItem(_oldCustomer, _newCustomer);
                         Dispose();
-                    }                    
+                    }
                 }
                 else
                 {
-                    // MessageBox.Show("Kiểm tra lỗi", "Đang test thử", MessageBoxButtons.OK);
-                    _controller.AddNewItem(newCustomer);
+                    _controller.AddNewItem(_newCustomer);
                 }
             }
             catch (InvalidNameExceoption ex) { MessageBox.Show($"{ex.Message} {ex.InvalidName}", "Lỗi dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             catch (InvalidEmailException ex) { MessageBox.Show($"{ex.Message} {ex.InvalidName}", "Lỗi dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             catch (InvalidPhoneNumberException ex) { MessageBox.Show($"{ex.Message} {ex.InvalidName}", "Lỗi dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            
+        }
 
+        private void BtnCancelClick(object sender, EventArgs e)
+        {
+            var ans = MessageBox.Show("Bạn có chắc chắn muốn huỷ?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (ans == DialogResult.Yes) 
+            {
+                Dispose();
+            }
         }
     }
 }

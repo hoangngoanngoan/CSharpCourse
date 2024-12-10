@@ -22,30 +22,34 @@ namespace CSharpCourse
         private CommonController _commonController; // Dùng để gọi các phương thức Generic Thêm xoá sửa sắp xếp tìm kiếm
 
         // Mặt hàng
-
         private List<Item> _items;                  // Dùng để lưu danh sách các mặt hàng có trong cửa hàng
-        private List<Discount> _discount = null;    // Dùng để lưu các đối tượng mã khuyến mãi
+        private List<Discount> _discounts = null;    // Dùng để lưu các đối tượng mã khuyến mãi
         private ItemController _itemController;     // Dùng nạp các comparer truyền vào phương thức _commonController.Sort<T>(<T>List list, Comparison<T> Comparer)
         private List<Item> _resultSearchItem;       // Dùng để lưu dách sách kết quả tìm kiếm tạm thời
-        private List<Customer> _resultSearchCustomer; // Dùng để lưu danh sách kết quả tìm kiềm tạm thời
-
+        
         // Khách hàng
-
         private List<Customer> _customers;
+        private CustomerController _customerController;
+        private List<Customer> _resultSearchCustomer; // Dùng để lưu danh sách kết quả tìm kiềm tạm thời
 
         public HomeFrm()
         {
             InitializeComponent();
+
+            // CommonController
+            _commonController = new CommonController();
+
             // Mặt hàng
             _items = new List<Item>();
-            _discount = new List<Discount>();
-            _commonController = new CommonController();
+            _discounts = new List<Discount>();
             _itemController = new ItemController();
             _resultSearchItem = new List<Item>();
             _actionType = ActionType.NORMAL;
 
             // Khách hàng
             _customers = new List<Customer>();
+            _customerController = new CustomerController();
+            _resultSearchCustomer = new List<Customer>();
 
             // Nạp dữ liệu 
             _customers = Utils.CreateFakeCustomer();
@@ -57,12 +61,13 @@ namespace CSharpCourse
         // Hàm hiện thị danh sách khách hàng
         private void ShowCustomers(List<Customer> customers)
         {
+            tblCustomer.Rows.Clear();
             foreach (var customer in customers)
             {
                 tblCustomer.Rows.Add(new object[]
                 {
                     customer.PersonId, customer.FullName.ToString(), customer.BirthDate.ToString("dd/MM/yyyy"),
-                    customer.Address, customer.Email, customer.PhoneNumber, 
+                    customer.Address, customer.PhoneNumber, customer.Email,
                     customer.Poin, customer.CustomerType, customer.CreatTime.ToString("dd/MM/yyy HH:mm:ss")
                 });
             }
@@ -82,6 +87,19 @@ namespace CSharpCourse
                 });
             }
         }
+        private void ShowDiscounts(List<Discount> discounts)
+        {
+            tblDiscount.Rows.Clear();
+            foreach (var item in discounts) 
+            {
+                tblDiscount.Rows.Add(new object[]
+                {
+                    item.DiscountId, item.Name, item.StartTime.ToString("dd/MM/yyyy"),
+                    item.EndTime.ToString("dd/MM/yyyy"), item.DiscountType, $"{item.DiscountPercent:N0}",
+                    $"{item.DiscountAmount:N0}"
+                });
+            }
+        }
 
         // Hàm thêm mới đối tượng 
         public void AddNewItem<T>(T item)
@@ -97,8 +115,15 @@ namespace CSharpCourse
                 var newCustomer = item as Customer;
                 _commonController.AddNewItem(_customers, newCustomer);
                 ShowCustomers(_customers);
+            }else if(typeof(T) == typeof(Discount))
+            {
+                var newDisCount = item as Discount;
+                _commonController.AddNewItem(_discounts, newDisCount);
+                ShowDiscounts(_discounts);
             }
         }
+
+        
 
         // Hàm cập nhật đối tượng
         public void UpdateItem<T>(T oldItem, T newItem)
@@ -133,26 +158,16 @@ namespace CSharpCourse
                 {
                     var nCustomer = newItem as Customer;
                     var oCustomer = oldItem as Customer;
-                    _commonController.UpdateItem(_customers, oCustomer, nCustomer);
-                    // LÀM TIẾP
+                    int index = _commonController.UpdateItem(_customers, oCustomer, nCustomer);
+                    ShowCustomers(_customers);
                 }
             }
         }
 
-        // Chức năng thêm mới
-        // Chức năng cập nhật
-        // Chức năng xoá
-        // 
-        // Bao gồm form, button,..
-        // AddEditItemFrm
-        // btnAddItem
-        // các radioSortItem
-        // tblItemCellClick
-
         // Hàm gọi form AddEditItemFrm : bằng sự kiện btnAddItem_Click
         private void btnAddItem_Click(object sender, EventArgs e)
         {
-            var frm = new AddEditItemFrm(this, _discount, null);
+            var frm = new AddEditItemFrm(this, _discounts, null);
             frm.ShowDialog();
         }
 
@@ -163,7 +178,7 @@ namespace CSharpCourse
             {
                 if (e.RowIndex >= 0 && e.ColumnIndex == tblItem.Columns["tblItemEdit"].Index)
                 {
-                    var frm = new AddEditItemFrm(this, _discount, _items[e.RowIndex]);
+                    var frm = new AddEditItemFrm(this, _discounts, _items[e.RowIndex]);
                     frm.ShowDialog();
                 }
                 else if (e.RowIndex >= 0 && e.ColumnIndex == tblItem.Columns["tblItemRemove"].Index)
@@ -180,7 +195,7 @@ namespace CSharpCourse
             {
                 if(e.RowIndex >= 0 && e.ColumnIndex == tblItem.Columns["tblItemEdit"].Index)
                 {
-                    var frm = new AddEditItemFrm(this, _discount, _resultSearchItem[e.RowIndex]);
+                    var frm = new AddEditItemFrm(this, _discounts, _resultSearchItem[e.RowIndex]);
                     frm.ShowDialog();
                 }
                 else if (e.RowIndex >= 0 && e.ColumnIndex == tblItem.Columns["tblItemRemove"].Index)
@@ -341,7 +356,7 @@ namespace CSharpCourse
 
         private void BtnAddNewCustomerClick(object sender, EventArgs e)
         {
-            var frm = new AddEditCustomerFrm();
+            var frm = new AddEditCustomerFrm(this, null);
             frm.ShowDialog();
         }
 
@@ -383,6 +398,121 @@ namespace CSharpCourse
                 }
             }
             
+        }
+
+        // Chức năng sắp xếp Customer
+        private void RadioSortCustomerCheckedChanged(object sender, EventArgs e)
+        {
+            if (_actionType == ActionType.NORMAL)
+            {
+                if (radioCustomerSortById.Checked == true)
+                {
+                    _commonController.Sort(_customers, _customerController.SortCustomerByIdASC);
+                }
+                else if (radioCustomerSortByName.Checked == true)
+                {
+                    _commonController.Sort(_customers, _customerController.SortCustomerByNameASC);
+                }
+                else if (radioCustomerSortByBirthDate.Checked == true)
+                {
+                    _commonController.Sort(_customers, _customerController.SortCustomerByBirthDateASC);
+                }
+                else if (radioCustomerSortByPoint.Checked == true)
+                {
+                    _commonController.Sort(_customers, _customerController.SortCustomerByPointDSC);
+                }
+                else if (radioCustomerSortByCreatedDate.Checked == true)
+                {
+                    _commonController.Sort(_customers, _customerController.SortCustomerByCreatedDateDSC);
+                }
+                ShowCustomers(_customers);
+            }
+            else
+            {
+                if (radioCustomerSortById.Checked == true)
+                {
+                    _commonController.Sort(_resultSearchCustomer, _customerController.SortCustomerByIdASC);
+                }
+                else if (radioCustomerSortByName.Checked == true)
+                {
+                    _commonController.Sort(_resultSearchCustomer, _customerController.SortCustomerByNameASC);
+                }
+                else if (radioCustomerSortByBirthDate.Checked == true)
+                {
+                    _commonController.Sort(_resultSearchCustomer, _customerController.SortCustomerByBirthDateASC);
+                }
+                else if (radioCustomerSortByPoint.Checked == true)
+                {
+                    _commonController.Sort(_resultSearchCustomer, _customerController.SortCustomerByPointDSC);
+                }
+                else if (radioCustomerSortByCreatedDate.Checked == true)
+                {
+                    _commonController.Sort(_resultSearchCustomer, _customerController.SortCustomerByCreatedDateDSC);
+                }
+                ShowCustomers(_resultSearchCustomer);
+            }    
+        }
+
+        // Chức năng tìm kiếm Khách hàng
+        private void BtnSearchCustomerClick(object sender, EventArgs e)
+        {
+            _actionType = ActionType.SEARCH;
+            var index = comboSearchCustomer.SelectedIndex;
+            if(index != -1)
+            {
+                if (!string.IsNullOrEmpty(txtSearchCustomer.Text))
+                {
+                    _resultSearchCustomer.Clear();
+                    switch (index)
+                    {
+                        case 0:
+                            _resultSearchCustomer.AddRange(_commonController.Search(_customers, 
+                                _customerController.IsCustomerNameMath, txtSearchCustomer.Text));
+                            break;
+                        case 1:
+                            _resultSearchCustomer = _commonController.Search(_customers,
+                                _customerController.IsCustomerIdMath, txtSearchCustomer.Text);
+                            break;
+                        case 2:
+                            _resultSearchCustomer = _commonController.Search(_customers,
+                                _customerController.IsCustomerTypeMath, txtSearchCustomer.Text);
+                            break;
+                        case 3:
+                            _resultSearchCustomer = _commonController.Search(_customers,
+                                _customerController.IsCustomerAddressMath, txtSearchCustomer.Text);
+                            break;
+                        case 4:
+                            _resultSearchCustomer = _commonController.Search(_customers,
+                                _customerController.IsCustomerPhoneMath, txtSearchCustomer.Text);
+                            break;
+                        default:
+                            break;
+                    }
+                    ShowCustomers(_resultSearchCustomer);
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng nhập nội dung tìm kiếm", "Lỗi dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void BtnReloadCustomerClick(object sender, EventArgs e)
+        {
+            _actionType = ActionType.NORMAL;
+            radioCustomerSortByName.Checked = false;
+            radioCustomerSortByPoint.Checked = false;
+            radioCustomerSortById.Checked = false;
+            radioCustomerSortByCreatedDate.Checked = false;
+            radioCustomerSortByBirthDate.Checked = false;
+
+            ShowCustomers(_customers);
+        }
+
+        private void BtnAddDiscountClick(object sender, EventArgs e)
+        {
+            var frm = new AddEditDiscountFrm(this, null);
+            frm.ShowDialog();
         }
     }
 }

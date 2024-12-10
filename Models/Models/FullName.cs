@@ -25,7 +25,7 @@ namespace Models
             string mid = "";
             for (int i = 1; i < data.Length - 1; i++)
             {
-                mid += data[i];
+                mid += data[i] + " ";
             }
             MidName = mid.TrimEnd();
         }

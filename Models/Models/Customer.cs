@@ -15,10 +15,21 @@ namespace Models
 
         public Customer() { }
 
-        public Customer(string personId, string fullName,
-            DateTime birthDate, string address, string phoneNumber,
+        public Customer(//string personId, string fullName,
+            //DateTime birthDate, string address, string phoneNumber,
             string customerType, int poin, DateTime creatTime, string email)
-            : base(personId, fullName, birthDate, address, phoneNumber)
+            //: base(personId, fullName, birthDate, address, phoneNumber)
+        {
+            CustomerType = customerType;
+            Poin = poin;
+            CreatTime = creatTime;
+            Email = email;
+        }
+
+        public Customer(string personId, string fullName,
+                        DateTime birthDate, string address, string phoneNumber,
+           string customerType, int poin, DateTime creatTime, string email)
+        : base(personId, fullName, birthDate, address, phoneNumber)
         {
             CustomerType = customerType;
             Poin = poin;

@@ -57,7 +57,7 @@
             this.label1.Location = new System.Drawing.Point(81, 47);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 17);
+            this.label1.Size = new System.Drawing.Size(127, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Mã khách hàng:";
             // 
@@ -67,7 +67,7 @@
             this.label2.Location = new System.Drawing.Point(122, 95);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 17);
+            this.label2.Size = new System.Drawing.Size(86, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Họ và tên:";
             // 
@@ -77,7 +77,7 @@
             this.label3.Location = new System.Drawing.Point(120, 143);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 17);
+            this.label3.Size = new System.Drawing.Size(88, 20);
             this.label3.TabIndex = 2;
             this.label3.Text = "Ngày sinh:";
             // 
@@ -87,7 +87,7 @@
             this.label4.Location = new System.Drawing.Point(142, 191);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(55, 17);
+            this.label4.Size = new System.Drawing.Size(66, 20);
             this.label4.TabIndex = 3;
             this.label4.Text = "Địa chỉ:";
             // 
@@ -97,7 +97,7 @@
             this.label5.Location = new System.Drawing.Point(72, 383);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(117, 17);
+            this.label5.Size = new System.Drawing.Size(136, 20);
             this.label5.TabIndex = 7;
             this.label5.Text = "Loại khách hàng:";
             // 
@@ -107,7 +107,7 @@
             this.label6.Location = new System.Drawing.Point(97, 335);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(92, 17);
+            this.label6.Size = new System.Drawing.Size(111, 20);
             this.label6.TabIndex = 6;
             this.label6.Text = "Điểm tích luỹ:";
             // 
@@ -117,7 +117,7 @@
             this.label7.Location = new System.Drawing.Point(152, 287);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(46, 17);
+            this.label7.Size = new System.Drawing.Size(56, 20);
             this.label7.TabIndex = 5;
             this.label7.Text = "Email:";
             // 
@@ -127,7 +127,7 @@
             this.label8.Location = new System.Drawing.Point(97, 239);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(95, 17);
+            this.label8.Size = new System.Drawing.Size(111, 20);
             this.label8.TabIndex = 4;
             this.label8.Text = "Số điện thoại:";
             // 
@@ -137,7 +137,7 @@
             this.label9.Location = new System.Drawing.Point(56, 431);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(131, 17);
+            this.label9.Size = new System.Drawing.Size(152, 20);
             this.label9.TabIndex = 8;
             this.label9.Text = "Ngày tạo tài khoản:";
             // 
@@ -145,35 +145,35 @@
             // 
             this.txtCustomerId.Location = new System.Drawing.Point(215, 44);
             this.txtCustomerId.Name = "txtCustomerId";
-            this.txtCustomerId.Size = new System.Drawing.Size(191, 23);
+            this.txtCustomerId.Size = new System.Drawing.Size(191, 27);
             this.txtCustomerId.TabIndex = 9;
             // 
             // txtFullName
             // 
             this.txtFullName.Location = new System.Drawing.Point(215, 92);
             this.txtFullName.Name = "txtFullName";
-            this.txtFullName.Size = new System.Drawing.Size(191, 23);
+            this.txtFullName.Size = new System.Drawing.Size(191, 27);
             this.txtFullName.TabIndex = 10;
             // 
             // txtAddress
             // 
             this.txtAddress.Location = new System.Drawing.Point(215, 188);
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(191, 23);
+            this.txtAddress.Size = new System.Drawing.Size(191, 27);
             this.txtAddress.TabIndex = 11;
             // 
             // txtPhoneNumber
             // 
             this.txtPhoneNumber.Location = new System.Drawing.Point(215, 236);
             this.txtPhoneNumber.Name = "txtPhoneNumber";
-            this.txtPhoneNumber.Size = new System.Drawing.Size(191, 23);
+            this.txtPhoneNumber.Size = new System.Drawing.Size(191, 27);
             this.txtPhoneNumber.TabIndex = 12;
             // 
             // txtEmail
             // 
             this.txtEmail.Location = new System.Drawing.Point(215, 284);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(191, 23);
+            this.txtEmail.Size = new System.Drawing.Size(191, 27);
             this.txtEmail.TabIndex = 13;
             // 
             // dateTimeBirthDate
@@ -182,7 +182,7 @@
             this.dateTimeBirthDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimeBirthDate.Location = new System.Drawing.Point(215, 138);
             this.dateTimeBirthDate.Name = "dateTimeBirthDate";
-            this.dateTimeBirthDate.Size = new System.Drawing.Size(191, 23);
+            this.dateTimeBirthDate.Size = new System.Drawing.Size(191, 27);
             this.dateTimeBirthDate.TabIndex = 15;
             // 
             // dateTimeCreatAccount
@@ -192,7 +192,7 @@
             this.dateTimeCreatAccount.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimeCreatAccount.Location = new System.Drawing.Point(215, 426);
             this.dateTimeCreatAccount.Name = "dateTimeCreatAccount";
-            this.dateTimeCreatAccount.Size = new System.Drawing.Size(191, 23);
+            this.dateTimeCreatAccount.Size = new System.Drawing.Size(191, 27);
             this.dateTimeCreatAccount.TabIndex = 16;
             // 
             // comboCustomerType
@@ -203,7 +203,7 @@
             "Mua sĩ"});
             this.comboCustomerType.Location = new System.Drawing.Point(215, 380);
             this.comboCustomerType.Name = "comboCustomerType";
-            this.comboCustomerType.Size = new System.Drawing.Size(191, 25);
+            this.comboCustomerType.Size = new System.Drawing.Size(191, 28);
             this.comboCustomerType.TabIndex = 17;
             // 
             // btnAddCustomer
@@ -228,6 +228,7 @@
             this.btnCancel.TabIndex = 19;
             this.btnCancel.Text = "Huỷ bỏ";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancelClick);
             // 
             // numericPoin
             // 
@@ -238,12 +239,12 @@
             0,
             0});
             this.numericPoin.Name = "numericPoin";
-            this.numericPoin.Size = new System.Drawing.Size(191, 23);
+            this.numericPoin.Size = new System.Drawing.Size(191, 27);
             this.numericPoin.TabIndex = 20;
             // 
             // AddEditCustomerFrm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(462, 601);
             this.Controls.Add(this.numericPoin);

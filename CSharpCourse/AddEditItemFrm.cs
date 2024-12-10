@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Models;
-using Controller;
 
 namespace CSharpCourse
 {

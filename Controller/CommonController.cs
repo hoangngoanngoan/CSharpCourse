@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Models;
 
 /*
@@ -64,7 +61,6 @@ namespace Controller
             return result;
         }
 
-        // Phương thức sắp xếp tuỳ theo kiểu đối tường T truyền vào qua lời gọi
         public void Sort<T>(List<T> list, Comparison<T> comparer)
         {
             list.Sort(comparer);
