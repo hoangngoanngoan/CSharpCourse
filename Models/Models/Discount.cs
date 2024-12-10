@@ -22,10 +22,14 @@ namespace Models
         {
             
         }
-
-        public Discount(int discountId, string name, DateTime startTime, DateTime endTime, string discountType, int discountPercent, int discountAmount)
+        
+        public Discount(int id)
         {
-            DiscountId = discountId;
+            DiscountId = id == 0 ? s_autoId++ : id;
+        }
+
+        public Discount(int discountId, string name, DateTime startTime, DateTime endTime, string discountType, int discountPercent, int discountAmount): this(discountId)
+        {
             Name = name;
             StartTime = startTime;
             EndTime = endTime;

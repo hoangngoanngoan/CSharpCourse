@@ -13,7 +13,7 @@ namespace CSharpCourse
         private Item _oldItem = null;        // Mục đích để lưu đối tượng item cũ chuẩn bị cập nhật mới
         private Item _newItem = null;        // Mục đích để lưu đối tượng item mới để chuẩn bị thêm mới hoặc cập nhật
         private IViewController _controller; // mục đích để thực hiện hai phương thức AddNewItem và UpDateItem trên form HomeFrm
-
+        private List<string> _listDiscount;  // Mục đích để lưu tên khuyến mãi vào comboDiscount
         // Các hàm khởi tạo
         public AddEditItemFrm()
         {
@@ -24,6 +24,8 @@ namespace CSharpCourse
         {
             _controller = masterView;
             _discounts = discounts;
+            GetDiscount(_discounts); // Mục đích dùng để hiển thị tên khuyến mãi vào comboDiscount
+            
 
             // Kiểm tra nếu hàm khởi tạo có truyền tham số item vào có nghĩa là người dùng muốn cập nhật 
 
@@ -34,6 +36,17 @@ namespace CSharpCourse
                 _oldItem = item;
                 GetItemDataFromHomeFrm();
             }
+        }
+
+        private void GetDiscount(List<Discount> ld)
+        {
+            _listDiscount = new List<string>();
+            foreach (var item in ld)
+            {
+                _listDiscount.Add(item.Name);
+            }
+            comboDiscount.DataSource = _listDiscount;
+            comboDiscount.SelectedIndex = -1;
         }
 
         // Hàm láy dữ liệu từ form HomeFrm
@@ -67,7 +80,7 @@ namespace CSharpCourse
             var releaseDate = dateTimePickerReleaseDate.Value;
             var price = (int)numericPrice.Value;
             Discount discount = null;
-            if (comboDiscount.SelectedIndex > 0)
+            if (comboDiscount.SelectedIndex > -1)
             {
                 discount = _discounts[comboDiscount.SelectedIndex];
             }

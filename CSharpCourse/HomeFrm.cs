@@ -87,6 +87,8 @@ namespace CSharpCourse
                 });
             }
         }
+
+        // Hàm hiển thị khuyến mãi
         private void ShowDiscounts(List<Discount> discounts)
         {
             tblDiscount.Rows.Clear();
