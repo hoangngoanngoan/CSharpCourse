@@ -159,7 +159,7 @@ namespace CSharpCourse
                     _commonController.UpdateItem(_resultSearchItem, oItem, nItem);
                     int index = _commonController.IndexOfItem(_items, nItem);
                     index = _commonController.IndexOfItem(_resultSearchItem, nItem);
-                    tblItem.Rows.RemoveAt(index);
+                    tblItem.Rows.Clear();
                     ShowItems(_resultSearchItem);
                 }
                
@@ -171,6 +171,14 @@ namespace CSharpCourse
                     var oCustomer = oldItem as Customer;
                     int index = _commonController.UpdateItem(_customers, oCustomer, nCustomer);
                     ShowCustomers(_customers);
+                }else
+                {
+                    var nCustomers = newItem as Customer;
+                    var oCustomers = oldItem as Customer;
+                    int index = _commonController.UpdateItem(_customers, oCustomers, nCustomers);
+                    index = _commonController.UpdateItem(_resultSearchCustomer, oCustomers, nCustomers);
+                    tblCustomer.Rows.Clear();
+                    ShowCustomers(_resultSearchCustomer);
                 }
             }else if (typeof(T) == typeof(Discount))
             {
@@ -561,6 +569,23 @@ namespace CSharpCourse
                         ShowDiscounts(_discounts);
                     }
                 } 
+            }else
+            {
+                if(e.RowIndex >= 0 && e.ColumnIndex == 7)
+                {
+                    var frm = new AddEditDiscountFrm(this, _resultSearchDiscount[e.RowIndex]);
+                    frm.ShowDialog();
+                }
+                else if(e.RowIndex >= 0 && e.ColumnIndex == 8)
+                {
+                    var ans = MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if(ans == DialogResult.Yes)
+                    {
+                        _commonController.DeleteItem(_discounts, _resultSearchDiscount[e.RowIndex]);
+                        _commonController.DeleteItem(_resultSearchDiscount, _resultSearchDiscount[e.RowIndex]);
+                        tblDiscount.Rows.RemoveAt(e.RowIndex);
+                    }
+                }
             }
         }
 
