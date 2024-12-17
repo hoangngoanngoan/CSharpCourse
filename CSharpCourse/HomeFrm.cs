@@ -172,6 +172,23 @@ namespace CSharpCourse
                     int index = _commonController.UpdateItem(_customers, oCustomer, nCustomer);
                     ShowCustomers(_customers);
                 }
+            }else if (typeof(T) == typeof(Discount))
+            {
+                if(_actionType == ActionType.NORMAL)
+                {
+                    var nDiscount = newItem as Discount;
+                    var oDiscount = oldItem as Discount;
+                    int index = _commonController.UpdateItem(_discounts, oDiscount, nDiscount);
+                    ShowDiscounts(_discounts);
+                } else
+                {
+                    var nDiscount = newItem as Discount;
+                    var oDiscount = oldItem as Discount;
+                    int index = _commonController.UpdateItem(_discounts, oDiscount, nDiscount);
+                    index = _commonController.UpdateItem(_resultSearchDiscount, oDiscount, nDiscount);
+                    tblDiscount.Rows.Clear();
+                    ShowDiscounts(_resultSearchDiscount);
+                }   
             }
         }
 

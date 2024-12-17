@@ -54,7 +54,7 @@
             this.label1.Location = new System.Drawing.Point(81, 66);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 17);
+            this.label1.Size = new System.Drawing.Size(126, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Mã khuyến mãi:";
             // 
@@ -63,7 +63,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(76, 119);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 17);
+            this.label2.Size = new System.Drawing.Size(131, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Tên khuyến mãi:";
             // 
@@ -72,7 +72,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(95, 172);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(97, 17);
+            this.label3.Size = new System.Drawing.Size(112, 20);
             this.label3.TabIndex = 2;
             this.label3.Text = "Ngày bắt đầu:";
             // 
@@ -81,7 +81,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(91, 225);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(99, 17);
+            this.label4.Size = new System.Drawing.Size(116, 20);
             this.label4.TabIndex = 3;
             this.label4.Text = "Ngày kết thúc:";
             // 
@@ -90,7 +90,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(72, 278);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(115, 17);
+            this.label5.Size = new System.Drawing.Size(135, 20);
             this.label5.TabIndex = 4;
             this.label5.Text = "Loại khuyến mãi:";
             // 
@@ -99,7 +99,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(57, 331);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(128, 17);
+            this.label6.Size = new System.Drawing.Size(150, 20);
             this.label6.TabIndex = 5;
             this.label6.Text = "Phần trăm giá bán:";
             // 
@@ -108,7 +108,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(60, 384);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(126, 17);
+            this.label7.Size = new System.Drawing.Size(149, 20);
             this.label7.TabIndex = 6;
             this.label7.Text = "Giá trị khuyến mãi:";
             // 
@@ -117,7 +117,7 @@
             this.txtDiscountId.Enabled = false;
             this.txtDiscountId.Location = new System.Drawing.Point(214, 63);
             this.txtDiscountId.Name = "txtDiscountId";
-            this.txtDiscountId.Size = new System.Drawing.Size(191, 23);
+            this.txtDiscountId.Size = new System.Drawing.Size(191, 27);
             this.txtDiscountId.TabIndex = 7;
             this.txtDiscountId.Text = "0";
             // 
@@ -125,7 +125,7 @@
             // 
             this.txtDiscountName.Location = new System.Drawing.Point(214, 116);
             this.txtDiscountName.Name = "txtDiscountName";
-            this.txtDiscountName.Size = new System.Drawing.Size(191, 23);
+            this.txtDiscountName.Size = new System.Drawing.Size(191, 27);
             this.txtDiscountName.TabIndex = 7;
             // 
             // dateTimeDiscountStart
@@ -134,7 +134,7 @@
             this.dateTimeDiscountStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimeDiscountStart.Location = new System.Drawing.Point(214, 167);
             this.dateTimeDiscountStart.Name = "dateTimeDiscountStart";
-            this.dateTimeDiscountStart.Size = new System.Drawing.Size(191, 23);
+            this.dateTimeDiscountStart.Size = new System.Drawing.Size(191, 27);
             this.dateTimeDiscountStart.TabIndex = 8;
             // 
             // dateTimeDiscountEnd
@@ -143,7 +143,7 @@
             this.dateTimeDiscountEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimeDiscountEnd.Location = new System.Drawing.Point(214, 220);
             this.dateTimeDiscountEnd.Name = "dateTimeDiscountEnd";
-            this.dateTimeDiscountEnd.Size = new System.Drawing.Size(191, 23);
+            this.dateTimeDiscountEnd.Size = new System.Drawing.Size(191, 27);
             this.dateTimeDiscountEnd.TabIndex = 8;
             // 
             // comboDiscountType
@@ -155,7 +155,7 @@
             "Khuyến mãi giảm giá trực tiếp"});
             this.comboDiscountType.Location = new System.Drawing.Point(213, 275);
             this.comboDiscountType.Name = "comboDiscountType";
-            this.comboDiscountType.Size = new System.Drawing.Size(191, 25);
+            this.comboDiscountType.Size = new System.Drawing.Size(191, 28);
             this.comboDiscountType.TabIndex = 9;
             // 
             // btnAddUpdateDiscount
@@ -186,19 +186,24 @@
             // 
             this.numericDiscountPercent.Location = new System.Drawing.Point(214, 329);
             this.numericDiscountPercent.Name = "numericDiscountPercent";
-            this.numericDiscountPercent.Size = new System.Drawing.Size(191, 23);
+            this.numericDiscountPercent.Size = new System.Drawing.Size(191, 27);
             this.numericDiscountPercent.TabIndex = 11;
             // 
             // numericDiscountAmount
             // 
             this.numericDiscountAmount.Location = new System.Drawing.Point(213, 382);
+            this.numericDiscountAmount.Maximum = new decimal(new int[] {
+            1410065407,
+            2,
+            0,
+            0});
             this.numericDiscountAmount.Name = "numericDiscountAmount";
-            this.numericDiscountAmount.Size = new System.Drawing.Size(191, 23);
+            this.numericDiscountAmount.Size = new System.Drawing.Size(191, 27);
             this.numericDiscountAmount.TabIndex = 11;
             // 
             // AddEditDiscountFrm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(462, 546);
             this.Controls.Add(this.numericDiscountAmount);
