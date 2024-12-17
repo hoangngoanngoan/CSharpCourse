@@ -23,7 +23,6 @@ namespace CSharpCourse
 
         // Mặt hàng
         private List<Item> _items;                  // Dùng để lưu danh sách các mặt hàng có trong cửa hàng
-        private List<Discount> _discounts = null;    // Dùng để lưu các đối tượng mã khuyến mãi
         private ItemController _itemController;     // Dùng nạp các comparer truyền vào phương thức _commonController.Sort<T>(<T>List list, Comparison<T> Comparer)
         private List<Item> _resultSearchItem;       // Dùng để lưu dách sách kết quả tìm kiếm tạm thời
         
@@ -32,6 +31,10 @@ namespace CSharpCourse
         private CustomerController _customerController;
         private List<Customer> _resultSearchCustomer; // Dùng để lưu danh sách kết quả tìm kiềm tạm thời
 
+        // Discount
+        private List<Discount> _discounts = null;
+        private List<Discount> _resultSearchDiscount;
+        private DiscountController _discountController;
         public HomeFrm()
         {
             InitializeComponent();
@@ -41,7 +44,6 @@ namespace CSharpCourse
 
             // Mặt hàng
             _items = new List<Item>();
-            _discounts = new List<Discount>();
             _itemController = new ItemController();
             _resultSearchItem = new List<Item>();
             _actionType = ActionType.NORMAL;
@@ -51,11 +53,18 @@ namespace CSharpCourse
             _customerController = new CustomerController();
             _resultSearchCustomer = new List<Customer>();
 
+            // Discount 
+            _discounts = new List<Discount>();
+            _resultSearchDiscount = new List<Discount>();
+            _discountController = new DiscountController();
+
             // Nạp dữ liệu 
             _customers = Utils.CreateFakeCustomer();
             _items = Utils.CreateFakeItem();
+            _discounts = Utils.CreateFakeDiscount();
             ShowItems(_items);
             ShowCustomers(_customers);
+            ShowDiscounts(_discounts);
         }
 
         // Hàm hiện thị danh sách khách hàng
@@ -515,6 +524,73 @@ namespace CSharpCourse
         {
             var frm = new AddEditDiscountFrm(this, null);
             frm.ShowDialog();
+        }
+
+        private void TblDiscountCellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (_actionType == ActionType.NORMAL)
+            {
+                if (e.RowIndex >= 0 && e.ColumnIndex == 7)
+                {
+                    var frm = new AddEditDiscountFrm(this, _discounts[e.RowIndex]);
+                    frm.ShowDialog();
+                } 
+                else if(e.RowIndex >= 0 && e.ColumnIndex == 8)
+                {
+                    var ans = MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (ans == DialogResult.Yes)
+                    {
+                        _commonController.DeleteItem(_discounts, _discounts[e.RowIndex]);
+                        ShowDiscounts(_discounts);
+                    }
+                } 
+            }
+        }
+
+        private void BtnSearchDiscountClick(object sender, EventArgs e)
+        {
+            _actionType = ActionType.SEARCH;
+            if (comboSearchDiscount.SelectedIndex == -1)
+            {
+                MessageBox.Show("Vui lòng chọn tiêu chí tìm kiếm", "Lỗi dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }else if(string.IsNullOrEmpty(txtSearchDiscount.Text))
+            {
+                MessageBox.Show("Vui lòng điền nội dung tìm kiếm", "Lỗi dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }else
+            {
+                _actionType = ActionType.SEARCH;
+                _resultSearchDiscount.Clear();
+                var key = txtSearchDiscount.Text;   
+                var option = comboSearchDiscount.SelectedIndex;
+                switch (option)
+                {
+                    case 0:
+                        _resultSearchDiscount.AddRange(_commonController.Search(_discounts, _discountController.IsMatchStartDate, key));
+                        break;
+                    case 1:
+                        _resultSearchDiscount.AddRange(_commonController.Search(_discounts, _discountController.IsMatchEndDate, key));
+                        break;
+                    case 2:
+                        _resultSearchDiscount.AddRange(_commonController.Search(_discounts,_discountController.IsMatchNameDiscount, key));
+                        break;
+                    default:
+                        break;
+                }
+                ShowDiscounts(_resultSearchDiscount);
+                if(_resultSearchDiscount.Count == 0)
+                {
+                    MessageBox.Show("Không tìm thấy kết quả nào", "Kết quả tìm kiếm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void BtnReloadDiscountClick(object sender, EventArgs e)
+        {
+            _actionType = ActionType.NORMAL;
+            _resultSearchDiscount.Clear();
+            comboSearchDiscount.SelectedIndex = -1;
+            txtSearchDiscount.Text = string.Empty;
+            ShowDiscounts(_discounts);
         }
     }
 }

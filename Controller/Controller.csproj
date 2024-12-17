@@ -43,9 +43,11 @@
   <ItemGroup>
     <Compile Include="CommonController.cs" />
     <Compile Include="CustomerController.cs" />
+    <Compile Include="DiscountController.cs" />
     <Compile Include="IBillController.cs" />
     <Compile Include="ICommonController.cs" />
     <Compile Include="ICustomerController.cs" />
+    <Compile Include="IDiscountController.cs" />
     <Compile Include="IItemController.cs" />
     <Compile Include="InvalidEmailException.cs" />
     <Compile Include="InvalidItemNameException.cs" />

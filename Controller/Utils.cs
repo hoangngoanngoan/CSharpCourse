@@ -32,5 +32,14 @@ namespace Controller
             items.Add(new Customer("0123456789126", "Lương Tiểu Diệp Nghĩa", DateTime.ParseExact("17/05/2010","dd/MM/yyyy", null), "248 Phương Sài tp.Nha Trang", "0705154714", "Mua lẻ", 10, DateTime.Now, "ldh17071994@gmail.com"));
             return items;
         }
+
+        public static List<Discount> CreateFakeDiscount()
+        {
+            List<Discount> discounts = new List<Discount>();
+            discounts.Add(new Discount(0, "Khuyến mãi 1", DateTime.ParseExact("01/01/2025 00:00:00", "dd/MM/yyyy HH:mm:ss", null), DateTime.ParseExact("01/01/2025 23:59:59", "dd/MM/yyyy HH:mm:ss", null), "Khuyến mãi giảm giá trực tiếp", 0, 10000));
+            discounts.Add(new Discount(0, "Khuyến mãi 2", DateTime.ParseExact("02/01/2025 00:00:00", "dd/MM/yyyy HH:mm:ss", null), DateTime.ParseExact("02/01/2025 23:59:59", "dd/MM/yyyy HH:mm:ss", null), "Khuyến mãi theo phần trăm giá bán", 10, 0));
+            discounts.Add(new Discount(0, "Khuyến mãi 3", DateTime.ParseExact("03/01/2025 00:00:00", "dd/MM/yyyy HH:mm:ss", null), DateTime.ParseExact("03/01/2025 23:59:59", "dd/MM/yyyy HH:mm:ss", null), "Khuyến mãi giảm giá trực tiếp", 0, 50000));
+            return discounts;
+        }
     }
 }
