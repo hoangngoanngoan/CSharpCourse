@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Models
 {
@@ -15,10 +12,7 @@ namespace Models
 
         public int TotalItems { get; set; }
 
-        public Cart()
-        {
-            
-        }
+        public Cart(){ }
 
         public Cart(int id)
         {

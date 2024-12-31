@@ -7,35 +7,35 @@ namespace Controller
     {
         public bool IsCustomerAddressMath(Customer customer, string address)
         {
-            var pattern = $@".*{address}.*";
+            var pattern = $".*{address}.*";
             var regex = new Regex(pattern, RegexOptions.IgnoreCase);
             return regex.IsMatch(customer.Address);
         }
 
         public bool IsCustomerIdMath(Customer customer, string id)
         {
-            var pattern = $@".*{id}.*";
+            var pattern = $".*{id}.*";
             var regex = new Regex(pattern, RegexOptions.IgnoreCase);
             return regex.IsMatch(customer.PersonId);
         }
 
         public bool IsCustomerNameMath(Customer customer, string name)
         {
-            var pattern = $@".*{name}.*";
+            var pattern = $".*{name}.*";
             var regex = new Regex(pattern, RegexOptions.IgnoreCase);
             return regex.IsMatch(customer.FullName.FirstName);
         }
 
         public bool IsCustomerPhoneMath(Customer customer, string phone)
         {
-            var pattern = $@".*{phone}.*";
+            var pattern = $".*{phone}.*";
             var regex = new Regex(pattern);
             return regex.IsMatch(customer.PhoneNumber);
         }
 
         public bool IsCustomerTypeMath(Customer customer, string type)
         {
-            var pattern = $@".*{type}.*";
+            var pattern = $".*{type}.*";
             var regex = new Regex(pattern, RegexOptions.IgnoreCase);
             return regex.IsMatch(customer.CustomerType);
         }

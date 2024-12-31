@@ -10,31 +10,49 @@ namespace CSharpCourse
     {
         NORMAL, SEARCH
     }
+
     public interface IViewController
     {
         void AddNewItem<T>(T item);
+
+        void UpdateItem<T>(T newItem);
+
         void UpdateItem<T>(T oldItem, T newItem);
+
     }
+
     public partial class HomeFrm : Form, IViewController
     {
 
         private ActionType _actionType;
-        private CommonController _commonController; // Dùng để gọi các phương thức Generic Thêm xoá sửa sắp xếp tìm kiếm
+        private CommonController _commonController; 
 
         // Mặt hàng
-        private List<Item> _items;                  // Dùng để lưu danh sách các mặt hàng có trong cửa hàng
-        private ItemController _itemController;     // Dùng nạp các comparer truyền vào phương thức _commonController.Sort<T>(<T>List list, Comparison<T> Comparer)
-        private List<Item> _resultSearchItem;       // Dùng để lưu dách sách kết quả tìm kiếm tạm thời
+        private List<Item> _items;                  
+        private ItemController _itemController;     
+        private List<Item> _resultSearchItem;       
         
         // Khách hàng
         private List<Customer> _customers;
         private CustomerController _customerController;
-        private List<Customer> _resultSearchCustomer; // Dùng để lưu danh sách kết quả tìm kiềm tạm thời
+        private List<Customer> _resultSearchCustomer;
 
         // Discount
         private List<Discount> _discounts = null;
         private List<Discount> _resultSearchDiscount;
         private DiscountController _discountController;
+
+        // BillDetail
+        private List<BillDetail> _bills;
+        private List<BillDetail> _resultSearchBillDetail;
+
+
+
+        // =============================================================================================================================
+        // ======================================================= HÀM KHỞI TẠO ======================================================== 
+        // ============================================================================================================================= 
+
+
         public HomeFrm()
         {
             InitializeComponent();
@@ -58,6 +76,10 @@ namespace CSharpCourse
             _resultSearchDiscount = new List<Discount>();
             _discountController = new DiscountController();
 
+            // BillDetail
+            _bills = new List<BillDetail>();
+            _resultSearchBillDetail = new List<BillDetail>();
+
             // Nạp dữ liệu 
             _customers = Utils.CreateFakeCustomer();
             _items = Utils.CreateFakeItem();
@@ -65,9 +87,19 @@ namespace CSharpCourse
             ShowItems(_items);
             ShowCustomers(_customers);
             ShowDiscounts(_discounts);
+            ShowBills(_bills);
         }
 
-        // Hàm hiện thị danh sách khách hàng
+
+        // ==================================================== HIỂN THỊ DANH SÁCH =====================================================
+        // ===================================================== 1. MẶT HÀNG ===========================================================
+        // ===================================================== 2. KHÁCH HÀNG =========================================================
+        // ===================================================== 3. KHUYẾN MÃI =========================================================
+        // ===================================================== 4. HÓA ĐƠN ============================================================
+        // ================================= NƠI THỰC HIỆN LỜI GỌI LÀ TỪ CÁC "HÀM KHỞI TẠO VÀ TỪ CÁC BUTTON" ===========================
+
+
+        // 1. HIỂN THỊ DANH SÁCH KHÁCH HÀNG
         private void ShowCustomers(List<Customer> customers)
         {
             tblCustomer.Rows.Clear();
@@ -82,7 +114,8 @@ namespace CSharpCourse
             }
         }
 
-        // Hàm hiển thị danh sách mặt hàng
+        
+        // 2. HIỂN THỊ DANH SÁCH MẶT HÀNG TỒN KHO
         private void ShowItems(List<Item> listItem)
         {
             tblItem.Rows.Clear();
@@ -97,7 +130,8 @@ namespace CSharpCourse
             }
         }
 
-        // Hàm hiển thị khuyến mãi
+        
+        // 3. HIỂN THỊ DANH SÁCH KHUYẾN MÃI
         private void ShowDiscounts(List<Discount> discounts)
         {
             tblDiscount.Rows.Clear();
@@ -112,58 +146,113 @@ namespace CSharpCourse
             }
         }
 
-        // Hàm thêm mới đối tượng 
+        
+        // 4. HIỂN THỊ DANH SÁCH HÓA ĐƠN
+        private void ShowBills(List<BillDetail> bills)
+        {
+            tblBill.Rows.Clear();
+            foreach (var bill in bills) 
+            {
+                tblBill.Rows.Add(new object[]
+                {
+                    bill.BillId, bill.Cart.Customer.FullName.ToString(), bill.StaffName,
+                    bill.CreatTime.ToString("dd/MM/yyyy HH:mm:ss"), $"{bill.TotalItem}sp", $"{bill.SubTotal:N0}đ",
+                    $"{bill.TotalDiscountAmount:N0}đ",$"{ bill.TotalAmount:N0}đ", bill.Status
+                });
+            }
+        }
+
+
+        // ==================================================== THÊM MỚI ĐỐI TƯỢNG =====================================================
+        // ===================================================== 1. MẶT HÀNG ===========================================================
+        // ===================================================== 2. KHÁCH HÀNG =========================================================
+        // ===================================================== 3. KHUYẾN MÃI =========================================================
+        // ===================================================== 4. HÓA ĐƠN ============================================================
+        // ========================= NƠI THỰC HIỆN LỜI GỌI LÀ TỪ CÁC "CHƯƠNG TRÌNH CẬP NHẬT HOẶC THÊM MỚI" =============================
+
+
         public void AddNewItem<T>(T item)
         {
+            // 1. MẶT HÀNG
+            
             if(typeof(T) == typeof(Item))
             {
                 var newItem = item as Item;
-                _commonController.AddNewItem(_items, newItem); // Truyền newItem vào trong List _items
+                _commonController.AddNewItem(_items, newItem);
                 ShowItems(_items);
             }
+
+            // 2. KHÁCH HÀNG
+
             else if(typeof(T) == typeof(Customer)) 
             {
                 var newCustomer = item as Customer;
                 _commonController.AddNewItem(_customers, newCustomer);
                 ShowCustomers(_customers);
-            }else if(typeof(T) == typeof(Discount))
+            }
+            
+            // 3. KHUYẾN MÃI
+
+            else if(typeof(T) == typeof(Discount))
             {
                 var newDisCount = item as Discount;
                 _commonController.AddNewItem(_discounts, newDisCount);
                 ShowDiscounts(_discounts);
             }
+            
+            // 4. HÓA ĐƠN 
+
+            else if(typeof(T) == typeof(BillDetail))
+            {
+                var newBillDetail = item as BillDetail;
+                _commonController.AddNewItem(_bills, newBillDetail);
+                ShowBills(_bills);
+            }
+
+
         }
 
-        
 
-        // Hàm cập nhật đối tượng
+
+        // ==================================================== CẬP NHẬT ĐỐI TƯỢNG =====================================================
+        // ===================================================== 1. MẶT HÀNG ===========================================================
+        // ===================================================== 2. KHÁCH HÀNG =========================================================
+        // ===================================================== 3. KHUYẾN MÃI =========================================================
+        // ===================================================== 4. HÓA ĐƠN ============================================================
+        // ========================= NƠI THỰC HIỆN LỜI GỌI LÀ TỪ CÁC "CHƯƠNG TRÌNH CẬP NHẬT HOẶC THÊM MỚI" =============================
+
+
         public void UpdateItem<T>(T oldItem, T newItem)
         {
-            // Cập nhật danh sách Item _items
+
+            // 1. MẶT HÀNG
+
             if(typeof(T) == typeof(Item)) 
             {
                 if (_actionType == ActionType.NORMAL)
                 {
                     var nItem = newItem as Item;
                     var oItem = oldItem as Item;
-                    _commonController.UpdateItem(_items, oItem, nItem);  // Cập nhật oItem thành nItem trọng List<Item> _items
-                    int index = _commonController.IndexOfItem(_items, nItem);
-                    tblItem.Rows.RemoveAt(index);
+                    _commonController.UpdateItem(_items, oItem);
+                    int index = _commonController.IndexOfItem(_items, oItem);
                     ShowItems(_items);
                 }
                 else
                 {
                     var nItem = newItem as Item;
                     var oItem = oldItem as Item;
-                    _commonController.UpdateItem(_items, oItem, nItem);  // Cập nhật oItem thành nItem trong List<Item> _items
-                    _commonController.UpdateItem(_resultSearchItem, oItem, nItem);
-                    int index = _commonController.IndexOfItem(_items, nItem);
-                    index = _commonController.IndexOfItem(_resultSearchItem, nItem);
-                    tblItem.Rows.Clear();
+                    _commonController.UpdateItem(_items, oItem);  
+                    _commonController.UpdateItem(_resultSearchItem, oItem);
+                    int index = _commonController.IndexOfItem(_items, oItem);
+                    index = _commonController.IndexOfItem(_resultSearchItem, oItem);
                     ShowItems(_resultSearchItem);
                 }
                
-            }else if (typeof(T) == typeof(Customer))
+            }
+
+            // 2. KHÁCH HÀNG
+
+            else if (typeof(T) == typeof(Customer))
             {
                 if(_actionType == ActionType.NORMAL)
                 {
@@ -177,10 +266,13 @@ namespace CSharpCourse
                     var oCustomers = oldItem as Customer;
                     int index = _commonController.UpdateItem(_customers, oCustomers, nCustomers);
                     index = _commonController.UpdateItem(_resultSearchCustomer, oCustomers, nCustomers);
-                    tblCustomer.Rows.Clear();
                     ShowCustomers(_resultSearchCustomer);
                 }
-            }else if (typeof(T) == typeof(Discount))
+            }
+            
+            // 3. KHUYẾN MÃI
+
+            else if (typeof(T) == typeof(Discount))
             {
                 if(_actionType == ActionType.NORMAL)
                 {
@@ -194,20 +286,49 @@ namespace CSharpCourse
                     var oDiscount = oldItem as Discount;
                     int index = _commonController.UpdateItem(_discounts, oDiscount, nDiscount);
                     index = _commonController.UpdateItem(_resultSearchDiscount, oDiscount, nDiscount);
-                    tblDiscount.Rows.Clear();
                     ShowDiscounts(_resultSearchDiscount);
                 }   
             }
+            
+            // 4. HÓA ĐƠN
+
+            else if(typeof(T) == typeof(BillDetail))
+            {
+                if(_actionType == ActionType.NORMAL)
+                {
+                    var oItem = oldItem as BillDetail;
+                    int index = _commonController.UpdateItem(_bills, oItem);
+                    ShowBills(_bills);
+                }else
+                {
+                    // DO SOMETHING
+                }
+            }
+
+
         }
 
-        // Hàm gọi form AddEditItemFrm : bằng sự kiện btnAddItem_Click
+        public void UpdateItem<T>(T newItem)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        // ========================================== CHƯƠNG TRÌNH CẬP NHẬP HOẶC THÊM MẶT HÀNG =========================================
+        // =============================================================================================================================
+
+
+        // 1. THÊM MỚI
+
         private void btnAddItem_Click(object sender, EventArgs e)
         {
             var frm = new AddEditItemFrm(this, _discounts, null);
             frm.ShowDialog();
         }
 
-        // Hàm gọi form AddEditItemFrm : bằng sự kiện tblItemCellClick
+        
+        // 2. CẬP NHẬT HOẶC XÓA BỎ
+
         private void tblItemCellCick(object sender, DataGridViewCellEventArgs e)
         {
             if(_actionType == ActionType.NORMAL)
@@ -249,7 +370,9 @@ namespace CSharpCourse
             }
         }
 
-        // Chức năng sắp xếp
+        
+        // 3. SẮP XẾP
+
         private void SortItemHandler(object sender, EventArgs e)
         {
             if (radioSortItemByPriceASC.Checked)
@@ -273,7 +396,9 @@ namespace CSharpCourse
             ShowItems(_items);
         }
 
-        // Chức năng tìm kiếm
+        
+        // 4. TIÊU CHÍ TÌM KIẾM
+
         private void ComboBoxSearchItemSelectedIndexChanged(object sender, EventArgs e)
         {
             switch (comboSearchItem.SelectedIndex)
@@ -295,6 +420,10 @@ namespace CSharpCourse
                     break;
             }
         }
+
+
+        // 5. TÌM KIẾM
+        
         private void BtnSearchItemClick(object sender, EventArgs e)
         {
             _actionType = ActionType.SEARCH;
@@ -374,7 +503,9 @@ namespace CSharpCourse
             }
         }
 
-        // Chức năng refresh bảng hiển thị (tblItem)
+
+        // 6. RELOAD HIỂN THỊ DANH SÁCH TÌM KIẾM MẶT HÀNG VỀ BÌNH THƯỜNG
+
         private void btnReloadItem_Click(object sender, EventArgs e)
         {
             _actionType = ActionType.NORMAL;
@@ -390,11 +521,22 @@ namespace CSharpCourse
             ShowItems(_items);
         }
 
+
+
+        // ========================================== CHƯƠNG TRÌNH CẬP NHẬP HOẶC THÊM KHÁCH HÀNG =======================================
+        // =============================================================================================================================
+
+
+        // 1. THÊM MỚI
+
         private void BtnAddNewCustomerClick(object sender, EventArgs e)
         {
             var frm = new AddEditCustomerFrm(this, null);
             frm.ShowDialog();
         }
+
+
+        // 2. CẬP NHẬT HOẶC XÓA BỎ
 
         private void TblCustomerCellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -436,7 +578,9 @@ namespace CSharpCourse
             
         }
 
-        // Chức năng sắp xếp Customer
+        
+        // 3. SẮP XẾP
+
         private void RadioSortCustomerCheckedChanged(object sender, EventArgs e)
         {
             if (_actionType == ActionType.NORMAL)
@@ -489,7 +633,9 @@ namespace CSharpCourse
             }    
         }
 
-        // Chức năng tìm kiếm Khách hàng
+        
+        // 4. TÌM KIẾM 
+
         private void BtnSearchCustomerClick(object sender, EventArgs e)
         {
             _actionType = ActionType.SEARCH;
@@ -533,6 +679,9 @@ namespace CSharpCourse
             }
         }
 
+
+        // 5. RELOAD HIỂN THỊ DANH SÁCH TÌM KIẾM KHÁCH HÀNG VỀ BÌNH THƯỜNG
+        
         private void BtnReloadCustomerClick(object sender, EventArgs e)
         {
             _actionType = ActionType.NORMAL;
@@ -545,11 +694,24 @@ namespace CSharpCourse
             ShowCustomers(_customers);
         }
 
+
+
+
+
+        // ========================================= CHƯƠNG TRÌNH CẬP NHẬP HOẶC THÊM KHUYẾN MÃI ========================================
+        // =============================================================================================================================
+
+
+        // 1. THÊM MỚI
+
         private void BtnAddDiscountClick(object sender, EventArgs e)
         {
             var frm = new AddEditDiscountFrm(this, null);
             frm.ShowDialog();
         }
+
+
+        // 2. CẬP NHẬT HOẶC XÓA BỎ
 
         private void TblDiscountCellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -589,6 +751,9 @@ namespace CSharpCourse
             }
         }
 
+        
+        // 3. TÌM KIẾM 
+
         private void BtnSearchDiscountClick(object sender, EventArgs e)
         {
             _actionType = ActionType.SEARCH;
@@ -626,6 +791,9 @@ namespace CSharpCourse
             }
         }
 
+
+        // 4. RELOAD HIỆN THỊ DANH SÁCH TÌM KIẾM KHUYẾN MÃI VỀ BÌNH THƯỜNG
+
         private void BtnReloadDiscountClick(object sender, EventArgs e)
         {
             _actionType = ActionType.NORMAL;
@@ -634,5 +802,40 @@ namespace CSharpCourse
             txtSearchDiscount.Text = string.Empty;
             ShowDiscounts(_discounts);
         }
+
+
+
+        // ========================================= CHƯƠNG TRÌNH CẬP NHẬP HOẶC THÊM HÓA ĐƠN ===========================================
+        // =============================================================================================================================
+
+
+        // 1. THÊM MỚI
+
+        private void BtnAddBillClick(object sender, EventArgs e)
+        {
+            var frm = new AddEditBillFrm(this, _customers, _items, null);
+            frm.ShowDialog();
+        }
+
+        
+        // 2. CẬP NHẬT HOẶC XÓA BỎ
+
+        private void TblBillCellBillDetailClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(_actionType == ActionType.NORMAL)
+            {
+                if (e.RowIndex >= 0 && e.ColumnIndex == 9)
+                {
+                    var frm = new AddEditBillFrm(this, _customers, _items, _bills[e.RowIndex]);
+                    frm.ShowDialog();
+                }
+            }else
+            {
+
+            }
+                       
+        }
+
+        
     }
 }

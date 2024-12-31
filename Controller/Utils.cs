@@ -26,10 +26,10 @@ namespace Controller
         public static List<Customer> CreateFakeCustomer()
         {
             List<Customer> items = new List<Customer>();
-            items.Add(new Customer("0123456789123", "Lương Đình Hoàng", DateTime.ParseExact("23/08/1995","dd/MM/yyyy", null), "248 Phương Sài tp.Nha Trang", "0705154714", "Mua lẻ", 10, DateTime.Now, "ldh2381995@gmail.com"));
-            items.Add(new Customer("0123456789124", "Lương Đình Huy", DateTime.ParseExact("17/03/1994","dd/MM/yyyy", null), "248 Phương Sài tp.Nha Trang", "0705154714", "Mua lẻ", 10, DateTime.Now, "ldh17071994@gmail.com"));
-            items.Add(new Customer("0123456789125", "Lương Điền Hồ Ngọc", DateTime.ParseExact("20/11/2006","dd/MM/yyyy", null), "248 Phương Sài tp.Nha Trang", "0705154714", "Mua lẻ", 10, DateTime.Now, "ldh17071994@gmail.com"));
-            items.Add(new Customer("0123456789126", "Lương Tiểu Diệp Nghĩa", DateTime.ParseExact("17/05/2010","dd/MM/yyyy", null), "248 Phương Sài tp.Nha Trang", "0705154714", "Mua lẻ", 10, DateTime.Now, "ldh17071994@gmail.com"));
+            items.Add(new Customer("0123456789123", "Hoàng Hư Hỏng", DateTime.ParseExact("23/08/1995","dd/MM/yyyy", null), "tp.Thủ Đức", "0705154714", "Mua lẻ", 10, DateTime.Now, "hoangngoanngoan@gmail.com"));
+            items.Add(new Customer("0123456789124", "Huy Hửng Hờ", DateTime.ParseExact("17/03/1994","dd/MM/yyyy", null), "tp.Đà Lạt", "0789154714", "Mua lẻ", 10, DateTime.Now, "huyhungho@gmail.com"));
+            items.Add(new Customer("0123456789125", "Ngọc Ngố", DateTime.ParseExact("20/11/2006","dd/MM/yyyy", null), "tp.Vũng Tàu", "0705154790", "Mua lẻ", 10, DateTime.Now, "ngocngo@gmail.com"));
+            items.Add(new Customer("0123456789126", "Út Nghĩa", DateTime.ParseExact("17/05/2010","dd/MM/yyyy", null), "tp.Buôn Mê Thuột", "0705364714", "Mua lẻ", 10, DateTime.Now, "utnghia@gmail.com"));
             return items;
         }
 

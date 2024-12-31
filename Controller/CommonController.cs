@@ -91,5 +91,13 @@ namespace Controller
             list.Insert(index, newItem);
             return index;
         }
+
+        public int UpdateItem<T>(List<T> list, T item)
+        {
+            int index = list.IndexOf(item);
+            list.RemoveAt(index);
+            list.Insert(index, item);
+            return index;
+        }
     }
 }

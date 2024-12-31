@@ -11,15 +11,12 @@ namespace Models
         public string PaymentMehtod { get; set; } // Phương thức thanh toán
         public string StaffName { get; set; } // Tên nhân viên lặp hóa đơn
 
-        public BillDetail()
-        {
-
-        }
+        public BillDetail():base(){ }
 
         public BillDetail(int billId, Cart cart, DateTime creatTime, int totalItem,
-            long subTotal, long totalDiscountAmount, long totalAmont, string status,
+            long subTotal, long totalDiscountAmount, long totalAmount, string status,
             string paymentMehtod, string staffName)
-            : base(billId, cart, creatTime, totalItem, subTotal, totalDiscountAmount, totalAmont, status)
+            : base(billId, cart, creatTime, totalItem, subTotal, totalDiscountAmount, totalAmount, status)
         {
             PaymentMehtod = paymentMehtod;
             StaffName = staffName;

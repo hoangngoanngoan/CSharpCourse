@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BillController.cs" />
     <Compile Include="CommonController.cs" />
     <Compile Include="CustomerController.cs" />
     <Compile Include="DiscountController.cs" />
