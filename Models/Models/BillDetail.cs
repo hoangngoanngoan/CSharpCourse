@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class BillDetail : Bill
+
+    public class BillDetail : Bill, ICloneable
     {
         public string PaymentMehtod { get; set; } // Phương thức thanh toán
         public string StaffName { get; set; } // Tên nhân viên lặp hóa đơn
 
         public BillDetail():base(){ }
+
+        public BillDetail(int id): base(id){ }
 
         public BillDetail(int billId, Cart cart, DateTime creatTime, int totalItem,
             long subTotal, long totalDiscountAmount, long totalAmount, string status,
@@ -21,7 +24,7 @@ namespace Models
             PaymentMehtod = paymentMehtod;
             StaffName = staffName;
         }
-
+        
         public override bool Equals(object obj)
         {
             return obj is BillDetail detail &&
@@ -36,5 +39,13 @@ namespace Models
             hashCode = hashCode * -1521134295 + BillId.GetHashCode();
             return hashCode;
         }
+
+        public object Clone()
+        {
+            return new BillDetail(BillId, null, CreatTime, TotalItem,
+                SubTotal, TotalDiscountAmount, TotalAmount, Status,
+                PaymentMehtod, StaffName);
+        }
+
     }
 }

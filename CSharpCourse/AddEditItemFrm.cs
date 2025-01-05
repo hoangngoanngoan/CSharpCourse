@@ -7,13 +7,15 @@ namespace CSharpCourse
 {
     public partial class AddEditItemFrm : Form
     {
+
         // Các trường dữ liệu cho trước
 
         private List<Discount> _discounts;   // Mục đích để lưu danh sách các đối tượng khuyến mãi để truyền vào cho mặt hàng
-        private Item _oldItem = null;        // Mục đích để lưu đối tượng item cũ chuẩn bị cập nhật mới
-        private Item _newItem = null;        // Mục đích để lưu đối tượng item mới để chuẩn bị thêm mới hoặc cập nhật
+        private Item _item = null;        // Mục đích để lưu đối tượng item mới để chuẩn bị thêm mới hoặc cập nhật
         private IViewController _controller; // mục đích để thực hiện hai phương thức AddNewItem và UpDateItem trên form HomeFrm
         private List<string> _listDiscount;  // Mục đích để lưu tên khuyến mãi vào comboDiscount
+
+
         // Các hàm khởi tạo
         public AddEditItemFrm()
         {
@@ -24,17 +26,28 @@ namespace CSharpCourse
         {
             _controller = masterView;
             _discounts = discounts;
-            GetDiscount(_discounts); // Mục đích dùng để hiển thị tên khuyến mãi vào comboDiscount
+
+            // Hiển thị tên khuyến mãi vào comboDiscount
+            GetDiscount(_discounts); 
             
-
             // Kiểm tra nếu hàm khởi tạo có truyền tham số item vào có nghĩa là người dùng muốn cập nhật 
-
             if (item != null)
             {
+                _item = (Item)item.Clone();
+               if(item.Discount != null)
+                {
+                    _item.Discount = item.Discount;
+                }else
+                {
+                    _item.Discount = null;
+                }
                 Text = "CẬP NHẬT THÔNG TIN MẶT HÀNG";
                 btnAddItem.Text = "Cập nhật";
-                _oldItem = item;
-                GetItemDataFromHomeFrm();
+                ShowItem(_item);
+            }
+            else
+            {
+                _item = new Item();
             }
         }
 
@@ -50,89 +63,92 @@ namespace CSharpCourse
         }
 
         // Hàm láy dữ liệu từ form HomeFrm
-        private void GetItemDataFromHomeFrm()
+        private void ShowItem(Item item)
         {
-            txtId.Text = _oldItem.ItemId.ToString();
-            txtItemName.Text = _oldItem.ItemName;
-            comboItemType.Text = _oldItem.ItemType;
-            numericQuantity.Value = _oldItem.Quantity;
-            txtBrand.Text = _oldItem.Brand;
-            dateTimePickerReleaseDate.Value = _oldItem.ReleaseDate;
-            numericPrice.Value = _oldItem.Price;
-            for (int i = 0; i < comboDiscount.Items.Count; i++)
+            txtId.Text = item.ItemId.ToString();
+            txtItemName.Text = item.ItemName;
+            comboItemType.Text = item.ItemType;
+            numericQuantity.Value = item.Quantity;
+            txtBrand.Text = item.Brand;
+            dateTimePickerReleaseDate.Value = item.ReleaseDate;
+            numericPrice.Value = item.Price;
+            
+            if(item.Discount != null)
             {
-                if (_oldItem.Discount?.Name.CompareTo(comboDiscount.Items[i]) == 0)
+                for (int i = 0; i < comboDiscount.Items.Count; i++)
                 {
-                    comboDiscount.SelectedIndex = i;
-                    break;
+                    if (item.Discount.Name.CompareTo(comboDiscount.Items[i]) == 0)
+                    {
+                        comboDiscount.SelectedIndex = i;
+                        break;
+                    }
                 }
             }
+            else
+            {
+                comboDiscount.SelectedIndex = -1;
+            }
+            
         }
 
-        // Hàm láy dữ liệu do người dùng nhập từ bàn phím
-        private void GetItemDataFromUser()
+        private void AddUpdateItem(Item item)
         {
-            var id = int.Parse(txtId.Text);
-            var name = txtItemName.Text;
-            var itemType = comboItemType.Text;
-            var quantity = (int)numericQuantity.Value;
-            var brand = txtBrand.Text;
-            var releaseDate = dateTimePickerReleaseDate.Value;
-            var price = (int)numericPrice.Value;
-            Discount discount = null;
-            if (comboDiscount.SelectedIndex > -1)
+            if (string.IsNullOrEmpty(txtItemName.Text))
             {
-                discount = _discounts[comboDiscount.SelectedIndex];
-            }
-            if (string.IsNullOrEmpty(name))
-            {
-                var msg = "Tên mặt hàng không được để trống.";
-                MessageBox.Show(msg, "Lỗi dữ liệu không hợp lệ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                var msg = "Tên mặt hàng không được để trống";
+                var title = "Lỗi dữ liệu không hợp lệ";
+                MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (string.IsNullOrEmpty(itemType))
+            else if (string.IsNullOrEmpty(comboItemType.Text))
             {
-                var msg = "Loại mặt hàng không được để trống.";
-                MessageBox.Show(msg, "Lỗi dữ liệu không hợp lệ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                var msg = "Loại mặt hàng không được để trống";
+                var title = "Lỗi dữ liệu không hợp lệ";
+                MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            Item item = new Item(id, name, itemType, quantity, brand, releaseDate, price, discount);
-            _newItem = item;
+            item.ItemName = txtItemName.Text;
+            item.ItemType = comboItemType.Text;
+            item.Quantity = (int)numericQuantity.Value;    
+            item.Brand = txtBrand.Text;
+            item.ReleaseDate = dateTimePickerReleaseDate.Value;
+            item.Price = (int)numericPrice.Value;
+            if(comboDiscount.SelectedIndex > -1)
+            {
+                item.Discount = _discounts[comboDiscount.SelectedIndex];
+            }else
+            {
+                item.Discount = new Discount();
+            }
         }
 
         // Hành động click chuột vào button btnAddItem của người dùng
         private void btnAddItem_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show("Kiểm tra lỗi", "Đang kiểm tra", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            // Kiểm tra hành động là thêm mới mặt hàng hay cập nhật
-
-            GetItemDataFromUser();
+           AddUpdateItem(_item);
             if (btnAddItem.Text.CompareTo("Cập nhật") == 0)
             {
-                if (_oldItem != null && _newItem != null)
+                var msg = "Bạn có chắc chắn muốn cập nhật không";
+                var title = "Thông báo";
+                var ans = MessageBox.Show(msg, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if(ans == DialogResult.Yes)
                 {
-                    var ans = MessageBox.Show("Bạn có chắc chắn muốn cập nhật không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if(ans == DialogResult.Yes)
-                    {
-                        _controller.UpdateItem(_oldItem, _newItem);
-                        Dispose();
-                    }                    
-                }
+                    _controller.UpdateItem(_item);
+                    Dispose();
+                }   
             }
             else
             {
-                if (_newItem != null)
-                {
-                    _controller.AddNewItem(_newItem);
-                }
+                _controller.AddNewItem(_item);
             }
         }
 
-        // Hành động click chuột vào button btnClose của người dùng
+        // Buton Close
         private void btnClose_Click(object sender, EventArgs e)
         {
-            var ans = MessageBox.Show("Bạn có chắc chắn muốn hủy không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var msg = "Bạn có chắc chắn muốn hủy không";
+            var title = "Thông báo";
+            var ans = MessageBox.Show(msg, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (ans == DialogResult.Yes)
             {
                 Dispose();

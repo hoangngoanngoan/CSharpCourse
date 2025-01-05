@@ -47,6 +47,7 @@
     <Compile Include="Customer.cs" />
     <Compile Include="Discount.cs" />
     <Compile Include="FullName.cs" />
+    <Compile Include="ICloneable.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

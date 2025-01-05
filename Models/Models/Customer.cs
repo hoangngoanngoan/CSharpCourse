@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Customer : Person, IComparable<Customer>
+    public class Customer : Person, IComparable<Customer>, ICloneable
     {
         public string CustomerType { get; set; }
         public int Poin { get; set; } // Điểm tích lũy
@@ -55,6 +55,11 @@ namespace Models
         public int CompareTo(Customer other)
         {
             return PersonId.CompareTo(other.PersonId);
+        }
+
+        public object Clone()
+        {
+            return new Customer(PersonId, FullName.ToString(), BirthDate, Address, PhoneNumber, CustomerType, Poin, CreatTime, Email);
         }
     }
 }

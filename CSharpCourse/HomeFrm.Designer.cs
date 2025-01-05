@@ -159,12 +159,6 @@
             this.btnReloadBill = new System.Windows.Forms.Button();
             this.btnAddBill = new System.Windows.Forms.Button();
             this.tblBill = new System.Windows.Forms.DataGridView();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnSearchStat = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboSearchStat = new System.Windows.Forms.ComboBox();
-            this.tblStat = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -175,6 +169,12 @@
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnSearchStat = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboSearchStat = new System.Windows.Forms.ComboBox();
+            this.tblStat = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -1238,6 +1238,7 @@
             this.btnReloadBill.TabIndex = 1;
             this.btnReloadBill.Text = "Làm mới";
             this.btnReloadBill.UseVisualStyleBackColor = true;
+            this.btnReloadBill.Click += new System.EventHandler(this.BtnReloadBillClick);
             // 
             // btnAddBill
             // 
@@ -1291,76 +1292,6 @@
             this.tblBill.Size = new System.Drawing.Size(1168, 431);
             this.tblBill.TabIndex = 12;
             this.tblBill.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.TblBillCellBillDetailClick);
-            // 
-            // tabPage5
-            // 
-            this.tabPage5.Controls.Add(this.groupBox3);
-            this.tabPage5.Controls.Add(this.tblStat);
-            this.tabPage5.Location = new System.Drawing.Point(4, 32);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1174, 651);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "Thống Kê";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.btnSearchStat);
-            this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Controls.Add(this.comboSearchStat);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox3.Location = new System.Drawing.Point(3, 434);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1168, 214);
-            this.groupBox3.TabIndex = 3;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Tìm kiếm";
-            // 
-            // btnSearchStat
-            // 
-            this.btnSearchStat.Image = global::CSharpCourse.Properties.Resources.search;
-            this.btnSearchStat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSearchStat.Location = new System.Drawing.Point(509, 115);
-            this.btnSearchStat.Name = "btnSearchStat";
-            this.btnSearchStat.Size = new System.Drawing.Size(151, 40);
-            this.btnSearchStat.TabIndex = 8;
-            this.btnSearchStat.Text = "Tìm kiếm";
-            this.btnSearchStat.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(399, 68);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 20);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Tiêu chí:";
-            // 
-            // comboSearchStat
-            // 
-            this.comboSearchStat.FormattingEnabled = true;
-            this.comboSearchStat.Items.AddRange(new object[] {
-            "Tìm theo tên mặt hàng.",
-            "Tìm theo khoảng giá a-b.",
-            "Tìm theo loại mặt hàng.",
-            "Tìm theo hãng sản xuất.",
-            "Theo số lượng khoảng a-b."});
-            this.comboSearchStat.Location = new System.Drawing.Point(500, 65);
-            this.comboSearchStat.Name = "comboSearchStat";
-            this.comboSearchStat.Size = new System.Drawing.Size(269, 28);
-            this.comboSearchStat.TabIndex = 0;
-            // 
-            // tblStat
-            // 
-            this.tblStat.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tblStat.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tblStat.Location = new System.Drawing.Point(3, 3);
-            this.tblStat.Name = "tblStat";
-            this.tblStat.RowHeadersWidth = 51;
-            this.tblStat.RowTemplate.Height = 24;
-            this.tblStat.Size = new System.Drawing.Size(1168, 431);
-            this.tblStat.TabIndex = 0;
             // 
             // Column1
             // 
@@ -1451,6 +1382,76 @@
             this.Column10.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column10.Text = "Chi tiết";
             this.Column10.UseColumnTextForButtonValue = true;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.groupBox3);
+            this.tabPage5.Controls.Add(this.tblStat);
+            this.tabPage5.Location = new System.Drawing.Point(4, 32);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(1174, 651);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Thống Kê";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btnSearchStat);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.comboSearchStat);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox3.Location = new System.Drawing.Point(3, 434);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(1168, 214);
+            this.groupBox3.TabIndex = 3;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Tìm kiếm";
+            // 
+            // btnSearchStat
+            // 
+            this.btnSearchStat.Image = global::CSharpCourse.Properties.Resources.search;
+            this.btnSearchStat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSearchStat.Location = new System.Drawing.Point(509, 115);
+            this.btnSearchStat.Name = "btnSearchStat";
+            this.btnSearchStat.Size = new System.Drawing.Size(151, 40);
+            this.btnSearchStat.TabIndex = 8;
+            this.btnSearchStat.Text = "Tìm kiếm";
+            this.btnSearchStat.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(399, 68);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(73, 20);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Tiêu chí:";
+            // 
+            // comboSearchStat
+            // 
+            this.comboSearchStat.FormattingEnabled = true;
+            this.comboSearchStat.Items.AddRange(new object[] {
+            "Tìm theo tên mặt hàng.",
+            "Tìm theo khoảng giá a-b.",
+            "Tìm theo loại mặt hàng.",
+            "Tìm theo hãng sản xuất.",
+            "Theo số lượng khoảng a-b."});
+            this.comboSearchStat.Location = new System.Drawing.Point(500, 65);
+            this.comboSearchStat.Name = "comboSearchStat";
+            this.comboSearchStat.Size = new System.Drawing.Size(269, 28);
+            this.comboSearchStat.TabIndex = 0;
+            // 
+            // tblStat
+            // 
+            this.tblStat.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tblStat.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tblStat.Location = new System.Drawing.Point(3, 3);
+            this.tblStat.Name = "tblStat";
+            this.tblStat.RowHeadersWidth = 51;
+            this.tblStat.RowTemplate.Height = 24;
+            this.tblStat.Size = new System.Drawing.Size(1168, 431);
+            this.tblStat.TabIndex = 0;
             // 
             // HomeFrm
             // 

@@ -31,7 +31,7 @@ namespace CSharpCourse
         private void ShowData()
         {
             txtCustomerName.Text = _bill.Cart.Customer.FullName.ToString();
-            txtStaffName.Text = _bill.StaffName.ToString();
+            txtStaffName.Text = _bill.StaffName?.ToString();
             txtCreatedTime.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
             txtTotalItem.Text = $"{_bill.TotalItem.ToString()}sp";
             txtTotalDiscount.Text = $"{_bill.TotalDiscountAmount.ToString():N0}đ";

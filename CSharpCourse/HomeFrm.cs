@@ -19,6 +19,10 @@ namespace CSharpCourse
 
         void UpdateItem<T>(T oldItem, T newItem);
 
+        void DeleteItem<T>(T item);
+
+        void UpdateListItem<T>(List<T> lItem);
+
     }
 
     public partial class HomeFrm : Form, IViewController
@@ -221,6 +225,17 @@ namespace CSharpCourse
         // ===================================================== 4. HÓA ĐƠN ============================================================
         // ========================= NƠI THỰC HIỆN LỜI GỌI LÀ TỪ CÁC "CHƯƠNG TRÌNH CẬP NHẬT HOẶC THÊM MỚI" =============================
 
+        public void UpdateListItem<T>(List<T> lItem)
+        {
+            if (typeof(T) == typeof(Item)) 
+            {
+                var nLItem = lItem as List<Item>;
+                _items.Clear();
+                _items.AddRange(nLItem);
+                ShowItems(_items);
+            }
+                
+        }
 
         public void UpdateItem<T>(T oldItem, T newItem)
         {
@@ -297,7 +312,7 @@ namespace CSharpCourse
                 if(_actionType == ActionType.NORMAL)
                 {
                     var oItem = oldItem as BillDetail;
-                    int index = _commonController.UpdateItem(_bills, oItem);
+                    int indexBill = _commonController.UpdateItem(_bills, oItem);
                     ShowBills(_bills);
                 }else
                 {
@@ -308,9 +323,68 @@ namespace CSharpCourse
 
         }
 
+        //
+        // Cập nhật lại chức năng cập nhật lại thông tin hiển thị trên DataGridView 
+        //
         public void UpdateItem<T>(T newItem)
         {
-            throw new NotImplementedException();
+
+            // 1. MẶT HÀNG
+
+            if (typeof(T) == typeof(Item))
+            {
+                if (_actionType == ActionType.NORMAL)
+                {
+                    var nItem = newItem as Item;
+                    _commonController.UpdateItem(_items, nItem);
+                    ShowItems(_items);
+                }
+                else
+                {
+                    var nItem = newItem as Item;
+                    _commonController.UpdateItem(_items, nItem);
+                    _commonController.UpdateItem(_resultSearchItem, nItem);
+                    ShowItems(_resultSearchItem);
+                }
+            }
+
+            // 4. HÓA ĐƠN
+
+            else if (typeof(T) == typeof(BillDetail))
+            {
+                if (_actionType == ActionType.NORMAL)
+                {
+                    var nItem = newItem as BillDetail;
+                    _commonController.UpdateItem(_bills, nItem);
+                    ShowBills(_bills);
+                }
+                else
+                {
+                    // DO SOMETHING
+                }
+            }
+        }
+
+        public void DeleteItem<T>(T item)
+        {
+            if(typeof(T) == typeof(BillDetail))
+            {
+                if(_actionType == ActionType.NORMAL)
+                {
+                    var billDelected = item as BillDetail;
+                    _commonController.DeleteItem(_bills, billDelected);
+                    ShowBills(_bills);
+                }
+            }else
+            {
+                if (_actionType == ActionType.SEARCH)
+                {
+                    var billDelected = item as BillDetail;
+                    _commonController.DeleteItem(_bills, billDelected);
+                    _commonController.DeleteItem(_resultSearchBillDetail, billDelected);
+                    ShowBills(_resultSearchBillDetail);
+                }
+            }
         }
 
 
@@ -834,6 +908,19 @@ namespace CSharpCourse
 
             }
                        
+        }
+
+        private void BtnReloadBillClick(object sender, EventArgs e)
+        {
+            tblBill.Rows.Clear();
+            foreach(var it in _bills)
+            {
+                tblBill.Rows.Add(new object[]
+                {
+                    it.BillId, it.Cart.Customer.FullName, it.StaffName, it.CreatTime, it.TotalItem, it.SubTotal, 
+                    it.TotalDiscountAmount, it.TotalAmount, it.Status
+                });
+            }
         }
 
         

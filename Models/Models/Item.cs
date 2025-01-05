@@ -2,7 +2,7 @@
 
 namespace Models
 {
-    public class Item : IComparable<Item>
+    public class Item : IComparable<Item>, ICloneable
     {
         private static int s_autoId = 1000000;
         public int ItemId { get; set; }
@@ -53,6 +53,11 @@ namespace Models
         public override int GetHashCode()
         {
             return -2113648141 + ItemId.GetHashCode();
+        }
+
+        public object Clone()
+        {
+            return new Item(ItemId, ItemName, ItemType, Quantity, Brand, ReleaseDate, Price, null);
         }
     }
 }

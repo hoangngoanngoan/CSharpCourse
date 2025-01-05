@@ -3,164 +3,111 @@ using System;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using Controller;
-using System.Reflection;
-using System.Diagnostics.Eventing.Reader;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using System.Linq;
 
 namespace CSharpCourse
 {
     public partial class AddEditBillFrm : Form
-    {
+    {        
+        
         // MasterView HomeFrm
         private IViewController _controller;
 
+        
         // Danh sách Khách hàng
         private List<Customer> _customer;
         private List<Customer> _searchCustomerResult;
 
+        
         // Danh sách Mặt hàng
         private List<Item> _item;
         private List<Item> _searchItemResult;
 
-        // Danh sách Hóa đơn
-        private BillDetail _bill;
-        private SelectedItem _selectedItem;
-
-        // Danh sách giỏ hàng
-        private List<SelectedItem> _cart;
-
-        //
+        
+        // Lớp chứa các chức năng chung
         private CommonController _commonController;
         
-        private BillController _billController;
-
+        
+        // Xác định trạng thái cập nhật hoặc thêm mới
         private bool _isUpdateBill;
-        private BillDetail _oldBillDetail;
 
 
-        // =============================================================================================================================
-        // ================================================== HÀM KHỞI TẠO ============================================================= 
-        // ============================================================================================================================= 
+        // Cập nhật số lượng sản phẩm
+        private BillDetail _bill;
+        private List<SelectedItem> _cart;
 
 
         public AddEditBillFrm()
         {
             InitializeComponent();
             CenterToParent();
-            _commonController = new CommonController();
-            _cart = new List<SelectedItem>();
-            
         }
 
-        // Hàm khởi tạo chính 
-        // Truyền vào danh sách item, customer và đối tượng bill
-        // Mục đích
-        // 1 Update được danh sách item trả về trang HomeFrm
-        // 2 Update hoặc thêm mới đối tượng bill và trả về danh sách billDetail của trang HomeFrm 
 
         public AddEditBillFrm(IViewController controller, List<Customer> customers, List<Item> items, BillDetail bill) : this()
-        {
+        {            
+            _searchCustomerResult = new List<Customer>();
+            _searchItemResult = new List<Item>();
             _controller = controller;
-            _customer = customers;              
-            _item = items;                      
+            _customer = customers;    
             
+            // Vấn đề nằm ở đây
+            // Phải tạo ra một bản sao danh sách items
+
+            _item = new List<Item>();
+            foreach(var item in items)
+            {
+                _item.Add((Item)item.Clone());
+            }
+
+            _commonController = new CommonController();
+
             if (bill != null)
             {
                 _isUpdateBill = true;
-                _bill = bill;
-                _cart = bill.Cart.SelectedItems;
-                _oldBillDetail = _bill;
+
+                // Vấn đề 
+                // phải tạo một bản sao cho bill.Cart.SelectedItem
+                
+                _bill = (BillDetail)bill.Clone();
+                _bill.Cart = new Cart();
+                _bill.Cart.SelectedItems.AddRange(bill.Cart.SelectedItems);
+                _bill.Cart.Customer = bill.Cart.Customer;
+                _cart = _bill.Cart.SelectedItems;
+
                 ShowBillDetail(_bill, _cart);
             }
             else            
             {
                 _isUpdateBill = false;
                 _bill = new BillDetail();
-                _bill.Cart.SelectedItems = _cart;
+                _cart = _bill.Cart.SelectedItems;
             }
         }
 
 
-        // =============================================================================================================================
-        // ==================================================== KẾT QUẢ TRẢ VỀ =========================================================
-        // ================================================ KHI THOÁT CHƯƠNG TRÌNH ===================================================== 
-        // =============================================================================================================================
-        // =============================================================================================================================
-        // ========================================= 1. CẬP NHẬT HOẶC THÊM MỚI HÓA ĐƠN =================================================
-        // ==================================== 2. CẬP NHẬT LẠI DANH SÁCH MẶT HÀNG TỒN KHO =============================================
-        // =============================================================================================================================
-
-        private void BtnSaveClick(object sender, EventArgs e)
+        private void ShowBillDetail(BillDetail bill, List<SelectedItem> cart)
         {
-
-            // 1. CẬP NHẬT LẠI HÓA ĐƠN 
-
-            if (_isUpdateBill)
+            tblBill.Rows.Clear();
+            foreach (var item in cart)
             {
-                _controller.UpdateItem(_bill, null);
-            }
-
-            // 1. HOẶC THÊM MỚI HÓA ĐƠN
-
-            else 
-            { 
-                _controller.AddNewItem(_bill);
-            }
-
-
-            // 2. CẬP NHẬT LẠI DANH SÁCH MẶT HÀNG TỒN KHO
-
-            foreach (var item in _searchItemResult)
-            {
-                if (_item.IndexOf(item) >= 0)
+                tblBill.Rows.Add(new object[]
                 {
-                    _controller.UpdateItem(item, null);
-                }
+                    bill.BillId, item.ItemId, item.ItemName, item.NumberOfSelectedItem, bill.SubTotal,
+                    bill.TotalDiscountAmount, bill.TotalAmount
+                });
             }
-
-            Dispose();
-        }
-
-        // Button Hủy bỏ
-        private void BtnCancelClick(object sender, EventArgs e)
-        {
-            _bill.Status = "Đã hủy";
-            _controller.UpdateItem(null, _bill);
-            _controller.UpdateItem(null, _item);
-            Dispose();
-        }
-
-        // Button Xóa bỏ
-        private void BtnRemoveClick(object sender, EventArgs e)
-        {
-
-        }
-
-        // Button Thanh toán
-        private void BtnPayClick(object sender, EventArgs e)
-        {
-            if (_bill.Cart.Customer != null && _bill.Cart.SelectedItems.Count > 0)
-            {
-                var frm = new PaymentFrm(_controller, _bill);
-                frm.ShowDialog();
-                Dispose();
-            }
-            else
-            {
-                MessageBox.Show("Vui lòng điền đầy đủ thông tin cần thiết", "Lỗi dữ liệu không hợp lệ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            
         }
 
 
         // =============================================================================================================================
         // ======================================= GIAO DIỆN SỬ DỤNG CHƯƠNG TRÌNH THÊM MỚI HÓA ĐƠN =====================================
+
+        // =============================================== TÌM KIẾM THÔNG TIN KHÁCH HÀNG ===============================================
         // =============================================================================================================================
 
 
-        // =============================================== HIỂN THỊ THÔNG TIN KHÁCH HÀNG ===============================================
-        // =============================================================================================================================
-
-        // Button Tìm
         private void BtnSearchCustomerClick(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtCustomerName.Text))
@@ -171,9 +118,11 @@ namespace CSharpCourse
             }
             else
             {
-                _searchCustomerResult = _commonController.Search(_customer, new CustomerController().IsCustomerNameMath, txtCustomerName.Text);
+                _searchCustomerResult.Clear();
+                _searchCustomerResult = _commonController.Search(_customer, new CustomerController().IsCustomerNameMath, txtCustomerName.Text); 
                 if (_searchCustomerResult.Count == 0)
                 {
+                    tblSearchCustomer.Rows.Clear(); 
                     var title = "Lỗi tìm kiếm";
                     var message = "Không tìm thấy kết quả";
                     MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -185,7 +134,7 @@ namespace CSharpCourse
             }
         }
 
-        // Hiển thị
+
         private void ShowSearchCustomerResult(List<Customer> searchCustomerResult)
         {
             tblSearchCustomer.Rows.Clear();
@@ -193,16 +142,36 @@ namespace CSharpCourse
             {
                 tblSearchCustomer.Rows.Add(new object[]
                 {
-                            customer.PersonId, customer.FullName.ToString(), customer.PhoneNumber
+                    customer.PersonId, customer.FullName.ToString(), customer.PhoneNumber
                 });
             }
         }
 
 
-        // ============================================= HIỂN THỊ THÔNG TIN SẢN PHẨM TỒN KHO ===========================================
-        // =============================================================================================================================
+        private void TblSearchCustomerCellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1 && e.ColumnIndex == 3)
+            {
+                var name = _searchCustomerResult[e.RowIndex].FullName.ToString();
+                _bill.Cart.Customer = _searchCustomerResult[e.RowIndex];
+                ShowCustomerInfo(name);
+            }
+        }
 
-        // Button Tìm
+
+        private void UpdateStaffInfo(object sender, EventArgs e)
+        {
+            _bill.StaffName = txtStaffName.Text;
+        }
+
+
+        // =============================================================================================================================
+        // ============================================= TÌM KIẾM THÔNG TIN SẢN PHẨM TỒN KHO ===========================================
+
+        // ============================================== 1 THÊM MẶT HÀNG VÀO HÓA ĐƠN ==================================================
+        // ============================================== 3 XÓA MẶT HÀNG TRONG HÓA ĐƠN =================================================
+
+
         private void BtnSearchItemClick(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtItem.Text))
@@ -213,10 +182,10 @@ namespace CSharpCourse
             }
             else
             {
-                tblSearchItem.Rows.Clear();
                 _searchItemResult = _commonController.Search(_item, new ItemController().IsItemNameMatch, txtItem.Text);
                 if (_searchItemResult.Count == 0)
                 {
+                    tblSearchItem.Rows.Clear();
                     var title = "Lỗi tìm kiếm";
                     var message = "Không tìm thấy kết quả";
                     MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -228,7 +197,7 @@ namespace CSharpCourse
             }
         }
 
-        // Hiển thị
+
         private void ShowSearchItemResult(List<Item> items)
         {
             tblSearchItem.Rows.Clear();
@@ -243,116 +212,245 @@ namespace CSharpCourse
 
 
         
-        // =================================== 1 SỬA HOẶC THÊM THÔNG TIN KHÁCH HÀNG TRONG HÓA ĐƠN ======================================
-        // ==================================== 2 SỬA HOẶC THÊM THÔNG TIN NHÂN VIÊN TRONG HÓA ĐƠN ======================================
-
-        // 1 CellClick
-        private void TblSearchCustomerCellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if(e.RowIndex > -1 && e.ColumnIndex == 3)
-            {
-                _bill.Cart.Customer = _searchCustomerResult[e.RowIndex];
-                var customerName = _searchCustomerResult[e.RowIndex].FullName.ToString();
-                labelCustomer.Text = $"Khách hàng: {customerName}";
-            }
-        }
-
-        // 2 Leave
-        private void UpdateStaffInfo(object sender, EventArgs e)
-        {
-            _bill.StaffName = txtStaffName.Text;
-        }
-
-
-
-        // ============================================== 1 THÊM MẶT HÀNG VÀO HÓA ĐƠN ==================================================
-        // ======================================== 2 HIỂN THỊ CHI TIẾT MẶT HÀNG TRONG HÓA ĐƠN =========================================
-        // ============================================== 3 XÓA MẶT HÀNG TRONG HÓA ĐƠN =================================================
-
-        // 1 CellClick
         private void TblSearchItemCellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex >= 0 && e.ColumnIndex == 3)
+            // 1. Nhất vào Tbl search Item cell button "Chọn"
+            if(e.RowIndex >= 0 && e.ColumnIndex == 3) 
             {
-                int index = _cart.IndexOf(_searchItemResult[e.RowIndex] as SelectedItem) == null ? -1 :
-                _cart.IndexOf(_searchItemResult[e.RowIndex] as SelectedItem);
+                var num = (int)numericNumberOfSelectedItem.Value;
 
-                if(
-                    (int)numericNumberOfSelectedItem.Value <= _searchItemResult[e.RowIndex].Quantity
-                    && (int)numericNumberOfSelectedItem.Value > 0
-                    )
+                // 2. Kiểm tra số lượng đặt có lớn hơn không và nhỏ hơn số lượng tồn kho mới cho chọn
+                if (num > 0 && num <= _searchItemResult[e.RowIndex].Quantity)
                 {
-                    if (index >= 0)
-                    {
-                        var oldNumberOfSelectedItem = _cart[index].NumberOfSelectedItem;
 
-                        _cart[index].NumberOfSelectedItem = (int)numericNumberOfSelectedItem.Value + oldNumberOfSelectedItem;
-                        _cart[index].UpdateQuantity((int)numericNumberOfSelectedItem.Value);
-                        _commonController.UpdateItem(_searchItemResult, _searchItemResult[e.RowIndex], _cart[index] as Item);
+                    // 3. Kiểm tra mặt hàng được chọn đã có trong giỏ hàng hay chưa
+                    int index = -1;
+                    
+                    for(int i = 0; i < _cart.Count; i++)
+                    {
+                        if (_cart[i].ItemId == _searchItemResult[e.RowIndex].ItemId)
+                        {
+                            index = i; 
+                            break;
+                        }
+                    }
+
+                    if(index >= 0)
+                    {
+                        // 4. Nếu mặt hàng đã có rồi thì cộng lượng đã đặt với số lượng đặt thêm 
+                        _cart[index].NumberOfSelectedItem += num;
+
+                        // 5. Cập nhật lại số lượng tồn kho
+                        _searchItemResult[e.RowIndex].Quantity -= num;
+
+                        // 6. Cập nhật lại số lượng tồn kho trong _item
+                        _commonController.UpdateItem(_item, _searchItemResult[e.RowIndex]);
                     }
                     else
                     {
-                        _selectedItem = new SelectedItem(_searchItemResult[e.RowIndex], (int)numericNumberOfSelectedItem.Value);
-                        _cart.Add(_selectedItem);
+                        // 7. Nếu chưa có thì thêm mặt hàng đó vào giỏ hàng
+                        _cart.Add(new SelectedItem(_searchItemResult[e.RowIndex] as Item, num));
 
-                        index = _cart.IndexOf(_selectedItem);
-                        _cart[index].UpdateQuantity((int)numericNumberOfSelectedItem.Value);
-                        _commonController.UpdateItem(_searchItemResult, _searchItemResult[e.RowIndex], _cart[index] as Item);
+                        // 8. Cập nhật lại số lượng tồn kho
+                        _searchItemResult[e.RowIndex].Quantity -= num;
+
+                        // 9. Cập nhật lại số lượng tồn kho trong _item
+                        _commonController.UpdateItem(_item, _searchItemResult[e.RowIndex]);
                     }
-                }else
-                {
-                    MessageBox.Show("Số lượng không hợp lệ, vui lòng nhập lại số lượng hợp lệ", "Lỗi dữ liệu không hợp lệ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    // 8. Tính toán lại tổng sản phẩm, tổng tạm, tổng khuyến mãi, tổng tiền
+                    _bill.CalculateBill();
                 }
-            }
-            _bill.CalculateBill();
-            labelTotalItem.Text = $"Tổng số sp: {_bill.TotalItem.ToString()}sp";
-            labelTotalDiscount.Text = $"Tổng KM: {_bill.TotalDiscountAmount.ToString():N0}đ";
-            labelTotalAmount.Text = $"Tổng tiền: {_bill.TotalAmount.ToString():N0}đ";
-            labelCreatedTime.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
-            ShowSearchItemResult(_searchItemResult);
-            ShowBillDetail(_bill, _cart);
-        }
-
-        // 2 Hiển thị
-        private void ShowBillDetail(BillDetail bill, List<SelectedItem> cart)
-        {
-            tblBill.Rows.Clear();
-            foreach(var item in cart)
-            {
-                tblBill.Rows.Add(new object[]
+                else 
                 {
-                    bill.BillId, item.ItemId ,item.ItemName, item.NumberOfSelectedItem, bill.SubTotal, bill.TotalDiscountAmount, bill.TotalAmount 
-                });
+                    var message = "Số lượng không hợp lệ, vui lòng nhập lại số lượng hợp lệ";
+                    var title = "Lỗi dữ liệu không hợp lệ";
+                    MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } 
             }
+            // 9. Hiển thị lại kết quả tìm kiếm sau khi cật nhật lại số lượng tồn kho
+            ShowSearchItemResult(_searchItemResult);
+            
+            // 10. Hiển thị lại thông tin mặt hàng sau khi cập nhật lại mặt hàng
+            ShowBillDetail(_bill, _cart);
+
+            // 11. Hiện thị lại thông tin hóa đơn sau khi cập nhật mặt hàng
+            ShowBillInfo(_bill);
         }
 
-        // 3 CellClick
+
+
         private void TblBillCellRemoveClick(object sender, DataGridViewCellEventArgs e)
         {
             if(e.RowIndex >= 0 && e.ColumnIndex == 7)
             {
-                var ans = MessageBox.Show("Bạn có chắc chắn muốn xóa", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                var message = "Bạn có chắc chắn muốn xóa";
+                var title = "Thông báo";
+                var ans = MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (ans == DialogResult.Yes)
                 {
-                    var indexOfSearchItemResult = _searchItemResult.IndexOf(_cart[e.RowIndex]);
-                    var indexOfItem = _item.IndexOf(_searchItemResult[indexOfSearchItemResult]);
+                    // Cập nhật danh sách mặt hàng tồn kho _item
+                    foreach (var it in _item)
+                    {
+                        if (_cart[e.RowIndex].ItemId == it.ItemId)
+                        {
+                            it.Quantity += _cart[e.RowIndex].NumberOfSelectedItem;
+                            break;
+                        }
+                    }
 
-                    _commonController.UpdateItem(_searchItemResult, _searchItemResult[indexOfSearchItemResult], _item[indexOfItem]);
-                    tblBill.Rows.RemoveAt(e.RowIndex);
+                    // Cập nhật lại kết quả tìm kiếm item _searchItemResult
+                    //if (_searchItemResult.Count > 0)
+                    //{
+                    //    foreach(var it in _searchItemResult)
+                    //    {
+                    //        if (_cart[e.RowIndex].ItemId == it.ItemId)
+                    //        {
+                    //            it.Quantity += _cart[e.RowIndex].NumberOfSelectedItem;
+                    //            break;
+                    //        }
+                    //    }
+                    //} 
+                    
+                    // Xóa item trong giỏ hàng
                     _cart.RemoveAt(e.RowIndex);
 
-                    ShowSearchItemResult(_searchItemResult);
+                    // Cập nhật lại hóa đơn _bill
                     _bill.CalculateBill();
-                    labelTotalItem.Text = $"Tổng số sp: {_bill.TotalItem.ToString()}sp";
-                    labelTotalDiscount.Text = $"Tổng KM: {_bill.TotalDiscountAmount.ToString():N0}đ";
-                    labelTotalAmount.Text = $"Tổng tiền: {_bill.TotalAmount.ToString():N0}đ";
-                    labelCreatedTime.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
-                }              
+                }           
+            }
+
+            // Hiển thị lại các thông tin giỏ hàng và hóa đơn
+            ShowBillDetail(_bill, _cart);
+            ShowBillInfo(_bill);
+        }
+
+
+        // ======================================== 1 HIỂN THỊ CHI TIẾT MẶT HÀNG TRONG HÓA ĐƠN =========================================
+        // ======================= 2 HIỂN THỊ THÔNG TIN KHÁCH HÀNG, NHÂN VIÊN, TỔNG SẢN PHẨM, TỔNG KHUYẾN MÃI, TỔNG TIỀN ===============
+
+
+        private void ShowBillInfo(BillDetail bill)
+        {
+            labelTotalItem.Text = $"Tổng số sp: {bill.TotalItem.ToString()}sp";
+            labelTotalDiscount.Text = $"Tổng KM: {bill.TotalDiscountAmount.ToString():N0}đ";
+            labelTotalAmount.Text = $"Tổng tiền: {bill.TotalAmount.ToString():N0}đ";
+            labelCreatedTime.Text = bill.CreatTime.ToString("dd/MM/yyyy HH:mm:ss");
+        }
+
+        private void ShowCustomerInfo(string name)
+        {
+            labelCustomer.Text = $"Khách hàng: {name}";
+        }
+
+
+        // =============================================================================================================================
+        // ==================================================== KẾT QUẢ TRẢ VỀ =========================================================
+        // ================================================ KHI THOÁT CHƯƠNG TRÌNH ===================================================== 
+        // =============================================================================================================================
+        // =============================================================================================================================
+        // ========================================= 1. CẬP NHẬT HOẶC THÊM MỚI HÓA ĐƠN =================================================
+        // ==================================== 2. CẬP NHẬT LẠI DANH SÁCH MẶT HÀNG TỒN KHO =============================================
+        // =============================================================================================================================
+
+
+        // Button Lưu // ***************************************************************************************************************
+        // *****************************************************************************************************************************
+
+        private void BtnSaveClick(object sender, EventArgs e)
+        {
+            if (_cart.Count > 0 && _bill.Cart.Customer != null)
+            {
+                if (_isUpdateBill == true)
+                {
+                    _controller.UpdateItem(_bill);
+                    _controller.UpdateListItem(_item);
+                }
+                else
+                {
+                    _controller.AddNewItem(_bill);
+                    _controller.UpdateListItem(_item);
+                }
+                Dispose();
+            }
+            else
+            {
+                var message = "Đơn hàng chưa tồn tại";
+                var title = "Thông báo";
+                MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
-        
 
-        // ======================== HIỂN THỊ THÔNG TIN KHÁCH HÀNG, NHÂN VIÊN, TỔNG SẢN PHẨM, TỔNG KHUYẾN MÃI, TỔNG TIỀN ================
+        private void AddEditBillFrm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Close();
+        }
+
+        // Button Hoàn trả
+
+        private void BtnCancelClick(object sender, EventArgs e)
+        {
+            _bill.Status = "Hoàn trả";
+            _controller.UpdateItem(_bill);
+            Dispose();
+        }
+
+
+        // Button Xóa bỏ
+
+        private void BtnRemoveClick(object sender, EventArgs e)
+        {
+            if (_bill.Status == "Đã thanh toán")
+            {
+                var message = "Không thể xóa đơn hàng, vì đơn hàng này đã được \"Thanh toán\"";
+                var title = "Thông báo xóa đơn hàng";
+                MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            else if (_bill.Cart.Customer == null && _cart.Count < 0)
+            {
+                var message = "Đơn hàng chưa tồn tại, vui lòng chọn chức năng khác";
+                var title = "Thông báo xóa đơn hàng";
+                MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            else
+            {
+                var message = "Bạn có chắc chắn muốn xóa hóa đơn này không, đơn hàng này sẽ không còn tồn tại nếu bạn xóa";
+                var title = "Thông báo xoá đơn hàng";
+                var ans = MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (ans == DialogResult.Yes)
+                {
+                    foreach (var item in _cart)
+                    {
+                        var num = item.NumberOfSelectedItem;
+                        var index = _item.IndexOf(item as Item);
+                        _item[index].Quantity += num;
+                        _controller.UpdateItem(_item[index]);
+                    }
+                    _controller.UpdateListItem(_item);
+                    _controller.DeleteItem(_bill);
+                    MessageBox.Show("Đã xóa thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Dispose();
+                }
+            }
+        }
+
+        // Button Thanh toán
+        private void BtnPayClick(object sender, EventArgs e)
+        {
+            if (_bill.Cart.Customer != null && _cart.Count > 0)
+            {
+                var frm = new PaymentFrm(_controller, _bill);
+                frm.ShowDialog();
+                Dispose();
+            }
+            else
+            {
+                var message = "Vui lòng điền đầy đủ thông tin cần thiết";
+                var title = "Lỗi dữ liệu không hợp lệ";
+                MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
 
     }
 }
