@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Diagnostics;
 
 namespace Models
@@ -6,13 +7,10 @@ namespace Models
      
     public class SelectedItem : Item, IComparable<SelectedItem>, ICloneable
     {
-        
+        [JsonProperty("numberOfSelectedItem")]
         public int NumberOfSelectedItem { get; set; } = 0;
         
-        public SelectedItem()
-        {
-
-        }
+        public SelectedItem() { }
 
         public SelectedItem(Item item, int numberOfSelectedItem) : base(item.ItemId, item.ItemName, item.ItemType, item.Quantity 
             ,item.Brand, item.ReleaseDate, item.Price, item.Discount)

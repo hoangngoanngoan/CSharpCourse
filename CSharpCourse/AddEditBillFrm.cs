@@ -75,8 +75,11 @@ namespace CSharpCourse
                 _bill.Cart.SelectedItems.AddRange(bill.Cart.SelectedItems);
                 _bill.Cart.Customer = bill.Cart.Customer;
                 _cart = _bill.Cart.SelectedItems;
+                _bill.CalculateBill();
 
                 ShowBillDetail(_bill, _cart);
+                ShowCustomerInfo(_bill.Cart.Customer.FullName.ToString());
+                ShowBillInfo(_bill);
             }
             else            
             {
@@ -298,18 +301,6 @@ namespace CSharpCourse
                         }
                     }
 
-                    // Cập nhật lại kết quả tìm kiếm item _searchItemResult
-                    //if (_searchItemResult.Count > 0)
-                    //{
-                    //    foreach(var it in _searchItemResult)
-                    //    {
-                    //        if (_cart[e.RowIndex].ItemId == it.ItemId)
-                    //        {
-                    //            it.Quantity += _cart[e.RowIndex].NumberOfSelectedItem;
-                    //            break;
-                    //        }
-                    //    }
-                    //} 
                     
                     // Xóa item trong giỏ hàng
                     _cart.RemoveAt(e.RowIndex);
@@ -319,9 +310,12 @@ namespace CSharpCourse
                 }           
             }
 
+            ShowSearchItemResult(_searchItemResult);
+
             // Hiển thị lại các thông tin giỏ hàng và hóa đơn
             ShowBillDetail(_bill, _cart);
             ShowBillInfo(_bill);
+
         }
 
 
@@ -331,6 +325,7 @@ namespace CSharpCourse
 
         private void ShowBillInfo(BillDetail bill)
         {
+            labelPaymentMethod.Text = $"Hình thức thanh toán: {bill.PaymentMehtod}";
             labelTotalItem.Text = $"Tổng số sp: {bill.TotalItem.ToString()}sp";
             labelTotalDiscount.Text = $"Tổng KM: {bill.TotalDiscountAmount.ToString():N0}đ";
             labelTotalAmount.Text = $"Tổng tiền: {bill.TotalAmount.ToString():N0}đ";
@@ -385,7 +380,8 @@ namespace CSharpCourse
             this.Close();
         }
 
-        // Button Hoàn trả
+        // Button Hoàn trả // **********************************************************************************************************
+        // *****************************************************************************************************************************
 
         private void BtnCancelClick(object sender, EventArgs e)
         {
@@ -395,7 +391,8 @@ namespace CSharpCourse
         }
 
 
-        // Button Xóa bỏ
+        // Button Xóa bỏ // ************************************************************************************************************
+        // *****************************************************************************************************************************
 
         private void BtnRemoveClick(object sender, EventArgs e)
         {
@@ -423,7 +420,6 @@ namespace CSharpCourse
                         var num = item.NumberOfSelectedItem;
                         var index = _item.IndexOf(item as Item);
                         _item[index].Quantity += num;
-                        _controller.UpdateItem(_item[index]);
                     }
                     _controller.UpdateListItem(_item);
                     _controller.DeleteItem(_bill);
@@ -433,12 +429,15 @@ namespace CSharpCourse
             }
         }
 
-        // Button Thanh toán
+
+        // Button Thanh toán // ********************************************************************************************************
+        // *****************************************************************************************************************************
+
         private void BtnPayClick(object sender, EventArgs e)
         {
             if (_bill.Cart.Customer != null && _cart.Count > 0)
             {
-                var frm = new PaymentFrm(_controller, _bill);
+                var frm = new PaymentFrm(_controller, _bill, _isUpdateBill);
                 frm.ShowDialog();
                 Dispose();
             }

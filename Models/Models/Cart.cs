@@ -1,29 +1,35 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace Models
 {
     public class Cart : IComparable<Cart>
     {
+        [JsonIgnore]
         private static int s_autoId = 1000000;
+
+        [JsonProperty("cartId")]
         public int CartId { get; set; }
+
+        [JsonProperty("customer")]
         public Customer Customer { get; set; }
+
+        [JsonProperty("selectedItems")]
         public List<SelectedItem> SelectedItems { get; set; } = new List<SelectedItem>();
 
-        public int TotalItems { get; set; }
 
         public Cart(){ }
 
         public Cart(int id)
         {
-            CartId = id > 0 ? id : s_autoId++;
+            CartId = id > 0 ? id : ++s_autoId;
         }
 
-        public Cart(int id, Customer customer, List<SelectedItem> selectedItems, int totalItems):this(id)
+        public Cart(int id, Customer customer, List<SelectedItem> selectedItems):this(id)
         {
             Customer = customer;
             SelectedItems = selectedItems;
-            TotalItems = totalItems;
         }
 
         public override bool Equals(object obj)

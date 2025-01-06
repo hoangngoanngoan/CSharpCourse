@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace Models
 {
 
     public class BillDetail : Bill, ICloneable
     {
-        public string PaymentMehtod { get; set; } // Phương thức thanh toán
-        public string StaffName { get; set; } // Tên nhân viên lặp hóa đơn
+        [JsonProperty("paymentMethod")]
+        public string PaymentMehtod { get; set; }
+
+        [JsonProperty("staffName")]         
+        public string StaffName { get; set; }
 
         public BillDetail():base(){ }
 
@@ -45,6 +45,8 @@ namespace Models
             return new BillDetail(BillId, null, CreatTime, TotalItem,
                 SubTotal, TotalDiscountAmount, TotalAmount, Status,
                 PaymentMehtod, StaffName);
+
+            // Phải tính lại tổng tiền khuyến mãi, tổng tạm và tổng tiển vì không clone giỏ hàng
         }
 
     }

@@ -50,6 +50,9 @@ namespace CSharpCourse
         private List<BillDetail> _bills;
         private List<BillDetail> _resultSearchBillDetail;
 
+        private IOController _iOController;
+        private UpdateAutoID _updateAutoID;
+
 
 
         // =============================================================================================================================
@@ -84,10 +87,23 @@ namespace CSharpCourse
             _bills = new List<BillDetail>();
             _resultSearchBillDetail = new List<BillDetail>();
 
+            // IOController
+            _iOController = new IOController();
+
             // Nạp dữ liệu 
-            _customers = Utils.CreateFakeCustomer();
-            _items = Utils.CreateFakeItem();
-            _discounts = Utils.CreateFakeDiscount();
+            _iOController.LoadDataList(_items, _customers, _discounts, _bills);
+
+            // UpdateAutoID
+            _updateAutoID = new UpdateAutoID();
+            _updateAutoID.UpdateItemAutoID(_items);
+            _updateAutoID.UpdateDiscountAutoID(_discounts);
+            _updateAutoID.UpdateBillAutoID(_bills);
+            
+            //_items = Utils.CreateFakeItem();
+            //_customers = Utils.CreateFakeCustomer();
+            //_discounts = Utils.CreateFakeDiscount();
+
+            // Hiển thị
             ShowItems(_items);
             ShowCustomers(_customers);
             ShowDiscounts(_discounts);
@@ -627,7 +643,6 @@ namespace CSharpCourse
                     if (ans == DialogResult.Yes)
                     {
                         _commonController.DeleteItem(_customers, _customers[e.RowIndex]);
-                        _customers.RemoveAt(e.RowIndex);
                         tblCustomer.Rows.RemoveAt(e.RowIndex);
                     }
 
@@ -923,6 +938,12 @@ namespace CSharpCourse
             }
         }
 
-        
+        private void MenuSaveFileClick(object sender, EventArgs e)
+        {
+            _iOController.SaveDataList(_items, _customers, _discounts, _bills);
+            var message = "Lưu file thành công";
+            var title = "Thông báo";
+            MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

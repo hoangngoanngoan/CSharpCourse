@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 
 namespace Models
 {
     public class FullName
     {
+        [JsonProperty("first")]
         public string FirstName { get; set; }
+
+        [JsonProperty("mid")]
         public string MidName { get; set; }
+        
+        [JsonProperty("last")]
         public string LastName { get; set; }
 
-        public FullName()
-        {
-
-        }
+        public FullName() { }
 
         public FullName(string fullName)
         {

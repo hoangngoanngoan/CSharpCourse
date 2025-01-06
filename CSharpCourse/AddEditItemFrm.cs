@@ -34,10 +34,11 @@ namespace CSharpCourse
             if (item != null)
             {
                 _item = (Item)item.Clone();
-               if(item.Discount != null)
+                if(item.Discount != null)
                 {
                     _item.Discount = item.Discount;
-                }else
+                }
+                else
                 {
                     _item.Discount = null;
                 }
@@ -91,7 +92,7 @@ namespace CSharpCourse
             
         }
 
-        private void AddUpdateItem(Item item)
+        private void GetItemInfo(Item item)
         {
             if (string.IsNullOrEmpty(txtItemName.Text))
             {
@@ -107,25 +108,27 @@ namespace CSharpCourse
                 MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             item.ItemName = txtItemName.Text;
             item.ItemType = comboItemType.Text;
             item.Quantity = (int)numericQuantity.Value;    
             item.Brand = txtBrand.Text;
             item.ReleaseDate = dateTimePickerReleaseDate.Value;
             item.Price = (int)numericPrice.Value;
+
             if(comboDiscount.SelectedIndex > -1)
             {
                 item.Discount = _discounts[comboDiscount.SelectedIndex];
             }else
             {
-                item.Discount = new Discount();
+                item.Discount = null;
             }
         }
 
         // Hành động click chuột vào button btnAddItem của người dùng
         private void btnAddItem_Click(object sender, EventArgs e)
         {
-           AddUpdateItem(_item);
+           GetItemInfo(_item);
             if (btnAddItem.Text.CompareTo("Cập nhật") == 0)
             {
                 var msg = "Bạn có chắc chắn muốn cập nhật không";
@@ -139,7 +142,10 @@ namespace CSharpCourse
             }
             else
             {
-                _controller.AddNewItem(_item);
+                Item newItem = new Item(0, _item.ItemName, _item.ItemType, _item.Quantity, _item.Brand,
+                    _item.ReleaseDate, _item.Price, _item.Discount);
+                _controller.AddNewItem(newItem);
+                Dispose();
             }
         }
 

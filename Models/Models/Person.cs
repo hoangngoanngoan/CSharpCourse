@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,19 @@ namespace Models
 {
     public class Person : IComparable<Person>
     {
+        [JsonProperty("personId")]
         public string PersonId { get; set; }
+
+        [JsonProperty("fullName")]
         public FullName FullName { get; set; }
+
+        [JsonProperty("birthDate")]
         public DateTime BirthDate { get; set; }
+
+        [JsonProperty("adress")]
         public string Address { get; set; }
+
+        [JsonProperty("phoneNumber")]
         public string PhoneNumber { get; set; }
 
         public Person()

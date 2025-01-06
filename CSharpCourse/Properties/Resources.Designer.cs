@@ -123,6 +123,16 @@ namespace CSharpCourse.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap diskette2 {
+            get {
+                object obj = ResourceManager.GetObject("diskette2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap dustbin {
             get {
                 object obj = ResourceManager.GetObject("dustbin", resourceCulture);
@@ -176,6 +186,16 @@ namespace CSharpCourse.Properties {
         internal static System.Drawing.Bitmap plus1 {
             get {
                 object obj = ResourceManager.GetObject("plus1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap plus2 {
+            get {
+                object obj = ResourceManager.GetObject("plus2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

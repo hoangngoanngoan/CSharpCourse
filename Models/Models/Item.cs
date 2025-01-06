@@ -1,26 +1,42 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace Models
 {
     public class Item : IComparable<Item>, ICloneable
     {
+        [JsonIgnore]
         private static int s_autoId = 1000000;
-        public int ItemId { get; set; }
-        public string ItemName { get; set; }
-        public string ItemType { get; set; }
-        public int Quantity { get; set; }
-        public string Brand { get; set; }
-        public DateTime ReleaseDate { get; set; }
-        public int Price { get; set; }
-        public Discount Discount { get; set; } = null;
-        public Item()
-        {
 
-        }
+        [JsonProperty("itemId")]
+        public int ItemId { get; set; }
+
+        [JsonProperty("itemName")]
+        public string ItemName { get; set; }
+
+        [JsonProperty("itemType")]
+        public string ItemType { get; set; }
+
+        [JsonProperty("quantity")]
+        public int Quantity { get; set; }
+
+        [JsonProperty("brand")]
+        public string Brand { get; set; }
+
+        [JsonProperty("releaseDate")]
+        public DateTime ReleaseDate { get; set; }
+
+        [JsonProperty("price")]
+        public int Price { get; set; }
+
+        [JsonProperty("discount")]
+        public Discount Discount { get; set; } = null;
+
+        public Item() { }
 
         public Item(int id)
         {
-            ItemId = id > 0 ? id : s_autoId++;
+            ItemId = id > 0 ? id : ++s_autoId;
         }
 
         public Item(int itemId, string itemName, string itemType, int quantity, string brand, DateTime releaseDate, int price, Discount discount) : this(itemId)

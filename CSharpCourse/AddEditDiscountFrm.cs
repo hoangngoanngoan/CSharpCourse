@@ -71,10 +71,12 @@ namespace CSharpCourse
             {
                 GetDiscountFromUser();
                 _controller.AddNewItem(_nDiscount);
+                Dispose();
             }else
             {
                 GetDiscountFromUser();
                 _controller.UpdateItem(_oDiscount, _nDiscount);
+                Dispose();
             }
         }
 

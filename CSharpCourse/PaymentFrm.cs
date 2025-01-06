@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,16 +16,18 @@ namespace CSharpCourse
     {
         private IViewController _controller;
         private BillDetail _bill;
+        private bool _isUpdate;
         public PaymentFrm()
         {
             InitializeComponent();
             CenterToParent();
         }
 
-        public PaymentFrm(IViewController masterView, BillDetail bill): this()
+        public PaymentFrm(IViewController masterView, BillDetail bill, bool isUpdate): this()
         {
             _bill = bill;
             _controller = masterView;
+            _isUpdate = isUpdate;
             ShowData();
         }
 
@@ -43,11 +46,21 @@ namespace CSharpCourse
             if(comboPaymentMethod.SelectedIndex == -1)
             {
                 MessageBox.Show("Chưa chọn hình thức thanh toán", "Lỗi thanh toán", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }else
+            }
+            else
             {
-                _bill.Status = "Đã thanh toán";
-                _bill.PaymentMehtod = comboPaymentMethod.Text;
-                _controller.AddNewItem(_bill);
+                if (_isUpdate)
+                {
+                    _bill.Status = "Đã thanh toán";
+                    _bill.PaymentMehtod = comboPaymentMethod.Text;
+                    _controller.UpdateItem(_bill);
+                }
+                else
+                {
+                    _bill.Status = "Đã thanh toán";
+                    _bill.PaymentMehtod = comboPaymentMethod.Text;
+                    _controller.AddNewItem(_bill);
+                }                
                 Dispose();
             }
         }

@@ -1,22 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Models
 {
     public class Bill : IComparable<Bill>
     {
+        [JsonIgnore]
         private static int s_autoId = 1000000;
+
+        [JsonProperty("billId")]
         public int BillId { get; set; } = 0;
+
+        [JsonProperty("cart")]
         public Cart Cart { get; set; } = new Cart();
+
+        [JsonProperty("createdTime")]
         public DateTime CreatTime { get; set; } = DateTime.Now;
+
+        [JsonProperty("totalItem")]
         public int TotalItem { get; set; } = 0;
+
+        [JsonProperty("subTotal")]
         public long SubTotal { get; set; } = 0;
+
+        [JsonProperty("totalDiscountAmount")]
         public long TotalDiscountAmount { get; set; } = 0;
+
+        [JsonProperty("TotalAmount")]
         public long TotalAmount { get; set; } = 0;
+
+        [JsonProperty("status")]
         public string Status { get; set; } = "Đang xử lý";
 
         public Bill(): this(0)
@@ -26,7 +39,7 @@ namespace Models
 
         public Bill(int id)
         {
-            BillId = id > 0 ? id : s_autoId++;
+            BillId = id > 0 ? id : ++s_autoId;
             CalculateBill();
         }
 

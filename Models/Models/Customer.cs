@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,16 @@ namespace Models
 {
     public class Customer : Person, IComparable<Customer>, ICloneable
     {
+        [JsonProperty("customerType")]
         public string CustomerType { get; set; }
-        public int Poin { get; set; } // Điểm tích lũy
-        public DateTime CreatTime { get; set; } // Ngày tạo tài khoản
+
+        [JsonProperty("point")]
+        public int Poin { get; set; }
+
+        [JsonProperty("createdTime")]         
+        public DateTime CreatTime { get; set; }
+
+        [JsonProperty("email")]
         public string Email { get; set; }
 
         public Customer() { }
