@@ -437,7 +437,7 @@ namespace CSharpCourse
         {
             if (_bill.Cart.Customer != null && _cart.Count > 0)
             {
-                var frm = new PaymentFrm(_controller, _bill, _isUpdateBill);
+                var frm = new PaymentFrm(_controller, _bill, _item ,_isUpdateBill);
                 frm.ShowDialog();
                 Dispose();
             }

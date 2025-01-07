@@ -17,17 +17,19 @@ namespace CSharpCourse
         private IViewController _controller;
         private BillDetail _bill;
         private bool _isUpdate;
+        private List<Item> _items;
         public PaymentFrm()
         {
             InitializeComponent();
             CenterToParent();
         }
 
-        public PaymentFrm(IViewController masterView, BillDetail bill, bool isUpdate): this()
+        public PaymentFrm(IViewController masterView, BillDetail bill, List<Item> lItems, bool isUpdate): this()
         {
             _bill = bill;
             _controller = masterView;
             _isUpdate = isUpdate;
+            _items = lItems;
             ShowData();
         }
 
@@ -54,12 +56,14 @@ namespace CSharpCourse
                     _bill.Status = "Đã thanh toán";
                     _bill.PaymentMehtod = comboPaymentMethod.Text;
                     _controller.UpdateItem(_bill);
+                    _controller.UpdateListItem(_items);
                 }
                 else
                 {
                     _bill.Status = "Đã thanh toán";
                     _bill.PaymentMehtod = comboPaymentMethod.Text;
                     _controller.AddNewItem(_bill);
+                    _controller.UpdateListItem(_items);
                 }                
                 Dispose();
             }

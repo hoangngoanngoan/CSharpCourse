@@ -93,7 +93,7 @@ namespace CSharpCourse
             // Nạp dữ liệu 
             _iOController.LoadDataList(_items, _customers, _discounts, _bills);
 
-            // UpdateAutoID
+             UpdateAutoID
             _updateAutoID = new UpdateAutoID();
             _updateAutoID.UpdateItemAutoID(_items);
             _updateAutoID.UpdateDiscountAutoID(_discounts);
@@ -944,6 +944,44 @@ namespace CSharpCourse
             var message = "Lưu file thành công";
             var title = "Thông báo";
             MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void MenuPowerClick(object sender, EventArgs e)
+        {
+            var message = "Bạn có muốn lưu lại không ?";
+            var title = "Thông báo";
+            var ans = MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if(ans == DialogResult.Yes)
+            {
+                _iOController.SaveDataList(_items, _customers, _discounts, _bills);
+                var message2 = "Lưu file thành công";
+                var title2 = "Thông báo";
+                MessageBox.Show(message2, title2, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Dispose();
+            }
+            else
+            {
+                Dispose();
+            }  
+        }
+
+        private void HomeFrm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var message = "Bạn có muốn lưu lại không ?";
+            var title = "Thông báo";
+            var ans = MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (ans == DialogResult.Yes)
+            {
+                _iOController.SaveDataList(_items, _customers, _discounts, _bills);
+                var message2 = "Lưu file thành công";
+                var title2 = "Thông báo";
+                MessageBox.Show(message2, title2, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Dispose();
+            }
+            else
+            {
+                Dispose();
+            }
         }
     }
 }

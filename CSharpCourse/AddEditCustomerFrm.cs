@@ -87,6 +87,7 @@ namespace CSharpCourse
                 else
                 {
                     _controller.AddNewItem(_newCustomer);
+                    Dispose();
                 }
             }
             catch (InvalidNameExceoption ex) { MessageBox.Show($"{ex.Message} {ex.InvalidName}", "Lỗi dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error); }
