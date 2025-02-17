@@ -85,7 +85,7 @@ namespace CSharpCourse
             {
                 _isUpdateBill = false;
                 _bill = new BillDetail();
-                _cart = _bill.Cart.SelectedItems;
+                _cart = _bill.Cart.SelectedItems; 
             }
         }
 

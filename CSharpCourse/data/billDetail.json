@@ -1,0 +1,73 @@
+{
+  "billDetails": [
+    {
+      "paymentMethod": "Thanh toán chuyển khoản",
+      "staffName": null,
+      "billId": 1,
+      "cart": {
+        "cartId": 0,
+        "customer": {
+          "customerType": "Mua lẻ",
+          "point": 10,
+          "createdTime": "2025-01-06T20:25:05.5654248+07:00",
+          "email": "hoangngoanngoan@gmail.com",
+          "personId": "0123456789123",
+          "fullName": {
+            "first": "Hỏng",
+            "mid": "Hư",
+            "last": "Hoàng"
+          },
+          "birthDate": "1995-08-23T00:00:00",
+          "adress": "tp.Thủ Đức",
+          "phoneNumber": "0705154714"
+        },
+        "selectedItems": [
+          {
+            "numberOfSelectedItem": 1,
+            "itemId": 1000000,
+            "itemName": "Iphone 14",
+            "itemType": "Điện tử",
+            "quantity": 25,
+            "brand": "Apple",
+            "releaseDate": "2025-01-06T20:25:05.5654248+07:00",
+            "price": 25000000,
+            "discount": {
+              "discountId": 0,
+              "discountName": null,
+              "startTime": "0001-01-01T00:00:00",
+              "endTime": "0001-01-01T00:00:00",
+              "discountType": null,
+              "discountPercent": 0,
+              "discountAmount": 0
+            }
+          },
+          {
+            "numberOfSelectedItem": 1,
+            "itemId": 1000001,
+            "itemName": "Iphone 15",
+            "itemType": "Điện tử",
+            "quantity": 20,
+            "brand": "Apple",
+            "releaseDate": "2025-01-06T20:25:05.5654248+07:00",
+            "price": 26000000,
+            "discount": {
+              "discountId": 0,
+              "discountName": null,
+              "startTime": "0001-01-01T00:00:00",
+              "endTime": "0001-01-01T00:00:00",
+              "discountType": null,
+              "discountPercent": 0,
+              "discountAmount": 0
+            }
+          }
+        ]
+      },
+      "createdTime": "2025-01-07T22:42:18.5756321+07:00",
+      "totalItem": 2,
+      "subTotal": 51000000,
+      "totalDiscountAmount": 0,
+      "TotalAmount": 51000000,
+      "status": "Đã thanh toán"
+    }
+  ]
+}

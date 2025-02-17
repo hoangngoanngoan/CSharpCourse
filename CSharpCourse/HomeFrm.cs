@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Models;
 using Controller;
+using System.IO;
 
 namespace CSharpCourse
 {
@@ -27,6 +28,12 @@ namespace CSharpCourse
 
     public partial class HomeFrm : Form, IViewController
     {
+        private string appDataPath;
+        private string appFolder;
+        private string itemPath;
+        private string customerPath;
+        private string discountPath;
+        private string billDetailPath;
 
         private ActionType _actionType;
         private CommonController _commonController; 
@@ -50,59 +57,72 @@ namespace CSharpCourse
         private List<BillDetail> _bills;
         private List<BillDetail> _resultSearchBillDetail;
 
-        private IOController _iOController;
+        // UpdateAutoID
         private UpdateAutoID _updateAutoID;
-
-
-
-        // =============================================================================================================================
-        // ======================================================= HÀM KHỞI TẠO ======================================================== 
-        // ============================================================================================================================= 
 
 
         public HomeFrm()
         {
             InitializeComponent();
 
+            this.appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            this.appFolder = Path.Combine(appDataPath, "QLCH");
+            if (!Directory.Exists(appFolder))
+            {
+                Directory.CreateDirectory(appFolder);
+            }
+            this.itemPath = Path.Combine(appFolder, "item.json");
+            this.customerPath = Path.Combine(appFolder, "customer.json");
+            this.discountPath = Path.Combine(appFolder, "discount.json");
+            this.billDetailPath = Path.Combine(appFolder, "billDetail.json");
+
+            if (!File.Exists(itemPath))
+            {
+                File.WriteAllText(itemPath, "[]");
+            }
+            if (!File.Exists(customerPath))
+            {
+                File.WriteAllText(customerPath, "[]");
+            }
+            if (!File.Exists(discountPath))
+            {
+                File.WriteAllText(discountPath, "[]");
+            }
+            if (!File.Exists(billDetailPath))
+            {
+                File.WriteAllText(billDetailPath, "[]");
+            }
+
+            _items = Provider.Instance.ReadFromFile<Item>(itemPath);
+            _customers = Provider.Instance.ReadFromFile<Customer>(customerPath);
+            _discounts = Provider.Instance.ReadFromFile<Discount>(discountPath);
+            _bills = Provider.Instance.ReadFromFile<BillDetail>(billDetailPath);
+
             // CommonController
             _commonController = new CommonController();
 
             // Mặt hàng
-            _items = new List<Item>();
             _itemController = new ItemController();
             _resultSearchItem = new List<Item>();
             _actionType = ActionType.NORMAL;
 
             // Khách hàng
-            _customers = new List<Customer>();
             _customerController = new CustomerController();
             _resultSearchCustomer = new List<Customer>();
 
             // Discount 
-            _discounts = new List<Discount>();
             _resultSearchDiscount = new List<Discount>();
             _discountController = new DiscountController();
 
             // BillDetail
-            _bills = new List<BillDetail>();
             _resultSearchBillDetail = new List<BillDetail>();
 
-            // IOController
-            _iOController = new IOController();
-
-            // Nạp dữ liệu 
-            _iOController.LoadDataList(_items, _customers, _discounts, _bills);
-
-             UpdateAutoID
+            // UpdateAutoID
             _updateAutoID = new UpdateAutoID();
             _updateAutoID.UpdateItemAutoID(_items);
             _updateAutoID.UpdateDiscountAutoID(_discounts);
             _updateAutoID.UpdateBillAutoID(_bills);
             
-            //_items = Utils.CreateFakeItem();
-            //_customers = Utils.CreateFakeCustomer();
-            //_discounts = Utils.CreateFakeDiscount();
-
             // Hiển thị
             ShowItems(_items);
             ShowCustomers(_customers);
@@ -188,7 +208,6 @@ namespace CSharpCourse
         // ===================================================== 2. KHÁCH HÀNG =========================================================
         // ===================================================== 3. KHUYẾN MÃI =========================================================
         // ===================================================== 4. HÓA ĐƠN ============================================================
-        // ========================= NƠI THỰC HIỆN LỜI GỌI LÀ TỪ CÁC "CHƯƠNG TRÌNH CẬP NHẬT HOẶC THÊM MỚI" =============================
 
 
         public void AddNewItem<T>(T item)
@@ -234,31 +253,25 @@ namespace CSharpCourse
 
 
 
-        // ==================================================== CẬP NHẬT ĐỐI TƯỢNG =====================================================
-        // ===================================================== 1. MẶT HÀNG ===========================================================
-        // ===================================================== 2. KHÁCH HÀNG =========================================================
-        // ===================================================== 3. KHUYẾN MÃI =========================================================
-        // ===================================================== 4. HÓA ĐƠN ============================================================
-        // ========================= NƠI THỰC HIỆN LỜI GỌI LÀ TỪ CÁC "CHƯƠNG TRÌNH CẬP NHẬT HOẶC THÊM MỚI" =============================
+        #region : ItemMethod
 
         public void UpdateListItem<T>(List<T> lItem)
         {
-            if (typeof(T) == typeof(Item)) 
+            if (typeof(T) == typeof(Item))
             {
                 var nLItem = lItem as List<Item>;
                 _items.Clear();
                 _items.AddRange(nLItem);
                 ShowItems(_items);
             }
-                
-        }
 
+        }
         public void UpdateItem<T>(T oldItem, T newItem)
         {
 
             // 1. MẶT HÀNG
 
-            if(typeof(T) == typeof(Item)) 
+            if (typeof(T) == typeof(Item))
             {
                 if (_actionType == ActionType.NORMAL)
                 {
@@ -272,26 +285,27 @@ namespace CSharpCourse
                 {
                     var nItem = newItem as Item;
                     var oItem = oldItem as Item;
-                    _commonController.UpdateItem(_items, oItem);  
+                    _commonController.UpdateItem(_items, oItem);
                     _commonController.UpdateItem(_resultSearchItem, oItem);
                     int index = _commonController.IndexOfItem(_items, oItem);
                     index = _commonController.IndexOfItem(_resultSearchItem, oItem);
                     ShowItems(_resultSearchItem);
                 }
-               
+
             }
 
             // 2. KHÁCH HÀNG
 
             else if (typeof(T) == typeof(Customer))
             {
-                if(_actionType == ActionType.NORMAL)
+                if (_actionType == ActionType.NORMAL)
                 {
                     var nCustomer = newItem as Customer;
                     var oCustomer = oldItem as Customer;
                     int index = _commonController.UpdateItem(_customers, oCustomer, nCustomer);
                     ShowCustomers(_customers);
-                }else
+                }
+                else
                 {
                     var nCustomers = newItem as Customer;
                     var oCustomers = oldItem as Customer;
@@ -300,37 +314,39 @@ namespace CSharpCourse
                     ShowCustomers(_resultSearchCustomer);
                 }
             }
-            
+
             // 3. KHUYẾN MÃI
 
             else if (typeof(T) == typeof(Discount))
             {
-                if(_actionType == ActionType.NORMAL)
+                if (_actionType == ActionType.NORMAL)
                 {
                     var nDiscount = newItem as Discount;
                     var oDiscount = oldItem as Discount;
                     int index = _commonController.UpdateItem(_discounts, oDiscount, nDiscount);
                     ShowDiscounts(_discounts);
-                } else
+                }
+                else
                 {
                     var nDiscount = newItem as Discount;
                     var oDiscount = oldItem as Discount;
                     int index = _commonController.UpdateItem(_discounts, oDiscount, nDiscount);
                     index = _commonController.UpdateItem(_resultSearchDiscount, oDiscount, nDiscount);
                     ShowDiscounts(_resultSearchDiscount);
-                }   
+                }
             }
-            
+
             // 4. HÓA ĐƠN
 
-            else if(typeof(T) == typeof(BillDetail))
+            else if (typeof(T) == typeof(BillDetail))
             {
-                if(_actionType == ActionType.NORMAL)
+                if (_actionType == ActionType.NORMAL)
                 {
                     var oItem = oldItem as BillDetail;
                     int indexBill = _commonController.UpdateItem(_bills, oItem);
                     ShowBills(_bills);
-                }else
+                }
+                else
                 {
                     // DO SOMETHING
                 }
@@ -338,10 +354,6 @@ namespace CSharpCourse
 
 
         }
-
-        //
-        // Cập nhật lại chức năng cập nhật lại thông tin hiển thị trên DataGridView 
-        //
         public void UpdateItem<T>(T newItem)
         {
 
@@ -380,18 +392,18 @@ namespace CSharpCourse
                 }
             }
         }
-
         public void DeleteItem<T>(T item)
         {
-            if(typeof(T) == typeof(BillDetail))
+            if (typeof(T) == typeof(BillDetail))
             {
-                if(_actionType == ActionType.NORMAL)
+                if (_actionType == ActionType.NORMAL)
                 {
                     var billDelected = item as BillDetail;
                     _commonController.DeleteItem(_bills, billDelected);
                     ShowBills(_bills);
                 }
-            }else
+            }
+            else
             {
                 if (_actionType == ActionType.SEARCH)
                 {
@@ -402,26 +414,28 @@ namespace CSharpCourse
                 }
             }
         }
+        #endregion
+
+
+
 
 
         // ========================================== CHƯƠNG TRÌNH CẬP NHẬP HOẶC THÊM MẶT HÀNG =========================================
         // =============================================================================================================================
 
+        #region : Event
 
         // 1. THÊM MỚI
-
         private void btnAddItem_Click(object sender, EventArgs e)
         {
             var frm = new AddEditItemFrm(this, _discounts, null);
             frm.ShowDialog();
         }
 
-        
         // 2. CẬP NHẬT HOẶC XÓA BỎ
-
         private void tblItemCellCick(object sender, DataGridViewCellEventArgs e)
         {
-            if(_actionType == ActionType.NORMAL)
+            if (_actionType == ActionType.NORMAL)
             {
                 if (e.RowIndex >= 0 && e.ColumnIndex == tblItem.Columns["tblItemEdit"].Index)
                 {
@@ -438,9 +452,10 @@ namespace CSharpCourse
                         tblItem.Rows.RemoveAt(e.RowIndex);
                     }
                 }
-            }else
+            }
+            else
             {
-                if(e.RowIndex >= 0 && e.ColumnIndex == tblItem.Columns["tblItemEdit"].Index)
+                if (e.RowIndex >= 0 && e.ColumnIndex == tblItem.Columns["tblItemEdit"].Index)
                 {
                     var frm = new AddEditItemFrm(this, _discounts, _resultSearchItem[e.RowIndex]);
                     frm.ShowDialog();
@@ -448,11 +463,11 @@ namespace CSharpCourse
                 else if (e.RowIndex >= 0 && e.ColumnIndex == tblItem.Columns["tblItemRemove"].Index)
                 {
                     var ans = MessageBox.Show("Bạn có chắc chắn muốn xoá không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if(ans == DialogResult.Yes)
+                    if (ans == DialogResult.Yes)
                     {
                         _commonController.DeleteItem(_items, _resultSearchItem[e.RowIndex]);
                         _commonController.DeleteItem(_resultSearchItem, _resultSearchItem[e.RowIndex]);
-                        
+
                         MessageBox.Show($"Đã xoá thành công dòng thứ {e.RowIndex + 1}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         tblItem.Rows.RemoveAt(e.RowIndex);
                     }
@@ -460,9 +475,7 @@ namespace CSharpCourse
             }
         }
 
-        
         // 3. SẮP XẾP
-
         private void SortItemHandler(object sender, EventArgs e)
         {
             if (radioSortItemByPriceASC.Checked)
@@ -470,23 +483,26 @@ namespace CSharpCourse
                 _commonController.Sort(_items, _itemController.CompareItemByPriceASC);
                 // Cách khác
                 //_commonController.SortByPriceASC(_items);
-            }else if (radioSortItemByPriceDSC.Checked)
+            }
+            else if (radioSortItemByPriceDSC.Checked)
             {
                 _commonController.Sort(_items, _itemController.CompareItemByPriceDSC);
-            }else if (radioSortItemByQuantity.Checked)
+            }
+            else if (radioSortItemByQuantity.Checked)
             {
                 _commonController.Sort(_items, _itemController.CompareItemByQuantityDSC);
-            }else if (radioSortItemByName.Checked)
+            }
+            else if (radioSortItemByName.Checked)
             {
                 _commonController.Sort(_items, _itemController.CompareItemByName);
-            }else if (radioSortItemByDate.Checked)
+            }
+            else if (radioSortItemByDate.Checked)
             {
                 _commonController.Sort(_items, _itemController.CompareItemByDate);
             }
             ShowItems(_items);
         }
 
-        
         // 4. TIÊU CHÍ TÌM KIẾM
 
         private void ComboBoxSearchItemSelectedIndexChanged(object sender, EventArgs e)
@@ -511,9 +527,7 @@ namespace CSharpCourse
             }
         }
 
-
         // 5. TÌM KIẾM
-        
         private void BtnSearchItemClick(object sender, EventArgs e)
         {
             _actionType = ActionType.SEARCH;
@@ -525,11 +539,11 @@ namespace CSharpCourse
             {
                 MessageBox.Show("Vui lòng chọn tiêu chí tìm kiếm", "Thông báo lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if(comboSearchItem.SelectedIndex == 0)
+            else if (comboSearchItem.SelectedIndex == 0)
             {
                 var key = txtSearchItem.Text;
-                _resultSearchItem = _commonController.Search(_items ,_itemController.IsItemNameMatch, key);
-                if(_resultSearchItem.Count == 0)
+                _resultSearchItem = _commonController.Search(_items, _itemController.IsItemNameMatch, key);
+                if (_resultSearchItem.Count == 0)
                 {
                     MessageBox.Show("Không có kết quả", "Lỗi dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -538,7 +552,7 @@ namespace CSharpCourse
                     ShowItems(_resultSearchItem);
                 }
             }
-            else if(comboSearchItem.SelectedIndex == 1) // Tìm kiếm theo giá
+            else if (comboSearchItem.SelectedIndex == 1) // Tìm kiếm theo giá
             {
                 var from = (int)numericItemFrom.Value;
                 var to = (int)numericItemTo.Value;
@@ -556,15 +570,16 @@ namespace CSharpCourse
             {
                 var key = txtSearchItem.Text;
                 _resultSearchItem = _commonController.Search(_items, _itemController.IsItemTypeMatch, key);
-                if(_resultSearchItem.Count == 0)
+                if (_resultSearchItem.Count == 0)
                 {
                     MessageBox.Show("Không có kết quả", "Lỗi dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }else 
+                }
+                else
                 {
                     ShowItems(_resultSearchItem);
                 }
             }
-            else if(comboSearchItem.SelectedIndex == 3) // Tìm kiếm theo hảng sản xuất
+            else if (comboSearchItem.SelectedIndex == 3) // Tìm kiếm theo hảng sản xuất
             {
                 var key = txtSearchItem.Text;
                 _resultSearchItem = _commonController.Search(_items, _itemController.IsItemBrandMatch, key);
@@ -577,7 +592,7 @@ namespace CSharpCourse
                     ShowItems(_resultSearchItem);
                 }
             }
-            else if(comboSearchItem.SelectedIndex == 4) // Tìm kiếm theo số lượng
+            else if (comboSearchItem.SelectedIndex == 4) // Tìm kiếm theo số lượng
             {
                 var from = (int)numericItemFrom.Value;
                 var to = (int)numericItemTo.Value;
@@ -593,9 +608,7 @@ namespace CSharpCourse
             }
         }
 
-
         // 6. RELOAD HIỂN THỊ DANH SÁCH TÌM KIẾM MẶT HÀNG VỀ BÌNH THƯỜNG
-
         private void btnReloadItem_Click(object sender, EventArgs e)
         {
             _actionType = ActionType.NORMAL;
@@ -611,6 +624,7 @@ namespace CSharpCourse
             ShowItems(_items);
         }
 
+        #endregion
 
 
         // ========================================== CHƯƠNG TRÌNH CẬP NHẬP HOẶC THÊM KHÁCH HÀNG =======================================
@@ -940,7 +954,10 @@ namespace CSharpCourse
 
         private void MenuSaveFileClick(object sender, EventArgs e)
         {
-            _iOController.SaveDataList(_items, _customers, _discounts, _bills);
+            Provider.Instance.WriteToFile(itemPath, _items);
+            Provider.Instance.WriteToFile(customerPath, _customers);
+            Provider.Instance.WriteToFile(discountPath, _discounts);
+            Provider.Instance.WriteToFile(billDetailPath, _bills);
             var message = "Lưu file thành công";
             var title = "Thông báo";
             MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -953,7 +970,10 @@ namespace CSharpCourse
             var ans = MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if(ans == DialogResult.Yes)
             {
-                _iOController.SaveDataList(_items, _customers, _discounts, _bills);
+                Provider.Instance.WriteToFile(itemPath, _items);
+                Provider.Instance.WriteToFile(customerPath, _customers);
+                Provider.Instance.WriteToFile(discountPath, _discounts);
+                Provider.Instance.WriteToFile(billDetailPath, _bills);
                 var message2 = "Lưu file thành công";
                 var title2 = "Thông báo";
                 MessageBox.Show(message2, title2, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -972,7 +992,11 @@ namespace CSharpCourse
             var ans = MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (ans == DialogResult.Yes)
             {
-                _iOController.SaveDataList(_items, _customers, _discounts, _bills);
+                Provider.Instance.WriteToFile(itemPath,_items);
+                Provider.Instance.WriteToFile(customerPath,_customers);
+                Provider.Instance.WriteToFile(discountPath,_discounts);
+                Provider.Instance.WriteToFile(billDetailPath,_bills);
+
                 var message2 = "Lưu file thành công";
                 var title2 = "Thông báo";
                 MessageBox.Show(message2, title2, MessageBoxButtons.OK, MessageBoxIcon.Information);

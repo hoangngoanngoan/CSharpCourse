@@ -1,0 +1,64 @@
+{
+  "customers": [
+    {
+      "customerType": "Mua lẻ",
+      "point": 10,
+      "createdTime": "2025-01-06T20:25:05.5654248+07:00",
+      "email": "hoangngoanngoan@gmail.com",
+      "personId": "0123456789123",
+      "fullName": {
+        "first": "Hỏng",
+        "mid": "Hư",
+        "last": "Hoàng"
+      },
+      "birthDate": "1995-08-23T00:00:00",
+      "adress": "tp.Thủ Đức",
+      "phoneNumber": "0705154714"
+    },
+    {
+      "customerType": "Mua lẻ",
+      "point": 10,
+      "createdTime": "2025-01-06T20:25:05.5737563+07:00",
+      "email": "huyhungho@gmail.com",
+      "personId": "0123456789124",
+      "fullName": {
+        "first": "Hờ",
+        "mid": "Hửng",
+        "last": "Huy"
+      },
+      "birthDate": "1994-03-17T00:00:00",
+      "adress": "tp.Đà Lạt",
+      "phoneNumber": "0789154714"
+    },
+    {
+      "customerType": "Mua lẻ",
+      "point": 10,
+      "createdTime": "2025-01-06T20:25:05.5737563+07:00",
+      "email": "ngocngo@gmail.com",
+      "personId": "0123456789125",
+      "fullName": {
+        "first": "Ngố",
+        "mid": "",
+        "last": "Ngọc"
+      },
+      "birthDate": "2006-11-20T00:00:00",
+      "adress": "tp.Vũng Tàu",
+      "phoneNumber": "0705154790"
+    },
+    {
+      "customerType": "Mua lẻ",
+      "point": 10,
+      "createdTime": "2025-01-06T20:25:05.5737563+07:00",
+      "email": "utnghia@gmail.com",
+      "personId": "0123456789126",
+      "fullName": {
+        "first": "Nghĩa",
+        "mid": "",
+        "last": "Út"
+      },
+      "birthDate": "2010-05-17T00:00:00",
+      "adress": "tp.Buôn Mê Thuột",
+      "phoneNumber": "0705364714"
+    }
+  ]
+}

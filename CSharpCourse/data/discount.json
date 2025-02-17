@@ -1,0 +1,40 @@
+{
+  "discounts": [
+    {
+      "discountId": 1000000,
+      "discountName": "Khuyến mãi 1",
+      "startTime": "2025-01-01T00:00:00",
+      "endTime": "2025-01-01T23:59:59",
+      "discountType": "Khuyến mãi giảm giá trực tiếp",
+      "discountPercent": 0,
+      "discountAmount": 10000
+    },
+    {
+      "discountId": 1000001,
+      "discountName": "Khuyến mãi 2",
+      "startTime": "2025-01-02T00:00:00",
+      "endTime": "2025-01-02T23:59:59",
+      "discountType": "Khuyến mãi theo phần trăm giá bán",
+      "discountPercent": 10,
+      "discountAmount": 0
+    },
+    {
+      "discountId": 1000002,
+      "discountName": "Khuyến mãi 3",
+      "startTime": "2025-01-03T00:00:00",
+      "endTime": "2025-01-03T23:59:59",
+      "discountType": "Khuyến mãi giảm giá trực tiếp",
+      "discountPercent": 0,
+      "discountAmount": 50000
+    },
+    {
+      "discountId": 1000003,
+      "discountName": "Khuyến mãi 4",
+      "startTime": "2025-01-06T22:55:53.9839997+07:00",
+      "endTime": "2025-01-06T22:55:53.9788483+07:00",
+      "discountType": "Khuyến mãi theo phần trăm giá bán",
+      "discountPercent": 25,
+      "discountAmount": 0
+    }
+  ]
+}

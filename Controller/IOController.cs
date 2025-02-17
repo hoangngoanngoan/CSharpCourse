@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
+using System;
 
 namespace Controller
 {
     public class IOController : IIOController
     {
+
         public static string ITEM_FILE_NAME = "item.json";
         public static string CUSTOMER_FILE_NAME = "customer.json";
         public static string DISCOUNT_FILE_NAME = "discount.json";
@@ -28,19 +30,6 @@ namespace Controller
 
                 File.AppendAllText("log.txt", e.Message);
             };
-        }
-
-        public List<T> ReadData<T>(string fileName, string root)
-        {            
-            var data = File.ReadAllText(fileName);
-            var jObject = JObject.Parse(data);
-            var jArray = jObject[root];
-            List<T> list = new List<T>();
-            foreach (var it in jArray)
-            {
-                list.Add(it.ToObject<T>());
-            }
-            return list;
         }
 
         public bool SaveDataList(List<Item> itemList, List<Customer> customerList,
@@ -67,6 +56,19 @@ namespace Controller
             WriteData(discountObj, DISCOUNT_FILE_NAME);
             WriteData(billDetailObj, BILLDETAIL_FILE_NAME);
             return true;
+        }
+
+        public List<T> ReadData<T>(string fileName, string root)
+        {
+            var data = File.ReadAllText(fileName);
+            var jObject = JObject.Parse(data);
+            var jArray = jObject[root];
+            List<T> list = new List<T>();
+            foreach (var it in jArray)
+            {
+                list.Add(it.ToObject<T>());
+            }
+            return list;
         }
 
         public void WriteData(object obj, string fileName)
