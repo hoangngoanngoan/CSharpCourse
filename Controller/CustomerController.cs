@@ -1,4 +1,6 @@
 ﻿using Models;
+using System.Globalization;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Controller
@@ -23,7 +25,24 @@ namespace Controller
         {
             var pattern = $".*{name}.*";
             var regex = new Regex(pattern, RegexOptions.IgnoreCase);
-            return regex.IsMatch(customer.FullName.FirstName);
+            return regex.IsMatch(RemoveDiacritics(customer.FullName.ToString()));
+        }
+
+        public string RemoveDiacritics(string text)
+        {
+            var normalizedString = text.Normalize(NormalizationForm.FormD);
+            var stringBuilder = new StringBuilder();
+
+            foreach (var c in normalizedString)
+            {
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+
+            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
         }
 
         public bool IsCustomerPhoneMath(Customer customer, string phone)

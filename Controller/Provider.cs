@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
-using Models;
-using Newtonsoft.Json.Linq;
 
 namespace Controller
 {
     public class Provider
     {
-        
 
         private static Provider instance;
 
@@ -21,10 +14,7 @@ namespace Controller
             get { if (instance == null) instance = new Provider(); return instance; }
             private set { instance = value; }
         }
-        private Provider() 
-        {
-            
-        }
+        private Provider() { }
 
         public List<T> ReadFromFile<T>(string path)
         {
